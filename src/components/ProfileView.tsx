@@ -4,6 +4,7 @@ import {
   MapPin, 
   Mail, 
   Globe, 
+  Phone,
   Ship, 
   Building, 
   Wrench, 
@@ -684,17 +685,6 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
                     <span className="text-[15px] text-gray-600">{personalInfo.contact.location}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Linkedin className="w-5 h-5 text-gray-400" />
-                    <a 
-                      href={personalInfo.contact.linkedIn}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[15px] text-blue-600 hover:underline"
-                    >
-                      LinkedIn Profile
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-gray-400" />
                     <a 
                       href={`mailto:${personalInfo.contact.email}`}
@@ -704,7 +694,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
-                    <MessageSquare className="w-5 h-5 text-gray-400" />
+                    <Phone className="w-5 h-5 text-gray-400" />
                     <button
                       onClick={() => setIsContactModalOpen(true)}
                       className="text-[15px] text-blue-600 hover:underline"
