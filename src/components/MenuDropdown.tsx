@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, Store, FileText, Construction } from 'lucide-react';
+import { Menu, Store, FileText, Construction, Download } from 'lucide-react';
 
-const MenuDropdown: React.FC = () => {
+interface MenuDropdownProps {
+  onDownloadCV: () => void;
+}
+
+const MenuDropdown: React.FC<MenuDropdownProps> = ({ onDownloadCV }) => {
   const [isOpen, setIsOpen] = useState(false);
   const today = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -11,6 +15,13 @@ const MenuDropdown: React.FC = () => {
   });
 
   const menuItems = [
+    {
+      icon: <Download className="w-5 h-5 text-gray-500" />,
+      text: 'Download CV',
+      subtext: 'Get a copy of my CV',
+      action: onDownloadCV,
+      color: 'hover:bg-gray-50 dark:hover:bg-gray-900/20'
+    },
     {
       icon: <Store className="w-5 h-5 text-blue-500" />,
       text: 'Amazon Affiliate Shop',
@@ -60,27 +71,52 @@ const MenuDropdown: React.FC = () => {
             >
               <div className="py-2">
                 {menuItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-start px-4 py-3 hover:bg-opacity-50 transition-colors ${item.color}`}
-                  >
-                    <div className="flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        {item.text}
-                      </p>
-                      {item.subtext && (
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                          {item.subtext}
+                  item.action ? (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        item.action();
+                        setIsOpen(false);
+                      }}
+                      className={`w-full flex items-start px-4 py-3 hover:bg-opacity-50 transition-colors ${item.color}`}
+                    >
+                      <div className="flex-shrink-0">
+                        {item.icon}
+                      </div>
+                      <div className="ml-3 text-left">
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {item.text}
                         </p>
-                      )}
-                    </div>
-                  </a>
+                        {item.subtext && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                            {item.subtext}
+                          </p>
+                        )}
+                      </div>
+                    </button>
+                  ) : (
+                    <a
+                      key={index}
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-start px-4 py-3 hover:bg-opacity-50 transition-colors ${item.color}`}
+                    >
+                      <div className="flex-shrink-0">
+                        {item.icon}
+                      </div>
+                      <div className="ml-3">
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {item.text}
+                        </p>
+                        {item.subtext && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                            {item.subtext}
+                          </p>
+                        )}
+                      </div>
+                    </a>
+                  )
                 ))}
               </div>
             </motion.div>

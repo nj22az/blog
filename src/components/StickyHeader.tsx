@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { useCareer } from '../contexts/CareerContext';
 import MenuDropdown from './MenuDropdown';
 
@@ -27,14 +27,7 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({ onDownloadCV, onDownloadCov
 
           {/* Right side - Icons */}
           <div className="flex items-center space-x-4">
-            {/* Download buttons */}
-            <button
-              onClick={onDownloadCV}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">CV</span>
-            </button>
+            {/* Cover Letter button */}
             <button
               onClick={onDownloadCoverLetter}
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
@@ -45,7 +38,7 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({ onDownloadCV, onDownloadCov
 
             {/* Menu */}
             <div className="h-6 w-px bg-gray-200" />
-            <MenuDropdown />
+            <MenuDropdown onDownloadCV={onDownloadCV} />
           </div>
         </div>
       </div>
