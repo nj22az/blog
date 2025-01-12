@@ -6,12 +6,19 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -23,19 +30,25 @@ jobs:
         run: npm install
 
       - name: Create env file
+        env:
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_NOTIFICATION_TEMPLATE: ${{ secrets.EMAILJS_NOTIFICATION_TEMPLATE }}
+          EMAILJS_AUTOREPLY_TEMPLATE: ${{ secrets.EMAILJS_AUTOREPLY_TEMPLATE }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: |
-          touch .env
-          echo "REACT_APP_EMAILJS_SERVICE_ID=${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}" >> .env
-          echo "REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}" >> .env
-          echo "REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}" >> .env
-          echo "REACT_APP_EMAILJS_PUBLIC_KEY=${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}" >> .env
+          cat << EOF > .env
+          REACT_APP_EMAILJS_SERVICE_ID=${EMAILJS_SERVICE_ID}
+          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${EMAILJS_NOTIFICATION_TEMPLATE}
+          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${EMAILJS_AUTOREPLY_TEMPLATE}
+          REACT_APP_EMAILJS_PUBLIC_KEY=${EMAILJS_PUBLIC_KEY}
+          EOF
 
       - name: Build
         env:
-          REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
+          REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.EMAILJS_NOTIFICATION_TEMPLATE }}
+          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.EMAILJS_AUTOREPLY_TEMPLATE }}
+          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: npm run build
 
       - name: Deploy
