@@ -4,13 +4,28 @@ import { X, Send, User, Mail, MessageSquare, FileText } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 // EmailJS Configuration
-const EMAILJS_SERVICE_ID = 'nils.johansson@live.com';
-const EMAILJS_NOTIFICATION_TEMPLATE_ID = 'template_8gm8c5a';
-const EMAILJS_AUTOREPLY_TEMPLATE_ID = 'template_xxpcqid';
-const EMAILJS_PUBLIC_KEY = 'fLlukK5veEI51Zr_U';
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID!;
+const EMAILJS_NOTIFICATION_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID!;
+const EMAILJS_AUTOREPLY_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY!;
+
+// Check if environment variables are set
+if (!EMAILJS_SERVICE_ID || !EMAILJS_NOTIFICATION_TEMPLATE_ID || !EMAILJS_AUTOREPLY_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+  console.error('EmailJS environment variables are not properly configured:', {
+    EMAILJS_SERVICE_ID,
+    EMAILJS_NOTIFICATION_TEMPLATE_ID,
+    EMAILJS_AUTOREPLY_TEMPLATE_ID,
+    EMAILJS_PUBLIC_KEY
+  });
+}
 
 // Initialize EmailJS
-emailjs.init(EMAILJS_PUBLIC_KEY);
+try {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  console.log('EmailJS initialized successfully');
+} catch (error) {
+  console.error('Failed to initialize EmailJS:', error);
+}
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -95,7 +110,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     setErrorMessage('');
     
     try {
-      console.log('Sending notification email...');
+      console.log('Preparing to send email with config:', {
+        serviceId: EMAILJS_SERVICE_ID,
+        templateId: EMAILJS_NOTIFICATION_TEMPLATE_ID,
+        publicKey: EMAILJS_PUBLIC_KEY?.slice(0, 5) + '...' // Only log first 5 chars for security
+      });
       
       // Prepare form data
       const formData = new FormData(form.current);
@@ -104,8 +123,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         user_email: formData.get('user_email'),
         subject: formData.get('subject'),
         message: formData.get('message'),
-        to_email: 'nils.johansson@live.com' // Only used in notification email
+        to_email: 'nils.johansson@live.com'
       };
+
+      console.log('Sending with template params:', templateParams);
 
       // Send the notification email
       const result = await emailjs.send(
@@ -115,7 +136,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         EMAILJS_PUBLIC_KEY
       );
 
-      console.log('Notification result:', result);
+      console.log('Notification email result:', result);
 
       if (result.text === 'OK') {
         // Send the auto-reply email with minimal necessary information
@@ -208,16 +229,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               <form ref={form} onSubmit={handleSubmit} className="p-4 space-y-4 sm:p-5 sm:space-y-5">
                 <div className="space-y-4 sm:space-y-5">
                   <FloatingLabelInput
-                    id="name"
-                    name="name"
+                    id="user_name"
+                    name="user_name"
                     required
                     placeholder="Name"
                     description="Your name"
                     icon={<User className="w-5 h-5 text-[#007AFF]" />}
                   />
                   <FloatingLabelInput
-                    id="email"
-                    name="email"
+                    id="user_email"
+                    name="user_email"
                     type="email"
                     required
                     placeholder="Email"
