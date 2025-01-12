@@ -15,12 +15,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: github-pages
-    env:
-      REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-      REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-      REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-      REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -34,16 +28,41 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create .env file
+      - name: Verify secrets availability
         run: |
-          cat > .env << EOL
-          REACT_APP_EMAILJS_SERVICE_ID=${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_PUBLIC_KEY=${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
-          EOL
+          if [ -z "${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}" ]; then
+            echo "Error: REACT_APP_EMAILJS_SERVICE_ID is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}" ]; then
+            echo "Error: REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}" ]; then
+            echo "Error: REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}" ]; then
+            echo "Error: REACT_APP_EMAILJS_PUBLIC_KEY is not set"
+            exit 1
+          fi
+
+      - name: Create .env file
+        shell: bash
+        run: |
+          {
+            echo "REACT_APP_EMAILJS_SERVICE_ID='${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}'"
+            echo "REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID='${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}'"
+            echo "REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID='${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}'"
+            echo "REACT_APP_EMAILJS_PUBLIC_KEY='${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}'"
+          } > .env
 
       - name: Build project
+        env:
+          REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
+          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
+          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
+          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
         run: npm run build
 
       - name: Upload artifact
@@ -57,7 +76,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
