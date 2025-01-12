@@ -22,8 +22,8 @@ function App() {
             onDownloadCoverLetter={() => setIsCoverLetterModalOpen(true)}
           />
           
-          {/* Add padding-top to account for sticky header */}
-          <main className="pt-16 flex-grow">
+          {/* Add padding-top for sticky header and padding-bottom for sticky footer */}
+          <main className="pt-16 pb-16 flex-grow">
             <ProfileView 
               onDownloadCV={() => setIsCVModalOpen(true)}
               onDownloadCoverLetter={() => setIsCoverLetterModalOpen(true)}
