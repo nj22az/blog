@@ -5,6 +5,7 @@ import ProfileView from './components/ProfileView';
 import CVModal from './components/CVModal';
 import CoverLetterModal from './components/CoverLetterModal';
 import StickyHeader from './components/StickyHeader';
+import Footer from './components/Footer';
 import './styles/globals.css';
 import './styles/fonts.css';
 
@@ -15,19 +16,21 @@ function App() {
   return (
     <CareerProvider>
       <Router>
-        <div className="min-h-screen bg-[#f5f5f7]">
+        <div className="min-h-screen bg-[#f5f5f7] flex flex-col">
           <StickyHeader 
             onDownloadCV={() => setIsCVModalOpen(true)}
             onDownloadCoverLetter={() => setIsCoverLetterModalOpen(true)}
           />
           
           {/* Add padding-top to account for sticky header */}
-          <main className="pt-16">
+          <main className="pt-16 flex-grow">
             <ProfileView 
               onDownloadCV={() => setIsCVModalOpen(true)}
               onDownloadCoverLetter={() => setIsCoverLetterModalOpen(true)}
             />
           </main>
+
+          <Footer />
 
           <CVModal 
             isOpen={isCVModalOpen}
