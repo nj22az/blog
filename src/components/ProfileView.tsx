@@ -611,7 +611,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] print:bg-white print:min-h-0">
+    <div className="bg-[#f5f5f7] print:bg-white">
       <div className="max-w-5xl mx-auto px-4 py-8 print:p-6 print:max-w-none">
         {/* Profile Header */}
         <motion.div
