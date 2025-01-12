@@ -12,7 +12,7 @@ A modern, interactive CV website built with React, featuring dynamic content, PD
   - Enhanced deployment workflow
   - Bug fixes and performance improvements
 
-- v1.0.0 (January 9, 2024)
+- v1.0.0 (January 9, 2025)
   - Interactive CV display
   - PDF generation for CV and Cover Letter
   - Responsive design with mobile support
