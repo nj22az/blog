@@ -612,13 +612,13 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
   };
 
   return (
-    <div className="bg-[#f5f5f7] print:bg-white min-h-[calc(100vh-4rem)]">
-      <div className="max-w-5xl mx-auto px-4 py-20 print:p-6 print:max-w-none">
+    <div className="bg-[#f5f5f7] print:bg-white min-h-[calc(100vh-64px)]">
+      <div className="max-w-5xl mx-auto px-4 py-6 print:p-6 print:max-w-none">
         {/* Profile Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="ios-card mb-6"
+          className="ios-card mt-16 mb-6"
         >
           <div className="ios-card-padding">
             <div className="ios-stack sm:flex-row sm:gap-8 sm:items-start">
