@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Download, FileText } from 'lucide-react';
 import { useCareer } from '../contexts/CareerContext';
 import ContactModal from './ContactModal';
+import MenuDropdown from './MenuDropdown';
 
 interface StickyHeaderProps {
   onDownloadCV: () => void;
@@ -53,6 +54,7 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({ onDownloadCV, onDownloadCov
               >
                 <Mail className="w-5 h-5" />
               </button>
+              <MenuDropdown />
             </div>
           </div>
         </div>
