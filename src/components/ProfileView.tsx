@@ -44,6 +44,7 @@ import {
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import CVModal from './CVModal';
 import CoverLetterModal from './CoverLetterModal';
+import ContactModal from './ContactModal';
 
 // Category mapping for skills and responsibilities
 const skillCategories = {
@@ -400,6 +401,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [showCVModal, setShowCVModal] = useState(false);
   const [showCoverLetterModal, setShowCoverLetterModal] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   
   // Add motion values for tilt animation
   const x = useMotionValue(0);
@@ -867,6 +869,10 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
       </div>
       <CVModal isOpen={showCVModal} onClose={() => setShowCVModal(false)} />
       <CoverLetterModal isOpen={showCoverLetterModal} onClose={() => setShowCoverLetterModal(false)} />
+      <ContactModal 
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </div>
   );
 };
