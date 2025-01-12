@@ -6,7 +6,7 @@ A modern, interactive CV website built with React, featuring dynamic content, PD
 
 - v1.1.0 (January 12, 2025)
 
-  - Added EmailJS integration for contact form
+  - Contact form not working at the monent
   - Added Amazon Affiliate Shop link
   - Improved header navigation
   - Enhanced deployment workflow
