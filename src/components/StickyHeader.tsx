@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Linkedin, Mail, Download, FileText } from 'lucide-react';
+import { Mail, Download, FileText } from 'lucide-react';
 import { useCareer } from '../contexts/CareerContext';
 import ContactModal from './ContactModal';
 
@@ -47,14 +47,6 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({ onDownloadCV, onDownloadCov
 
               {/* Social links */}
               <div className="h-6 w-px bg-gray-200" />
-              <a
-                href={personalInfo.contact.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
               <button
                 onClick={() => setIsContactModalOpen(true)}
                 className="text-gray-500 hover:text-gray-900 transition-colors"
