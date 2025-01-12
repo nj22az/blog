@@ -13,14 +13,9 @@ permissions:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-    environment: github-pages
-    env:
-      SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-      TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-      AUTOREPLY_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-      PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
-
+    environment: production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -36,10 +31,11 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "REACT_APP_EMAILJS_SERVICE_ID=${SERVICE_ID}" > .env
-          echo "REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${TEMPLATE_ID}" >> .env
-          echo "REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${AUTOREPLY_ID}" >> .env
-          echo "REACT_APP_EMAILJS_PUBLIC_KEY=${PUBLIC_KEY}" >> .env
+          touch .env
+          echo "REACT_APP_EMAILJS_SERVICE_ID=service_cazlfdx" >> .env
+          echo "REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=template_8gm8c5a" >> .env
+          echo "REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=template_xxpcqid" >> .env
+          echo "REACT_APP_EMAILJS_PUBLIC_KEY=fLlukK5veEI51Zr_U" >> .env
 
       - name: Build project
         run: npm run build
@@ -51,6 +47,7 @@ jobs:
 
   deploy:
     needs: build
+    name: Deploy
     runs-on: ubuntu-latest
     environment:
       name: github-pages
