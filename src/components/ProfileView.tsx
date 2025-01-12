@@ -696,7 +696,21 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-gray-400" />
-                    <span className="text-[15px] text-gray-600">{personalInfo.contact.email}</span>
+                    <a 
+                      href={`mailto:${personalInfo.contact.email}`}
+                      className="text-[15px] text-gray-600 hover:text-blue-600 hover:underline"
+                    >
+                      {personalInfo.contact.email}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="w-5 h-5 text-gray-400" />
+                    <button
+                      onClick={() => setIsContactModalOpen(true)}
+                      className="text-[15px] text-blue-600 hover:underline"
+                    >
+                      Open Contact Form
+                    </button>
                   </div>
                   <div className="flex items-center gap-3">
                     <Globe className="w-5 h-5 text-gray-400" />
