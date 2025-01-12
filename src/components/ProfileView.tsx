@@ -694,12 +694,22 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-gray-400" />
+                    <div className="relative w-6 h-6">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Phone className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <Mail className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                        <MapPin className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                    </div>
                     <button
                       onClick={() => setIsContactModalOpen(true)}
-                      className="text-[15px] text-blue-600 hover:underline"
+                      className="text-[15px] text-blue-600 hover:underline flex items-center gap-2"
                     >
-                      Open Contact Form
+                      Contact Details Form
                     </button>
                   </div>
                   <div className="flex items-center gap-3">
