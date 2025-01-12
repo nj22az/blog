@@ -9,45 +9,54 @@ on:
 permissions:
   contents: write
   pages: write
+  id-token: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: github-pages
+    env:
+      REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
+      REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
+      REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
+      REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Create env file
+      - name: Create .env file
         run: |
-          cat << EOF > .env
-          REACT_APP_EMAILJS_SERVICE_ID=${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_PUBLIC_KEY=${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
-          EOF
+          echo "REACT_APP_EMAILJS_SERVICE_ID=${REACT_APP_EMAILJS_SERVICE_ID}" > .env
+          echo "REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID=${REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID}" >> .env
+          echo "REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID=${REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID}" >> .env
+          echo "REACT_APP_EMAILJS_PUBLIC_KEY=${REACT_APP_EMAILJS_PUBLIC_KEY}" >> .env
 
-      - name: Build
-        env:
-          REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
-          REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_NOTIFICATION_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID }}
-          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
+      - name: Build project
         run: npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          folder: build
-          branch: gh-pages
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
