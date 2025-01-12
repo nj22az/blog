@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, Store, Link, FileText, Construction } from 'lucide-react';
+import { Menu, Store, FileText, Construction } from 'lucide-react';
 
 const MenuDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,17 +13,10 @@ const MenuDropdown: React.FC = () => {
   const menuItems = [
     {
       icon: <Store className="w-5 h-5 text-blue-500" />,
-      text: 'Benjo Office',
-      subtext: '',
+      text: 'Amazon Affiliate Shop',
+      subtext: 'I may earn a commission on purchases',
       link: 'https://www.benjooffice.com',
       color: 'hover:bg-blue-50 dark:hover:bg-blue-900/20'
-    },
-    {
-      icon: <Link className="w-5 h-5 text-purple-500" />,
-      text: 'Affiliate Links',
-      subtext: 'I may earn a commission from purchases',
-      link: '#',
-      color: 'hover:bg-purple-50 dark:hover:bg-purple-900/20'
     },
     {
       icon: <FileText className="w-5 h-5 text-green-500" />,
