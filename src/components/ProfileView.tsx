@@ -40,7 +40,8 @@ import {
   GraduationCap,
   Binary,
   Download,
-  Clock
+  Clock,
+  Terminal
 } from 'lucide-react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import CVModal from './CVModal';
@@ -685,18 +686,12 @@ const ProfileView: React.FC<ProfileViewProps> = ({ onDownloadCV, onDownloadCover
                     <span className="text-[15px] text-gray-600">{personalInfo.contact.location}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1.5">
-                      <Mail className="w-5 h-5 text-gray-400" />
-                      <MessageSquare className="w-5 h-5 text-gray-400" />
-                    </div>
+                    <Terminal className="w-5 h-5 text-gray-400" />
                     <button
                       onClick={() => setIsContactModalOpen(true)}
-                      className="text-[15px] text-blue-600 hover:underline flex items-center gap-2 group"
+                      className="text-[15px] text-blue-600 hover:underline"
                     >
-                      Open Contact Form
-                      <span className="text-[13px] text-gray-500 group-hover:text-blue-600">
-                        • {personalInfo.contact.email}
-                      </span>
+                      Contact Form
                     </button>
                   </div>
                   <div className="flex items-center gap-3">
