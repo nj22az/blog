@@ -25,7 +25,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
           <button 
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-150 overflow-hidden"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-[2.5] overflow-hidden"
           >
             <img 
               src="/lovable-uploads/761a5103-4e51-4e54-9cc5-8777776f6ee8.png"
