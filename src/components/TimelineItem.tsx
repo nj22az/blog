@@ -52,19 +52,20 @@ const TimelineItem = ({
   const containerId = `exp-${index}`;
 
   return (
-    <div className="relative pl-6 md:pl-0 pr-4 md:pr-0">
-      <div className="flex items-start gap-4 relative">
-        {/* Timeline left section with icon */}
-        <div className="relative shrink-0">
-          {/* Timeline connector line */}
-          <div 
-            className="absolute left-1/2 -translate-x-1/2 top-12 h-[calc(100%+2rem)] w-px bg-gray-200"
-            style={{ height: isLast ? '0' : 'calc(100% + 2rem)' }}
-          />
+    <li className="relative mb-8 last:mb-0">
+      {/* Main container with proper mobile padding */}
+      <div className="flex flex-col md:flex-row gap-4 pl-12 pr-4 md:px-0">
+        {/* Timeline icon and line */}
+        <div className="absolute left-0 md:left-[calc(50%-20px)]">
+          {/* Vertical line */}
+          {!isLast && (
+            <div className="absolute left-4 top-12 w-px h-full bg-gray-200" />
+          )}
           
+          {/* Icon button */}
           <div 
             id={containerId}
-            className="relative w-8 h-8 md:w-10 md:h-10 z-10"
+            className="relative w-8 h-8 md:w-10 md:h-10"
           >
             <div className="absolute inset-[-4px] bg-white rounded-full" />
             <button 
@@ -83,30 +84,30 @@ const TimelineItem = ({
             )}
           </div>
         </div>
-        
-        {/* Timeline content */}
-        <div className="flex-1 min-w-0 pb-8">
+
+        {/* Content card */}
+        <div className="w-full md:w-[calc(50%-40px)] md:ml-auto">
           <div className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            {/* Title and Period */}
-            <div className="flex flex-col gap-1 mb-3">
-              <h3 className="text-base font-semibold text-brand-dark">
-                {exp.title}
-              </h3>
-              <div className="flex items-center gap-1.5 text-xs text-neutral-gray">
-                <Icons.Calendar className="h-3.5 w-3.5 shrink-0" />
-                <span>{exp.period}</span>
-              </div>
+            {/* Title */}
+            <h3 className="text-base font-semibold text-brand-dark mb-2">
+              {exp.title}
+            </h3>
+            
+            {/* Period */}
+            <div className="flex items-center gap-1.5 text-xs text-neutral-gray mb-3">
+              <Icons.Calendar className="h-3.5 w-3.5 shrink-0" />
+              <span>{exp.period}</span>
             </div>
             
             {/* Company and Location */}
             <div className="flex flex-col gap-1.5 mb-3">
               <div className="flex items-center gap-1.5 text-xs text-neutral-gray">
                 <Icons.Building className="h-3.5 w-3.5 shrink-0" />
-                <span className="truncate">{exp.company}</span>
+                <span>{exp.company}</span>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-neutral-gray">
                 <Icons.MapPin className="h-3.5 w-3.5 shrink-0" />
-                <span className="truncate">{exp.location}</span>
+                <span>{exp.location}</span>
               </div>
             </div>
             
@@ -129,7 +130,7 @@ const TimelineItem = ({
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
