@@ -1,6 +1,3 @@
-
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
 import { Calendar, User, Clock } from "lucide-react";
 
 const blogPosts = [
@@ -22,42 +19,34 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <Sidebar />
-      <main className="pt-24 pb-8 px-4 md:ml-64">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <h2 className="text-2xl font-semibold text-brand-dark mb-6">Blog</h2>
-            <div className="space-y-6">
-              {blogPosts.map((post, index) => (
-                <div key={index} className="group cursor-pointer">
-                  <div className="p-6 rounded-xl border border-gray-200 group-hover:shadow-md transition-all">
-                    <h3 className="text-xl font-medium text-brand-dark group-hover:text-brand-purple transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 text-neutral-gray">{post.excerpt}</p>
-                    <div className="flex items-center gap-4 mt-4 text-sm text-neutral-gray">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        <span>{post.readTime}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <User className="h-4 w-4" />
-                        <span>{post.author}</span>
-                      </div>
-                    </div>
-                  </div>
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Blog</h2>
+      <div className="space-y-6">
+        {blogPosts.map((post, index) => (
+          <div key={index} className="group cursor-pointer">
+            <div className="p-6 rounded-xl border border-gray-200 group-hover:shadow-md transition-all">
+              <h3 className="text-xl font-medium text-brand-dark group-hover:text-brand-purple transition-colors">
+                {post.title}
+              </h3>
+              <p className="mt-2 text-neutral-gray">{post.excerpt}</p>
+              <div className="flex items-center gap-4 mt-4 text-sm text-neutral-gray">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{post.date}</span>
                 </div>
-              ))}
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{post.readTime}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span>{post.author}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        ))}
+      </div>
     </div>
   );
 };
