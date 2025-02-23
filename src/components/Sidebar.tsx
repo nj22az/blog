@@ -77,7 +77,7 @@ const Sidebar = () => {
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.zIndex = '0';
-    renderer.domElement.style.opacity = '0.3'; // Increased opacity
+    renderer.domElement.style.opacity = '0.3';
     renderer.domElement.style.pointerEvents = 'none';
     
     container.insertBefore(renderer.domElement, container.firstChild);
@@ -97,9 +97,9 @@ const Sidebar = () => {
     const geometry = new THREE.PlaneGeometry(4, 8, 50, 50);
     const material = new THREE.MeshPhongMaterial({
       color: 0x9b87f5,
-      wireframe: false, // Solid surface instead of wireframe
+      wireframe: true, // Changed back to wireframe
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.8, // Increased opacity
       shininess: 90,
       specular: 0x9b87f5
     });
@@ -114,13 +114,25 @@ const Sidebar = () => {
       requestAnimationFrame(animate);
       
       const positions = geometry.attributes.position;
-      const time = Date.now() * 0.0003; // Slightly faster animation
+      const time = Date.now() * 0.001; // Increased speed for more dramatic effect
       
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const y = positions.getY(i);
-        const z = Math.sin(x + time) * Math.cos(y + time) * 0.5; // Increased wave height
+        
+        // Create more complex wave patterns
+        const z = 
+          Math.sin(x * 0.5 + time) * 0.5 + // Base wave
+          Math.sin(x * 2 + time * 2) * 0.2 + // Higher frequency detail
+          Math.cos(y * 0.5 + time) * 0.5 + // Cross waves
+          Math.sin((x + y) * 0.5 + time) * 0.3; // Diagonal waves
+        
         positions.setZ(i, z);
+      }
+      
+      // Add some rotation to make it more dynamic
+      if (wavesRef.current) {
+        wavesRef.current.rotation.z = Math.sin(time * 0.2) * 0.1;
       }
       
       positions.needsUpdate = true;
@@ -159,18 +171,15 @@ const Sidebar = () => {
           })
           .catch(console.error);
       } else {
-        // For devices that don't require permission
         window.addEventListener('deviceorientation', handleDeviceOrientation);
       }
     } else {
-      // Clean up animation when not on experience page
       if (rendererRef.current && animationContainerRef.current) {
         animationContainerRef.current.removeChild(rendererRef.current.domElement);
         rendererRef.current = null;
       }
     }
 
-    // Cleanup on unmount
     return () => {
       if (rendererRef.current && animationContainerRef.current) {
         animationContainerRef.current.removeChild(rendererRef.current.domElement);
