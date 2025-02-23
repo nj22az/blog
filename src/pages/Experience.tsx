@@ -157,10 +157,15 @@ const Experience = () => {
   };
 
   const initThreeJS = useCallback((containerId: string, category: string) => {
+    console.log('Initializing Three.js for container:', containerId, 'category:', category);
     const container = cardRefs.current[containerId];
-    if (!container) return;
+    if (!container) {
+      console.log('Container not found:', containerId);
+      return;
+    }
 
     if (animationRefs.current[containerId]) {
+      console.log('Cleaning up previous animation');
       container.removeChild(animationRefs.current[containerId]!.domElement);
       animationRefs.current[containerId] = null;
     }
@@ -175,20 +180,22 @@ const Experience = () => {
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0';
     renderer.domElement.style.left = '0';
-    renderer.domElement.style.zIndex = '0';
+    renderer.domElement.style.zIndex = '1';
     renderer.domElement.style.borderRadius = '0.75rem';
+    renderer.domElement.style.pointerEvents = 'none';
     
     container.insertBefore(renderer.domElement, container.firstChild);
+    console.log('Renderer added to container');
     
-    camera.position.z = 5;
-    camera.position.y = 2;
+    camera.position.z = 3;
+    camera.position.y = 0;
 
     const geometry = new THREE.PlaneGeometry(15, 8, 50, 50);
     const material = new THREE.MeshBasicMaterial({
       color: category.toLowerCase() === 'maritime' ? 0x9b87f5 : 0x87f5b4,
       wireframe: true,
       transparent: true,
-      opacity: 0.15
+      opacity: 0.3
     });
     
     const waves = new THREE.Mesh(geometry, material);
@@ -211,11 +218,11 @@ const Experience = () => {
         let z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time);
         
         if (category.toLowerCase() === 'maritime') {
-          z *= 1.0; // Ocean waves
+          z *= 2.0;
         } else if (category.toLowerCase() === 'industrial') {
-          z = Math.sin(x * 2 + time) * 0.3; // Machine vibrations
+          z = Math.sin(x * 2 + time) * 0.6;
         } else if (category.toLowerCase() === 'military') {
-          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time) * 0.5; // Radar waves
+          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time);
         }
         
         positions.setZ(i, z);
@@ -227,16 +234,19 @@ const Experience = () => {
 
     animate();
     animationRefs.current[containerId] = renderer;
+    console.log('Animation started for:', containerId);
 
     return () => {
       if (container && animationRefs.current[containerId]) {
         container.removeChild(animationRefs.current[containerId]!.domElement);
         animationRefs.current[containerId] = null;
+        console.log('Animation cleaned up for:', containerId);
       }
     };
   }, []);
 
   const handleCategoryClick = (containerId: string, category: string) => {
+    console.log('Category clicked:', category, 'for container:', containerId);
     if (selectedCategory === containerId) {
       setSelectedCategory(null);
       if (animationRefs.current[containerId]) {
