@@ -61,7 +61,7 @@ const TimelineItem = ({
           id={containerId}
           className="relative w-10 h-10 sm:w-14 sm:h-14"
         >
-          <div className="absolute inset-[-4px] bg-white rounded-full" /> {/* White background circle */}
+          <div className="absolute inset-[-4px] bg-white rounded-full" />
           <button 
             onClick={onToggleAnimation}
             className="absolute inset-0 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 hover:bg-brand-purple/20 transition-colors"

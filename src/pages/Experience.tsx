@@ -1,7 +1,8 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TimelineItem from "@/components/TimelineItem";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Download } from "lucide-react";
 
 interface Experience {
   period: string;
@@ -272,30 +273,66 @@ const Experience = () => {
     setActiveAnimation(currentActive => currentActive === index ? null : index);
   };
 
+  const downloadCSV = () => {
+    const headers = ["Period", "Title", "Company", "Category", "Location", "Description", "Skills"];
+    const csvContent = [
+      headers.join(","),
+      ...experiences.map(exp => [
+        exp.period,
+        `"${exp.title}"`,
+        `"${exp.company}"`,
+        exp.category,
+        `"${exp.location}"`,
+        `"${exp.description}"`,
+        `"${exp.skills.join(", ")}"`
+      ].join(","))
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "professional_experience.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
       <div className="flex justify-between items-center mb-6 sm:mb-8">
         <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark">
           Professional Experience
         </h2>
-        <Button 
-          variant="ghost" 
-          size="sm"
-          onClick={visibleExperiences < experiences.length ? showMore : showLess}
-          className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
-        >
-          {visibleExperiences < experiences.length ? (
-            <>
-              Show All
-              <ChevronDown className="ml-1 h-4 w-4" />
-            </>
-          ) : (
-            <>
-              Show Less
-              <ChevronUp className="ml-1 h-4 w-4" />
-            </>
-          )}
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="ghost" 
+            size="sm"
+            onClick={downloadCSV}
+            className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
+          >
+            <Download className="h-4 w-4 mr-1" />
+            Download CSV
+          </Button>
+          <Button 
+            variant="ghost" 
+            size="sm"
+            onClick={visibleExperiences < experiences.length ? showMore : showLess}
+            className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
+          >
+            {visibleExperiences < experiences.length ? (
+              <>
+                Show All
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Show Less
+                <ChevronUp className="ml-1 h-4 w-4" />
+              </>
+            )}
+          </Button>
+        </div>
       </div>
       
       <div className="relative space-y-6 sm:space-y-8">
