@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import * as Icons from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,7 +37,7 @@ const experiences: Experience[] = [
     company: "Instron",
     category: "Industrial",
     location: "Nordic Region • Ireland • Poland",
-    description: "Installation and commissioning of testing systems across Nordic Region and Europe. Perform comprehensive IQOQ processes and develop testing methods using Bluehill software.",
+    description: "Installation and commissioning of testing systems across Nordic Region and Europe. Perform comprehensive IQOQ processes and develop testing methods using Bluehill software. Specialize in load cell calibration and provide client training for equipment optimization.",
     skills: ["Testing Systems Installation", "IQOQ & Calibration", "Bluehill Software", "Technical Training", "Data Analysis"],
   },
   {
@@ -47,31 +46,103 @@ const experiences: Experience[] = [
     company: "AH Automation",
     category: "Automation",
     location: "Sweden",
-    description: "Developed expertise in Siemens TIA Portal and automation systems. Implemented conveyor belt systems with touchscreen Human-Machine Interface (HMI) interfaces.",
+    description: "Developed expertise in Siemens TIA Portal and automation systems. Implemented conveyor belt systems with touchscreen Human-Machine Interface (HMI) interfaces. Engaged in continuous professional development and maintenance of electric motors in conveyor systems.",
     skills: ["PLC Programming", "HMI Development", "System Integration", "Technical Documentation", "Automation Design"],
   },
   {
-    period: "Aug 2018 - Jun 2023",
-    title: "Marine Engineer Officer",
-    company: "Swedish Armed Forces",
-    category: "Maritime",
-    location: "Sweden",
-    description: "Served as Marine Engineer Officer on combat vessels. Led engineering teams and managed complex marine systems.",
-    skills: ["Marine Engineering", "Team Leadership", "System Maintenance", "Emergency Response", "Technical Operations"],
+    period: "Sep 2020 - Jul 2023",
+    title: "Commissioning Engineer",
+    company: "Siemens Energy",
+    category: "Industrial",
+    location: "Worldwide",
+    description: "Specialized in on-site commissioning of gas turbines globally. Managed the assembly, installation, and testing of turbines, ensuring compliance with safety and quality standards.",
+    skills: ["Gas Turbine Systems", "Project Management", "International Operations", "Technical Leadership", "System Integration", "Safety Compliance"],
   },
   {
-    period: "Jun 2015 - Jul 2018",
-    title: "Technical Officer",
-    company: "Swedish Armed Forces",
+    period: "Dec 2019 - Sep 2020",
+    title: "Inspection Engineer",
+    company: "DEKRA Industrial",
+    category: "Industrial",
+    location: "Sweden",
+    description: "Responsible for conducting comprehensive inspections of industrial equipment to ensure compliance with safety standards. Provided actionable recommendations for repairs and maintenance.",
+    skills: ["Quality Control", "Safety Compliance", "Technical Documentation", "Industrial Inspections", "Equipment Assessment"],
+  },
+  {
+    period: "Sep 2018 - Dec 2019",
+    title: "3rd Engineer",
+    company: "Stena RoRo",
+    category: "Maritime",
+    location: "Worldwide",
+    description: "Oversaw engine room operations on the Stena Flavia and Mont Ventoux vessels. Managed servicing and maintenance of auxiliary engine CAT3512 and Sperre Compressor systems.",
+    skills: ["Engine Operations", "Maintenance Planning", "System Repairs", "Equipment Overhaul", "Safety Protocols"],
+  },
+  {
+    period: "Apr 2018 - Sep 2018",
+    title: "Regional Technical Engineer",
+    company: "Trafikverket",
+    category: "Maritime",
+    location: "Lake Vättern",
+    description: "Oversaw the engine department, ensuring compliance with safety protocols and project timelines. Led team in enhancing performance and continuous learning.",
+    skills: ["Technical Operations", "Team Leadership", "Maintenance Planning", "Safety Compliance", "System Optimization"],
+  },
+  {
+    period: "Jan 2018 - Apr 2018",
+    title: "Technical Manager",
+    company: "Persson Innovation AB",
+    category: "Industrial",
+    location: "Kumla, Örebro län, Sweden",
+    description: "Led installation and commissioning of cardboard handle application machines in Tennessee and North Carolina. Managed shipping process from Sweden to US.",
+    skills: ["Project Management", "Automation Systems", "Team Supervision", "Process Optimization", "Technical Planning"],
+  },
+  {
+    period: "Sep 2015 - Jan 2018",
+    title: "Field Service Engineer",
+    company: "Instron",
+    category: "Industrial",
+    location: "Nordic Region • Ireland • Poland",
+    description: "Installation and commissioning of testing systems across Nordic Region and Europe. Performed comprehensive IQOQ processes and developed testing methods.",
+    skills: ["System Installation", "Equipment Calibration", "Software Configuration", "Client Training", "Technical Support"],
+  },
+  {
+    period: "Nov 2014 - Apr 2015",
+    title: "3rd Engineer",
+    company: "Stena Baltic A/S",
+    category: "Maritime",
+    location: "Worldwide",
+    description: "Responsible for engine watchkeeping, maintenance of key engine components, and ensuring safe operations onboard. Managed bunkering operations and oil record logging.",
+    skills: ["Engine Operations", "System Maintenance", "Equipment Overhaul", "Safety Protocols", "Technical Documentation"],
+  },
+  {
+    period: "May 2014 - Oct 2014",
+    title: "3rd Engineer",
+    company: "Destination Gotland",
+    category: "Maritime",
+    location: "Baltic Sea",
+    description: "Engaged in watchkeeping, performed engineer duties, managed bunkering, overhauled diesel engines, and operated purifiers and clarifiers.",
+    skills: ["Engine Operations", "System Maintenance", "Equipment Repair", "Safety Compliance", "Technical Documentation"],
+  },
+  {
+    period: "Sep 2011 - Mar 2012",
+    title: "Engineer",
+    company: "Royal Swedish Navy",
+    category: "Military",
+    location: "Swedish Coast",
+    description: "Worked as a military engineer in the engine room, overseeing operations, maintenance, and repairs. Participated in military exercises.",
+    skills: ["Military Operations", "Engine Systems", "Equipment Maintenance", "Safety Protocols", "Emergency Response"],
+  },
+  {
+    period: "Jan 2003 - Dec 2003",
+    title: "Military Service, AB",
+    company: "Royal Swedish Navy",
     category: "Military",
     location: "Sweden",
-    description: "Specialized in technical operations and maintenance of military equipment. Trained personnel in technical procedures.",
-    skills: ["Technical Operations", "Personnel Training", "Equipment Maintenance", "Safety Protocols", "Team Management"],
+    description: "Military Deckhand on the navigation school vessel HMS M20, specializing in deck work and seamanship.",
+    skills: ["Military Training", "Maritime Operations", "Equipment Handling", "Safety Protocols", "Team Coordination"],
   }
 ];
 
 const Experience = () => {
-  const [visibleExperiences, setVisibleExperiences] = useState(2);
+  const [visibleExperiences, setVisibleExperiences] = useState(3);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<any>(null);
@@ -81,15 +152,13 @@ const Experience = () => {
   };
 
   const showLess = () => {
-    setVisibleExperiences(2);
+    setVisibleExperiences(3);
     setSelectedCategory(null);
   };
 
-  // Initialize Three.js scene
   const initThreeJS = useCallback(() => {
     if (!containerRef.current) return;
 
-    // Clean up previous scene if it exists
     if (animationRef.current) {
       containerRef.current.removeChild(animationRef.current.domElement);
       animationRef.current = null;
@@ -105,7 +174,6 @@ const Experience = () => {
     
     camera.position.z = 5;
 
-    // Create wave geometry
     const geometry = new THREE.PlaneGeometry(20, 20, 50, 50);
     const material = new THREE.MeshBasicMaterial({
       color: 0x9b87f5,
@@ -118,7 +186,6 @@ const Experience = () => {
     waves.rotation.x = -Math.PI / 3;
     scene.add(waves);
 
-    // Animation
     const animate = () => {
       requestAnimationFrame(animate);
       
@@ -146,7 +213,6 @@ const Experience = () => {
     };
   }, []);
 
-  // Handle category selection
   const handleCategoryClick = (category: string) => {
     if (selectedCategory === category) {
       setSelectedCategory(null);
@@ -158,7 +224,6 @@ const Experience = () => {
     }
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (containerRef.current && animationRef.current) {
@@ -174,7 +239,6 @@ const Experience = () => {
       <div className="relative space-y-6 sm:space-y-8">
         {experiences.slice(0, visibleExperiences).map((exp, index) => (
           <div key={index} className="relative flex gap-3 sm:gap-6 animate-fade-in">
-            {/* Timeline line that stops before and after the icon */}
             {index !== 0 && (
               <div className="absolute left-[19px] sm:left-[27px] top-0 h-3 w-px bg-gray-200" />
             )}
