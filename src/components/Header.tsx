@@ -1,6 +1,6 @@
 
 import { Menu } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const toggleMobileMenu = () => {
@@ -24,23 +24,15 @@ const Header = () => {
           </h1>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity overflow-hidden">
-                <img 
-                  src="/lovable-uploads/761a5103-4e51-4e54-9cc5-8777776f6ee8.png"
-                  alt="Profile Logo"
-                  className="w-full h-full object-contain"
-                />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem>
-                <Menu className="mr-2 h-4 w-4" />
-                <span>Menu</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <button 
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-150 overflow-hidden"
+          >
+            <img 
+              src="/lovable-uploads/761a5103-4e51-4e54-9cc5-8777776f6ee8.png"
+              alt="Profile Logo"
+              className="w-full h-full object-contain"
+            />
+          </button>
         </div>
       </div>
     </header>
