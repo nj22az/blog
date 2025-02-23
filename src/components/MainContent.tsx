@@ -27,11 +27,11 @@ const MainContent = () => {
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Building className="h-5 w-5 text-primary" />
+                  <Building className="h-8 w-8 text-primary" />
                   <span className="text-base text-muted-foreground">Field Service Engineer at Instron</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary" />
+                  <MapPin className="h-8 w-8 text-primary" />
                   <div className="text-base text-muted-foreground">
                     <p>Based in:</p>
                     <p>Örebro, Sweden •</p>
@@ -39,7 +39,7 @@ const MainContent = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Languages className="h-5 w-5 text-primary" />
+                  <Languages className="h-8 w-8 text-primary" />
                   <div className="text-base text-muted-foreground">
                     <p>Languages:</p>
                     <p>Swedish (Native) • English (Fluent)</p>
