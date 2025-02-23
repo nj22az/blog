@@ -24,46 +24,62 @@ const MainContent = () => {
             </p>
             
             {/* Contact and Location Information */}
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Building className="h-8 w-8 text-primary" />
-                  <span className="text-base text-muted-foreground">Field Service Engineer at Instron</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-8 w-8 text-primary" />
-                  <div className="text-base text-muted-foreground">
-                    <p>Based in:</p>
-                    <p>Örebro, Sweden •</p>
-                    <p>Da Nang, Quang Nam, Vietnam</p>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Left Column */}
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <Building className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Current Position</h3>
+                    <p className="text-muted-foreground">Field Service Engineer at Instron</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Languages className="h-8 w-8 text-primary" />
-                  <div className="text-base text-muted-foreground">
-                    <p>Languages:</p>
-                    <p>Swedish (Native) • English (Fluent)</p>
+                <div className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <MapPin className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Based in</h3>
+                    <p className="text-muted-foreground">Örebro, Sweden</p>
+                    <p className="text-muted-foreground">Da Nang, Quang Nam, Vietnam</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <Languages className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Languages</h3>
+                    <p className="text-muted-foreground">Swedish (Native)</p>
+                    <p className="text-muted-foreground">English (Fluent)</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Globe2 className="h-8 w-8 text-primary" />
-                  <span className="text-base text-muted-foreground">Connect with me:</span>
+
+              {/* Right Column */}
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <Globe2 className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Connect with me</h3>
+                    <a 
+                      href="https://www.linkedin.com/in/nils-johansson-86744583/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center gap-2 mt-2 text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <Linkedin className="h-8 w-8" />
+                      <span>LinkedIn Profile</span>
+                    </a>
+                    <p className="text-sm text-muted-foreground mt-4">
+                      Want to reach out? Feel free to connect with me via social media above!
+                    </p>
+                  </div>
                 </div>
-                <a 
-                  href="https://www.linkedin.com/in/nils-johansson-86744583/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors"
-                >
-                  <Linkedin className="h-8 w-8" />
-                  <span className="text-base">LinkedIn Profile</span>
-                </a>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Want to reach out? Feel free to connect with me via social media above!
-                </p>
               </div>
             </div>
           </div>
