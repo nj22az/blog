@@ -171,13 +171,13 @@ const Experience = () => {
     }
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
       antialias: true
     });
     
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(56, 56);
     renderer.setClearColor(0x000000, 0);
     
     renderer.domElement.style.position = 'absolute';
@@ -185,8 +185,8 @@ const Experience = () => {
     renderer.domElement.style.left = '0';
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
-    renderer.domElement.style.zIndex = '1';
-    renderer.domElement.style.borderRadius = '0.75rem';
+    renderer.domElement.style.zIndex = '0';
+    renderer.domElement.style.borderRadius = '9999px';
     renderer.domElement.style.pointerEvents = 'none';
     
     container.insertBefore(renderer.domElement, container.firstChild);
@@ -196,7 +196,7 @@ const Experience = () => {
     camera.position.y = 0;
     camera.lookAt(0, 0, 0);
 
-    const geometry = new THREE.PlaneGeometry(8, 4, 50, 50);
+    const geometry = new THREE.PlaneGeometry(4, 4, 20, 20);
     const material = new THREE.MeshBasicMaterial({
       color: category.toLowerCase() === 'maritime' ? 0x9b87f5 : 0x87f5b4,
       wireframe: true,
@@ -224,11 +224,11 @@ const Experience = () => {
         let z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time);
         
         if (category.toLowerCase() === 'maritime') {
-          z *= 2.0;
+          z *= 1.5;
         } else if (category.toLowerCase() === 'industrial') {
           z = Math.sin(x * 2 + time) * 0.8;
         } else if (category.toLowerCase() === 'military') {
-          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time) * 1.5;
+          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time) * 1.2;
         }
         
         positions.setZ(i, z);
@@ -288,49 +288,49 @@ const Experience = () => {
             )}
             
             <div className="relative shrink-0">
-              <button 
-                onClick={() => handleCategoryClick(`exp-${index}`, exp.category)}
-                className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 relative hover:bg-brand-purple/20 transition-colors"
+              <div 
+                ref={el => cardRefs.current[`exp-${index}`] = el}
+                className="relative w-10 h-10 sm:w-14 sm:h-14"
               >
-                {React.createElement(getIcon(exp.category), {
-                  className: "h-5 w-5 sm:h-6 sm:w-6 text-brand-purple"
-                })}
-              </button>
+                <button 
+                  onClick={() => handleCategoryClick(`exp-${index}`, exp.category)}
+                  className="absolute inset-0 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 hover:bg-brand-purple/20 transition-colors"
+                >
+                  {React.createElement(getIcon(exp.category), {
+                    className: "h-5 w-5 sm:h-6 sm:w-6 text-brand-purple"
+                  })}
+                </button>
+              </div>
             </div>
             
-            <div 
-              ref={el => cardRefs.current[`exp-${index}`] = el}
-              className="relative flex-1 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow overflow-hidden"
-            >
-              <div className="relative z-10">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
-                    <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
-                      <Icons.Building className="h-4 w-4 shrink-0" />
-                      <span>{exp.company}</span>
-                      <span className="hidden sm:inline text-gray-300">•</span>
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center text-sm text-neutral-gray">
-                    <Icons.Calendar className="h-4 w-4 mr-2 shrink-0" />
-                    <span>{exp.period}</span>
+            <div className="flex-1 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
+                    <Icons.Building className="h-4 w-4 shrink-0" />
+                    <span>{exp.company}</span>
+                    <span className="hidden sm:inline text-gray-300">•</span>
+                    <span>{exp.location}</span>
                   </div>
                 </div>
-                
-                <p className="text-sm sm:text-base text-neutral-gray mb-4">{exp.description}</p>
-                
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {exp.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-2 sm:px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs sm:text-sm font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div className="flex items-center text-sm text-neutral-gray">
+                  <Icons.Calendar className="h-4 w-4 mr-2 shrink-0" />
+                  <span>{exp.period}</span>
                 </div>
+              </div>
+              
+              <p className="text-sm sm:text-base text-neutral-gray mb-4">{exp.description}</p>
+              
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {exp.skills.map((skill, skillIndex) => (
+                  <span
+                    key={skillIndex}
+                    className="px-2 sm:px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs sm:text-sm font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
