@@ -49,16 +49,16 @@ const MainContent = () => {
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Globe2 className="h-5 w-5 text-primary" />
+                  <Globe2 className="h-8 w-8 text-primary" />
                   <span className="text-base text-muted-foreground">Connect with me:</span>
                 </div>
                 <a 
-                  href="https://www.linkedin.com/in/your-profile" 
+                  href="https://www.linkedin.com/in/nils-johansson-86744583/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors"
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <Linkedin className="h-8 w-8" />
                   <span className="text-base">LinkedIn Profile</span>
                 </a>
                 <p className="text-sm text-muted-foreground mt-2">
