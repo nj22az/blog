@@ -1,4 +1,3 @@
-
 import React, { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -49,14 +48,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <Sidebar />
-      <main className="pt-24 pb-8 px-4 md:ml-64 transition-all duration-300">
-        <div className="max-w-3xl mx-auto">
-          <Suspense fallback={<LoadingSpinner />}>
-            {children}
-          </Suspense>
-        </div>
-      </main>
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 ml-0 md:ml-64 min-h-[calc(100vh-4rem)] mt-16">
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <Suspense fallback={<LoadingSpinner />}>
+              {children}
+            </Suspense>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
