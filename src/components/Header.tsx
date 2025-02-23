@@ -26,11 +26,11 @@ const Header = () => {
         <div className="flex items-center gap-2 sm:gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1a2238] flex items-center justify-center hover:opacity-90 transition-opacity overflow-hidden">
+              <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity overflow-hidden">
                 <img 
-                  src="/lovable-uploads/c8f8ae3a-cc1f-424c-9f22-03622b6f9c72.png"
+                  src="/lovable-uploads/761a5103-4e51-4e54-9cc5-8777776f6ee8.png"
                   alt="Profile Logo"
-                  className="w-full h-full object-contain p-0.5"
+                  className="w-full h-full object-contain"
                 />
               </button>
             </DropdownMenuTrigger>
