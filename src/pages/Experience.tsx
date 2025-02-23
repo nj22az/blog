@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { BriefcaseIcon, CalendarIcon, BuildingIcon, GraduationCap, Anchor, Shield } from "lucide-react";
+import { BriefcaseIcon, CalendarIcon, Building, Anchor, Shield, GraduationCap } from "lucide-react";
 
 const getIcon = (category: string) => {
   switch (category.toLowerCase()) {
@@ -17,8 +17,17 @@ const getIcon = (category: string) => {
   }
 };
 
-// Complete timeline data
-const experiences = [
+interface Experience {
+  period: string;
+  title: string;
+  company: string;
+  category: string;
+  location: string;
+  description: string;
+  skills: string[];
+}
+
+const experiences: Experience[] = [
   {
     period: "January 2024 - Present",
     title: "Field Service Engineer",
@@ -36,8 +45,7 @@ const experiences = [
     location: "Sweden",
     description: "Developed expertise in Siemens TIA Portal and automation systems. Implemented conveyor belt systems with touchscreen Human-Machine Interface (HMI) interfaces.",
     skills: ["PLC Programming", "HMI Development", "System Integration", "Technical Documentation", "Automation Design"],
-  },
-  // ... Add more experiences here following the same structure
+  }
 ];
 
 const Experience = () => {
@@ -71,7 +79,7 @@ const Experience = () => {
                       <div>
                         <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
                         <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
-                          <BuildingIcon className="h-4 w-4 shrink-0" />
+                          <Building className="h-4 w-4 shrink-0" />
                           <span>{exp.company}</span>
                           <span className="hidden sm:inline text-gray-300">•</span>
                           <span>{exp.location}</span>
