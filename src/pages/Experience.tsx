@@ -95,7 +95,7 @@ const experiences: Experience[] = [
     skills: ["Project Management", "Automation Systems", "Team Supervision", "Process Optimization", "Technical Planning"],
   },
   {
-    period: "Sep 2015 - Jan 2018",
+    period: "Sep 2015 - Jan 218",
     title: "Field Service Engineer",
     company: "Instron",
     category: "Industrial",
@@ -170,32 +170,45 @@ const Experience = () => {
     
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
     renderer.setClearColor(0x000000, 0);
+    
+    // Position the renderer's canvas absolutely
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.zIndex = '0';
+    
     containerRef.current.appendChild(renderer.domElement);
     
-    camera.position.z = 5;
+    // Move camera further back and up
+    camera.position.z = 8;
+    camera.position.y = 2;
 
-    const geometry = new THREE.PlaneGeometry(20, 20, 50, 50);
+    // Create larger wave geometry
+    const geometry = new THREE.PlaneGeometry(30, 30, 50, 50);
     const material = new THREE.MeshBasicMaterial({
       color: 0x9b87f5,
       wireframe: true,
       transparent: true,
-      opacity: 0.3
+      opacity: 0.2
     });
     
     const waves = new THREE.Mesh(geometry, material);
-    waves.rotation.x = -Math.PI / 3;
+    // Adjust wave position and rotation
+    waves.rotation.x = -Math.PI / 4; // Less steep angle
+    waves.position.y = 5; // Move waves up
+    waves.position.z = -5; // Move waves back
     scene.add(waves);
 
     const animate = () => {
       requestAnimationFrame(animate);
       
       const positions = geometry.attributes.position;
-      const time = Date.now() * 0.001;
+      const time = Date.now() * 0.0005; // Slower wave movement
       
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const y = positions.getY(i);
-        const z = 0.5 * Math.sin(x + time) * Math.cos(y + time);
+        const z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 1.5; // Larger waves
         positions.setZ(i, z);
       }
       
