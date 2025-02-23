@@ -1,4 +1,3 @@
-
 import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
 
 const MainContent = () => {
@@ -8,7 +7,7 @@ const MainContent = () => {
       <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-border">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 group">
-            <div className="absolute inset-0 rounded-full overflow-hidden transition-all duration-300 ease-in-out transform group-hover:-rotate-10">
+            <div className="absolute inset-0 rounded-full overflow-hidden transition-all duration-300 ease-in-out transform origin-center hover:-rotate-10">
               <img 
                 src="/lovable-uploads/d0b6e8a0-fbab-45b8-8c90-4f8c7bba9262.png" 
                 alt="Profile picture"
