@@ -49,11 +49,12 @@ const TimelineItem = ({
 
   return (
     <div className="relative flex gap-3 sm:gap-6 animate-fade-in">
+      {/* Timeline connector lines */}
       {!isFirst && (
-        <div className="absolute left-[19px] sm:left-[27px] top-0 h-3 w-px bg-gray-200" />
+        <div className="absolute left-[19px] sm:left-[27px] top-[-12px] h-[28px] w-px bg-gray-200" />
       )}
       {!isLast && (
-        <div className="absolute left-[19px] sm:left-[27px] top-[52px] bottom-0 w-px bg-gray-200" />
+        <div className="absolute left-[19px] sm:left-[27px] top-[36px] h-[calc(100%-36px)] w-px bg-gray-200" />
       )}
       
       <div className="relative shrink-0">
@@ -73,7 +74,6 @@ const TimelineItem = ({
             <JobAnimation 
               containerId={containerId}
               category={exp.category}
-              onClose={onToggleAnimation}
             />
           )}
         </div>

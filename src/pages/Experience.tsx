@@ -1,6 +1,8 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TimelineItem from "@/components/TimelineItem";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface Experience {
   period: string;
@@ -128,7 +130,7 @@ const Experience = () => {
   const [activeAnimation, setActiveAnimation] = useState<number | null>(null);
 
   const showMore = () => {
-    setVisibleExperiences(prev => Math.min(prev + 2, experiences.length));
+    setVisibleExperiences(experiences.length);
   };
 
   const showLess = () => {
@@ -142,9 +144,29 @@ const Experience = () => {
 
   return (
     <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
-      <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-6 sm:mb-8">
-        Professional Experience
-      </h2>
+      <div className="flex justify-between items-center mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark">
+          Professional Experience
+        </h2>
+        <Button 
+          variant="ghost" 
+          size="sm"
+          onClick={visibleExperiences < experiences.length ? showMore : showLess}
+          className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
+        >
+          {visibleExperiences < experiences.length ? (
+            <>
+              Show All
+              <ChevronDown className="ml-1 h-4 w-4" />
+            </>
+          ) : (
+            <>
+              Show Less
+              <ChevronUp className="ml-1 h-4 w-4" />
+            </>
+          )}
+        </Button>
+      </div>
       
       <div className="relative space-y-6 sm:space-y-8">
         {experiences.slice(0, visibleExperiences).map((exp, index) => (
@@ -158,26 +180,6 @@ const Experience = () => {
             onToggleAnimation={() => toggleAnimation(index)}
           />
         ))}
-      </div>
-
-      <div className="mt-6 text-center">
-        {visibleExperiences < experiences.length ? (
-          <Button 
-            variant="outline" 
-            onClick={showMore}
-            className="mx-auto"
-          >
-            Show More
-          </Button>
-        ) : (
-          <Button 
-            variant="outline" 
-            onClick={showLess}
-            className="mx-auto"
-          >
-            Show Less
-          </Button>
-        )}
       </div>
     </div>
   );

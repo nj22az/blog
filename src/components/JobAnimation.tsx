@@ -1,15 +1,13 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { X } from 'lucide-react';
 
 interface JobAnimationProps {
   containerId: string;
   category: string;
-  onClose: () => void;
 }
 
-const JobAnimation = ({ containerId, category, onClose }: JobAnimationProps) => {
+const JobAnimation = ({ containerId, category }: JobAnimationProps) => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
 
   useEffect(() => {
@@ -110,15 +108,7 @@ const JobAnimation = ({ containerId, category, onClose }: JobAnimationProps) => 
     };
   }, [containerId, category]);
 
-  return (
-    <button 
-      onClick={onClose}
-      className="absolute top-1 right-1 z-20 rounded-full bg-white/80 p-1 hover:bg-white transition-colors"
-      aria-label="Stop animation"
-    >
-      <X className="h-3 w-3 text-gray-500" />
-    </button>
-  );
+  return null;
 };
 
 export default JobAnimation;
