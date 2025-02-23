@@ -7,27 +7,72 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Close mobile menu when route changes or window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        setIsMobileMenuOpen(false);
+        const sidebar = document.querySelector('aside');
+        sidebar?.classList.add('-translate-x-full');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Toggle sidebar visibility by adding/removing transform class
     const sidebar = document.querySelector('aside');
     sidebar?.classList.toggle('-translate-x-full');
+
+    // If opening the menu, add click outside listener
+    if (!isMobileMenuOpen) {
+      setTimeout(() => {
+        document.addEventListener('click', handleClickOutside);
+      }, 0);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const sidebar = document.querySelector('aside');
+    const menuButton = document.querySelector('[data-mobile-menu-trigger]');
+
+    if (sidebar && !sidebar.contains(event.target as Node) && 
+        menuButton && !menuButton.contains(event.target as Node)) {
+      setIsMobileMenuOpen(false);
+      sidebar.classList.add('-translate-x-full');
+      document.removeEventListener('click', handleClickOutside);
+    }
+  };
+
+  // Cleanup event listener on component unmount
+  useEffect(() => {
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-gray-200 z-50 px-4">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button 
+            data-mobile-menu-trigger
             className="p-2 hover:bg-gray-100 rounded-full transition-colors md:hidden"
-            onClick={toggleMobileMenu}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMobileMenu();
+            }}
           >
             <Menu className="h-5 w-5 text-neutral-gray" />
           </button>

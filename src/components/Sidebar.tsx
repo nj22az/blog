@@ -13,13 +13,21 @@ const navItems = [
 ];
 
 const Sidebar = () => {
+  const handleLinkClick = () => {
+    if (window.innerWidth < 768) { // Close sidebar on mobile when link is clicked
+      const sidebar = document.querySelector('aside');
+      sidebar?.classList.add('-translate-x-full');
+    }
+  };
+
   return (
-    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md -translate-x-full md:translate-x-0 transition-transform">
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-40">
       <nav className="p-4 space-y-2">
         {navItems.map((item) => (
           <Link
             key={item.label}
             to={item.path}
+            onClick={handleLinkClick}
             className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors text-neutral-gray hover:text-brand-purple"
           >
             <item.icon className="h-5 w-5" />
