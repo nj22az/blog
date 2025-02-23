@@ -1,21 +1,14 @@
-
 import { CalendarDays, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
 const Blog = () => {
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
         <h2 className="text-2xl font-semibold text-brand-dark mb-6">Blog</h2>
         
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <div className="relative">
-              <img
-                src="/lovable-uploads/49913105-17f1-401c-9792-a1d073bf0dc8.png"
-                alt="Jungle Office Meeting"
-                className="rounded-lg w-full h-auto shadow-lg"
-              />
+              <img src="/lovable-uploads/49913105-17f1-401c-9792-a1d073bf0dc8.png" alt="Jungle Office Meeting" className="rounded-lg w-full h-auto shadow-lg" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
             </div>
             
@@ -64,13 +57,11 @@ const Blog = () => {
 
             <div className="flex items-center gap-2 text-sm text-neutral-gray">
               <CalendarDays className="h-4 w-4" />
-              <span>Launching Q2 2024</span>
+              <span>Launching Q2 2025</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;
