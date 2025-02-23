@@ -1,5 +1,5 @@
 
-import { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -68,14 +68,12 @@ const queryClient = new QueryClient({
       retry: 1,
       staleTime: 30000,
       refetchOnWindowFocus: false,
-      suspense: true,
     },
   },
 });
 
 const App = () => {
-  // Trigger route preloading
-  React.useEffect(() => {
+  useEffect(() => {
     preloadRoutes();
   }, []);
 
