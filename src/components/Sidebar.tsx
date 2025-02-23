@@ -8,6 +8,8 @@ const Sidebar = () => {
   const location = useLocation();
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const wavesRef = useRef<THREE.Mesh | null>(null);
   
   const navItems = [
     {
@@ -58,6 +60,8 @@ const Sidebar = () => {
 
     const container = animationContainerRef.current;
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
+    
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
@@ -73,7 +77,7 @@ const Sidebar = () => {
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.zIndex = '0';
-    renderer.domElement.style.opacity = '0.1';
+    renderer.domElement.style.opacity = '0.3'; // Increased opacity
     renderer.domElement.style.pointerEvents = 'none';
     
     container.insertBefore(renderer.domElement, container.firstChild);
@@ -81,29 +85,41 @@ const Sidebar = () => {
     camera.position.z = 2;
     camera.lookAt(0, 0, 0);
 
+    // Add ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    // Add directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
     const geometry = new THREE.PlaneGeometry(4, 8, 50, 50);
-    const material = new THREE.MeshBasicMaterial({
+    const material = new THREE.MeshPhongMaterial({
       color: 0x9b87f5,
-      wireframe: true,
+      wireframe: false, // Solid surface instead of wireframe
       transparent: true,
-      opacity: 0.3
+      opacity: 0.6,
+      shininess: 90,
+      specular: 0x9b87f5
     });
     
     const waves = new THREE.Mesh(geometry, material);
     waves.rotation.x = -Math.PI / 6;
     scene.add(waves);
+    wavesRef.current = waves;
 
     const animate = () => {
       if (!rendererRef.current) return;
       requestAnimationFrame(animate);
       
       const positions = geometry.attributes.position;
-      const time = Date.now() * 0.0002;
+      const time = Date.now() * 0.0003; // Slightly faster animation
       
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const y = positions.getY(i);
-        const z = Math.sin(x + time) * Math.cos(y + time) * 0.3;
+        const z = Math.sin(x + time) * Math.cos(y + time) * 0.5; // Increased wave height
         positions.setZ(i, z);
       }
       
@@ -115,9 +131,37 @@ const Sidebar = () => {
     animate();
   };
 
+  // Handle device orientation changes
+  const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+    if (!wavesRef.current || !event.beta || !event.gamma) return;
+    
+    // Convert degrees to radians
+    const beta = (event.beta * Math.PI) / 180;
+    const gamma = (event.gamma * Math.PI) / 180;
+    
+    // Adjust the wave mesh rotation based on device orientation
+    wavesRef.current.rotation.x = -Math.PI / 6 + (beta * 0.1); // Base rotation + tilt adjustment
+    wavesRef.current.rotation.y = gamma * 0.1;
+  };
+
   useEffect(() => {
     if (location.pathname === '/experience') {
       initThreeJS();
+      
+      // Request device orientation permission and add listener
+      if (typeof DeviceOrientationEvent !== 'undefined' && 
+          typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+        (DeviceOrientationEvent as any).requestPermission()
+          .then((response: string) => {
+            if (response === 'granted') {
+              window.addEventListener('deviceorientation', handleDeviceOrientation);
+            }
+          })
+          .catch(console.error);
+      } else {
+        // For devices that don't require permission
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+      }
     } else {
       // Clean up animation when not on experience page
       if (rendererRef.current && animationContainerRef.current) {
@@ -132,6 +176,7 @@ const Sidebar = () => {
         animationContainerRef.current.removeChild(rendererRef.current.domElement);
         rendererRef.current = null;
       }
+      window.removeEventListener('deviceorientation', handleDeviceOrientation);
     };
   }, [location.pathname]);
 
