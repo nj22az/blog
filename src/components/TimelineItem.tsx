@@ -51,16 +51,16 @@ const TimelineItem = ({
     <div className="relative flex gap-3 sm:gap-6 animate-fade-in">
       {/* Timeline connector lines */}
       {!isFirst && (
-        <div className="absolute left-[19px] sm:left-[27px] top-[-12px] h-[28px] w-px bg-gray-200" />
+        <div className="absolute left-[19px] sm:left-[27px] top-[-20px] h-[20px] w-px bg-gray-200" />
       )}
       {!isLast && (
-        <div className="absolute left-[19px] sm:left-[27px] top-[36px] h-[calc(100%-36px)] w-px bg-gray-200" />
+        <div className="absolute left-[19px] sm:left-[27px] top-[40px] h-[calc(100%-40px)] w-px bg-gray-200" />
       )}
       
       <div className="relative shrink-0">
         <div 
           id={containerId}
-          className="relative w-10 h-10 sm:w-14 sm:h-14"
+          className="relative w-10 h-10 sm:w-14 sm:h-14 bg-white"
         >
           <button 
             onClick={onToggleAnimation}

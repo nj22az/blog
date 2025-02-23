@@ -39,7 +39,7 @@ const experiences: Experience[] = [
     company: "Siemens Energy",
     category: "Industrial",
     location: "Worldwide",
-    description: "Specialized in on-site commissioning of gas turbines globally. Managed the assembly, installation, and testing of turbines, ensuring compliance with safety and quality standards.",
+    description: "When I worked as a Commissioning Engineer at Siemens Energy, I specialized in on-site commissioning of gas turbines globally. I managed the assembly, installation, and testing of turbines, ensuring compliance with safety and quality standards. My technical problem-solving abilities and adaptability were pivotal in overcoming obstacles and achieving project success.",
     skills: ["Gas Turbine Systems", "Project Management", "International Operations", "Technical Leadership", "System Integration", "Safety Compliance"],
   },
   {
@@ -48,7 +48,7 @@ const experiences: Experience[] = [
     company: "DEKRA Industrial",
     category: "Industrial",
     location: "Sweden",
-    description: "Responsible for conducting comprehensive inspections of industrial equipment to ensure compliance with safety standards. Provided actionable recommendations for repairs and maintenance.",
+    description: "In my capacity as an Inspection Engineer at DEKRA Industrial, I was responsible for conducting comprehensive inspections of industrial equipment to ensure compliance with safety standards. Utilizing a diverse range of testing methodologies, I diligently identified potential vulnerabilities and meticulously documented my findings in comprehensive reports.",
     skills: ["Quality Control", "Safety Compliance", "Technical Documentation", "Industrial Inspections", "Equipment Assessment"],
   },
   {
@@ -57,7 +57,7 @@ const experiences: Experience[] = [
     company: "Stena RoRo",
     category: "Maritime",
     location: "Worldwide",
-    description: "Oversaw engine room operations on the Stena Flavia and Mont Ventoux vessels. Managed servicing and maintenance of auxiliary engine CAT3512 and Sperre Compressor systems.",
+    description: "As a Third Engineer at Stena RoRo in Nynäshamn, I oversaw engine room operations on the Stena Flavia and Mont Ventoux vessels in the Baltic Sea and Mediterranean. Managed servicing and maintenance of auxiliary engine CAT3512 and Sperre Compressor systems.",
     skills: ["Engine Operations", "Maintenance Planning", "System Repairs", "Equipment Overhaul", "Safety Protocols"],
   },
   {
@@ -79,13 +79,22 @@ const experiences: Experience[] = [
     skills: ["Project Management", "Automation Systems", "Team Supervision", "Process Optimization", "Technical Planning"],
   },
   {
-    period: "Sep 2015 - Jan 218",
+    period: "Sep 2015 - Jan 2018",
     title: "Field Service Engineer",
     company: "Instron",
     category: "Industrial",
     location: "Nordic Region • Ireland • Poland",
     description: "Installation and commissioning of testing systems across Nordic Region and Europe. Performed comprehensive IQOQ processes and developed testing methods.",
     skills: ["System Installation", "Equipment Calibration", "Software Configuration", "Client Training", "Technical Support"],
+  },
+  {
+    period: "Apr 2015 - Sep 2015",
+    title: "Engine Fitter",
+    company: "Örebro Kommun",
+    category: "Industrial",
+    location: "Örebro, Sweden",
+    description: "Conducted engine fitting, workshop repairs, and faultfinding at Örebro kommun. Managed sewage waste, performed preventive maintenance, and oversaw workshop responsibilities.",
+    skills: ["Equipment Repair", "System Maintenance", "Technical Operations", "Safety Compliance", "Documentation"],
   },
   {
     period: "Nov 2014 - Apr 2015",
@@ -104,6 +113,15 @@ const experiences: Experience[] = [
     location: "Baltic Sea",
     description: "Engaged in watchkeeping, performed engineer duties, managed bunkering, overhauled diesel engines, and operated purifiers and clarifiers.",
     skills: ["Engine Operations", "System Maintenance", "Equipment Repair", "Safety Compliance", "Technical Documentation"],
+  },
+  {
+    period: "Jan 2014 - Apr 2014",
+    title: "Engineer/Motorman",
+    company: "Trafikverket",
+    category: "Maritime",
+    location: "Lake Hjälmaren",
+    description: "Played a crucial role in ensuring smooth fleet operation. Performed engine watchkeeping duties and utilized AMOS system for maintenance management.",
+    skills: ["Engine Operations", "System Maintenance", "Equipment Repair", "Safety Standards", "Technical Documentation"],
   },
   {
     period: "Sep 2011 - Mar 2012",
