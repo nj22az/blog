@@ -5,12 +5,12 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const downloadItems = [
   {
-    title: "Professional CV (2024)",
+    title: "Professional CV (2025)",
     icon: FileText,
     description: "Comprehensive curriculum vitae highlighting expertise in Field Service Engineering, Marine Engineering, and Industrial Automation.",
     formats: [
-      { name: "PDF", size: "285 KB", url: "/downloads/Nils_Johansson_CV_2024.pdf" },
-      { name: "Word", size: "422 KB", url: "/downloads/Nils_Johansson_CV_2024.docx" }
+      { name: "PDF", size: "285 KB", url: "/downloads/Nils_Johansson_CV_2025.pdf" },
+      { name: "Word", size: "422 KB", url: "/downloads/Nils_Johansson_CV_2025.docx" }
     ]
   },
   {
@@ -18,8 +18,8 @@ const downloadItems = [
     icon: Book,
     description: "Professional cover letter showcasing technical expertise and commitment to engineering excellence.",
     formats: [
-      { name: "PDF", size: "195 KB", url: "/downloads/Nils_Johansson_Cover_Letter_2024.pdf" },
-      { name: "Word", size: "325 KB", url: "/downloads/Nils_Johansson_Cover_Letter_2024.docx" }
+      { name: "PDF", size: "195 KB", url: "/downloads/Nils_Johansson_Cover_Letter_2025.pdf" },
+      { name: "Word", size: "325 KB", url: "/downloads/Nils_Johansson_Cover_Letter_2025.docx" }
     ]
   }
 ];
