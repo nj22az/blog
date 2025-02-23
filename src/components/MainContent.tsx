@@ -1,3 +1,4 @@
+
 import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
 
 const MainContent = () => {
@@ -6,12 +7,14 @@ const MainContent = () => {
       {/* Profile Overview */}
       <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-border">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-          <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden transition-transform duration-300 hover:-rotate-10 transform cursor-pointer">
-            <img 
-              src="/lovable-uploads/d0b6e8a0-fbab-45b8-8c90-4f8c7bba9262.png" 
-              alt="Profile picture"
-              className="w-full h-full object-cover"
-            />
+          <div className="relative w-24 h-24 sm:w-32 sm:h-32 group">
+            <div className="absolute inset-0 rounded-full overflow-hidden transition-all duration-300 ease-in-out transform group-hover:-rotate-10">
+              <img 
+                src="/lovable-uploads/d0b6e8a0-fbab-45b8-8c90-4f8c7bba9262.png" 
+                alt="Profile picture"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Nils Johansson</h2>
