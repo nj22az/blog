@@ -1,30 +1,127 @@
 
-import { Moon } from "lucide-react";
+import { Moon, Palette, Terminal, Sparkles } from "lucide-react";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
+import { toast } from "sonner";
 
 const Settings = () => {
   const { theme, setTheme } = useTheme();
 
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
+    toast.success(`Theme switched to ${newTheme}!`, {
+      duration: 2000,
+    });
+  };
+
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Application Settings</h2>
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <h2 className="text-2xl font-semibold text-brand-dark dark:text-white mb-6">
+        Application Settings
+      </h2>
       
       <div className="space-y-6">
         {/* Theme Settings */}
-        <div className="flex items-center justify-between py-4">
+        <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <Moon className="h-5 w-5 text-brand-purple" />
+            <Palette className="h-5 w-5 text-brand-purple" />
             <div>
-              <Label className="text-base font-medium text-brand-dark">Theme</Label>
-              <p className="text-sm text-neutral-gray">Dark mode</p>
+              <Label className="text-base font-medium text-brand-dark dark:text-white">Theme</Label>
+              <p className="text-sm text-neutral-gray">Choose your visual style</p>
             </div>
           </div>
-          <Switch
-            checked={theme === "dark"}
-            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-          />
+
+          <RadioGroup
+            defaultValue={theme}
+            onValueChange={handleThemeChange}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2"
+          >
+            <div>
+              <RadioGroupItem
+                value="light"
+                id="light"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="light"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+              >
+                <div className="flex items-center gap-4">
+                  <Sparkles className="h-5 w-5" />
+                  <div>Light Mode</div>
+                </div>
+              </Label>
+            </div>
+
+            <div>
+              <RadioGroupItem
+                value="dark"
+                id="dark"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="dark"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+              >
+                <div className="flex items-center gap-4">
+                  <Moon className="h-5 w-5" />
+                  <div>Dark Mode</div>
+                </div>
+              </Label>
+            </div>
+
+            <div>
+              <RadioGroupItem
+                value="soft-pastel"
+                id="soft-pastel"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="soft-pastel"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+              >
+                <div className="flex items-center gap-4">
+                  <Palette className="h-5 w-5" />
+                  <div>Soft Pastel</div>
+                </div>
+              </Label>
+            </div>
+
+            <div>
+              <RadioGroupItem
+                value="dos-prompt"
+                id="dos-prompt"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="dos-prompt"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+              >
+                <div className="flex items-center gap-4">
+                  <Terminal className="h-5 w-5" />
+                  <div>DOS Prompt</div>
+                </div>
+              </Label>
+            </div>
+
+            <div>
+              <RadioGroupItem
+                value="synthwave"
+                id="synthwave"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="synthwave"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+              >
+                <div className="flex items-center gap-4">
+                  <Sparkles className="h-5 w-5" />
+                  <div>Synthwave</div>
+                </div>
+              </Label>
+            </div>
+          </RadioGroup>
         </div>
       </div>
     </div>
