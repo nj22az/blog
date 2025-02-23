@@ -1,3 +1,4 @@
+
 import React, { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -36,8 +37,8 @@ const preloadRoutes = () => {
 const LoadingSpinner = () => (
   <div className="min-h-[200px] flex items-center justify-center">
     <div className="relative">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-purple"></div>
-      <div className="mt-2 text-sm text-neutral-gray">Loading...</div>
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <div className="mt-2 text-sm text-muted-foreground">Loading...</div>
     </div>
   </div>
 );
@@ -47,7 +48,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <div className="flex">
         <Sidebar />
@@ -80,25 +81,38 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      value={{
+        light: "light",
+        dark: "dark",
+        "soft-pastel": "soft-pastel",
+        "dos-prompt": "dos-prompt",
+        synthwave: "synthwave",
+      }}
+    >
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/experience" element={<Experience />} />
-                <Route path="/downloads" element={<Downloads />} />
-                <Route path="/store" element={<Store />} />
-                <Route path="/skills" element={<Skills />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Layout>
-          </BrowserRouter>
+          <div className="min-h-screen bg-background text-foreground antialiased transition-colors duration-300">
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/experience" element={<Experience />} />
+                  <Route path="/downloads" element={<Downloads />} />
+                  <Route path="/store" element={<Store />} />
+                  <Route path="/skills" element={<Skills />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
+            </BrowserRouter>
+          </div>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>

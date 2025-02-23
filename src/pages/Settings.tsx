@@ -16,8 +16,8 @@ const Settings = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-      <h2 className="text-2xl font-semibold text-brand-dark dark:text-white mb-6">
+    <div className="bg-background border-border rounded-xl p-6 shadow-sm border">
+      <h2 className="text-2xl font-semibold text-foreground mb-6">
         Application Settings
       </h2>
       
@@ -25,10 +25,10 @@ const Settings = () => {
         {/* Theme Settings */}
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <Palette className="h-5 w-5 text-brand-purple" />
+            <Palette className="h-5 w-5 text-primary" />
             <div>
-              <Label className="text-base font-medium text-brand-dark dark:text-white">Theme</Label>
-              <p className="text-sm text-neutral-gray">Choose your visual style</p>
+              <Label className="text-base font-medium text-foreground">Theme</Label>
+              <p className="text-sm text-muted-foreground">Choose your visual style</p>
             </div>
           </div>
 
@@ -45,7 +45,7 @@ const Settings = () => {
               />
               <Label
                 htmlFor="light"
-                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
               >
                 <div className="flex items-center gap-4">
                   <Sparkles className="h-5 w-5" />
@@ -62,7 +62,7 @@ const Settings = () => {
               />
               <Label
                 htmlFor="dark"
-                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
               >
                 <div className="flex items-center gap-4">
                   <Moon className="h-5 w-5" />
@@ -79,7 +79,7 @@ const Settings = () => {
               />
               <Label
                 htmlFor="soft-pastel"
-                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
               >
                 <div className="flex items-center gap-4">
                   <Palette className="h-5 w-5" />
@@ -96,7 +96,7 @@ const Settings = () => {
               />
               <Label
                 htmlFor="dos-prompt"
-                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
               >
                 <div className="flex items-center gap-4">
                   <Terminal className="h-5 w-5" />
@@ -113,7 +113,7 @@ const Settings = () => {
               />
               <Label
                 htmlFor="synthwave"
-                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer peer-data-[state=checked]:border-brand-purple peer-data-[state=checked]:text-brand-purple"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
               >
                 <div className="flex items-center gap-4">
                   <Sparkles className="h-5 w-5" />
