@@ -1,4 +1,5 @@
-import { Calendar, MapPin, Building, Globe2, Languages, Linkedin } from "lucide-react";
+
+import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
 
 const MainContent = () => {
   return (
@@ -44,18 +45,28 @@ const MainContent = () => {
                 <p className="text-xs text-muted-foreground">English (Fluent)</p>
               </div>
 
-              <div className="flex flex-col items-center text-center p-3 sm:col-span-3">
-                <Globe2 className="h-6 w-6 text-primary mb-2" />
-                <h3 className="text-sm font-medium text-foreground">Connect</h3>
-                <a 
-                  href="https://www.linkedin.com/in/nils-johansson-86744583/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center gap-2 mt-2 text-primary hover:text-primary/80 transition-colors"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="text-xs">LinkedIn Profile</span>
-                </a>
+              <div className="col-span-full border-t border-border mt-2 pt-4">
+                <div className="flex items-center justify-center gap-4">
+                  <a 
+                    href="https://www.linkedin.com/in/nils-johansson-86744583/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                    <span className="text-xs">LinkedIn</span>
+                  </a>
+                  <div className="h-4 w-px bg-border"></div>
+                  <a 
+                    href="https://github.com/nj22az" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <Github className="h-5 w-5" />
+                    <span className="text-xs">GitHub</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
