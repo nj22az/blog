@@ -1,5 +1,5 @@
 
-import { Calendar, MapPin, Building } from "lucide-react";
+import { Calendar, MapPin, Building, Globe2, Languages, Linkedin } from "lucide-react";
 
 const MainContent = () => {
   return (
@@ -22,18 +22,48 @@ const MainContent = () => {
               Proven track record in commissioning, technical operations, and delivering hands-on engineering solutions 
               that ensure optimal system performance.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 items-center sm:items-start">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Building className="h-4 w-4" />
-                <span>Field Service Engineer at Instron</span>
+            
+            {/* Contact and Location Information */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Building className="h-5 w-5 text-primary" />
+                  <span className="text-base text-muted-foreground">Field Service Engineer at Instron</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  <div className="text-base text-muted-foreground">
+                    <p>Based in:</p>
+                    <p>Örebro, Sweden •</p>
+                    <p>Da Nang, Quang Nam, Vietnam</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Languages className="h-5 w-5 text-primary" />
+                  <div className="text-base text-muted-foreground">
+                    <p>Languages:</p>
+                    <p>Swedish (Native) • English (Fluent)</p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>Stockholm, Sweden</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Calendar className="h-4 w-4" />
-                <span>Extensive Field Experience</span>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Globe2 className="h-5 w-5 text-primary" />
+                  <span className="text-base text-muted-foreground">Connect with me:</span>
+                </div>
+                <a 
+                  href="https://www.linkedin.com/in/your-profile" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Linkedin className="h-5 w-5" />
+                  <span className="text-base">LinkedIn Profile</span>
+                </a>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Want to reach out? Feel free to connect with me via social media above!
+                </p>
               </div>
             </div>
           </div>
