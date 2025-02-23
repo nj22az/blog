@@ -14,6 +14,11 @@ const JobAnimation = ({ containerId, category }: JobAnimationProps) => {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    // Clear any existing canvas
+    if (rendererRef.current) {
+      container.removeChild(rendererRef.current.domElement);
+    }
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
@@ -33,7 +38,7 @@ const JobAnimation = ({ containerId, category }: JobAnimationProps) => {
     renderer.domElement.style.borderRadius = '9999px';
     renderer.domElement.style.pointerEvents = 'none';
     
-    container.insertBefore(renderer.domElement, container.firstChild);
+    container.appendChild(renderer.domElement);
 
     camera.position.z = 2;
     camera.position.y = 0;
@@ -68,23 +73,24 @@ const JobAnimation = ({ containerId, category }: JobAnimationProps) => {
 
         switch (category.toLowerCase()) {
           case 'maritime':
-            z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 0.5 +
-                Math.sin(x * 2 + time * 2) * 0.2;
-            break;
-          case 'industrial':
-            z = Math.sin(x * 2 + time) * 0.3 +
-                Math.cos(y * 2 + time) * 0.3;
-            mesh.rotation.z = time * 0.5;
+            z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 0.5;
             break;
           case 'military':
             z = Math.abs(Math.sin(x * 3 + time) * Math.cos(y * 3 + time)) * 0.4;
             break;
+          case 'industrial':
+            z = Math.sin(x * 2 + time) * 0.3 + Math.cos(y * 2 + time) * 0.3;
+            mesh.rotation.z = time * 0.5;
+            break;
           case 'automation':
-            z = Math.round(Math.sin(x * 4 + time) * 4) / 4 * 0.5;
+            z = Math.sin(x * 4 + time) * Math.cos(y * 4 + time) * 0.3;
             break;
           case 'education':
-            z = Math.sin(x * 0.3 + time) * 0.3 +
-                Math.cos((x + y) * 0.5 + time) * 0.2;
+          case 'student':
+            z = Math.sin(x * 0.3 + time) * 0.3 + Math.cos((x + y) * 0.5 + time) * 0.2;
+            break;
+          case 'logistics':
+            z = Math.sin(x + time) * Math.cos(y + time) * 0.4;
             break;
           default:
             z = Math.sin(x + time) * 0.3;
@@ -105,6 +111,8 @@ const JobAnimation = ({ containerId, category }: JobAnimationProps) => {
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
       }
+      geometry.dispose();
+      material.dispose();
     };
   }, [containerId, category]);
 
