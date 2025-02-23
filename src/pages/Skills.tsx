@@ -15,26 +15,31 @@ const Skills = () => {
         "Speed & Displacement",
         "ASTM E2658 & E2309",
         "ISO 5893"
-      ],
-      level: "Expert"
+      ]
     },
     {
       title: "Industrial Automation",
       icon: Cpu,
-      skills: ["PLC Programming", "HMI Development", "SCADA Systems", "Industrial Networks"],
-      level: "Advanced"
+      skills: ["PLC Programming", "HMI Development", "SCADA Systems", "Industrial Networks"]
     },
     {
       title: "Engineering",
       icon: Cog,
-      skills: ["Mechanical Systems", "Electrical Systems", "System Integration", "Equipment Maintenance"],
-      level: "Expert"
+      skills: ["Mechanical Systems", "Electrical Systems", "System Integration", "Equipment Maintenance"]
     },
     {
       title: "Maritime Engineering",
       icon: Server,
-      skills: ["Engine Operations", "System Maintenance", "Safety Protocols", "Equipment Repair"],
-      level: "Expert"
+      skills: [
+        "Engine Operations",
+        "System Maintenance",
+        "Safety Protocols",
+        "Equipment Repair",
+        "COC Watchkeeping",
+        "Advanced Firefighting",
+        "Basic Safety",
+        "Crowd Management"
+      ]
     }
   ];
 
@@ -52,10 +57,7 @@ const Skills = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-medium text-brand-dark">{category.title}</h3>
-                      <p className="text-sm text-neutral-gray mt-1">Level: {category.level}</p>
-                    </div>
+                    <h3 className="font-medium text-brand-dark">{category.title}</h3>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {category.skills.map((skill) => (
