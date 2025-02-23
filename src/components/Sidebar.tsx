@@ -1,48 +1,50 @@
 
 import { Home, Briefcase, Star, Download, ShoppingCart, Book, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-
-const navItems = [
-  {
-    icon: Home,
-    label: "Overview",
-    path: "/"
-  },
-  {
-    icon: Briefcase,
-    label: "Experience",
-    path: "/experience"
-  },
-  {
-    icon: Star,
-    label: "Skills",
-    path: "/skills"
-  },
-  {
-    icon: Download,
-    label: "Downloads",
-    path: "/downloads"
-  },
-  {
-    icon: ShoppingCart,
-    label: "Store",
-    path: "/store"
-  },
-  {
-    icon: Book,
-    label: "Blog",
-    path: "/blog"
-  },
-  {
-    icon: Settings,
-    label: "Settings",
-    path: "/settings"
-  }
-];
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
   
+  const navItems = [
+    {
+      icon: Home,
+      label: t("overview"),
+      path: "/"
+    },
+    {
+      icon: Briefcase,
+      label: t("experience"),
+      path: "/experience"
+    },
+    {
+      icon: Star,
+      label: t("skills"),
+      path: "/skills"
+    },
+    {
+      icon: Download,
+      label: t("downloads"),
+      path: "/downloads"
+    },
+    {
+      icon: ShoppingCart,
+      label: t("store"),
+      path: "/store"
+    },
+    {
+      icon: Book,
+      label: t("blog"),
+      path: "/blog"
+    },
+    {
+      icon: Settings,
+      label: t("settings"),
+      path: "/settings"
+    }
+  ];
+
   const handleLinkClick = () => {
     if (window.innerWidth < 768) {
       // Close sidebar on mobile when link is clicked

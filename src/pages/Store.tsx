@@ -1,56 +1,59 @@
 
 import { ExternalLink, ShoppingCart, BookOpen, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const storeItems = [
-  {
-    title: "Pressurized Equipment Safety Course",
-    icon: Code,
-    description: "Comprehensive training on safe operation and management of pressurized equipment. Covers risk assessment, maintenance, and safety protocols. Available in Swedish and English.",
-    price: "$299",
-    type: "Course",
-    features: [
-      "Risk Assessment Methods",
-      "Safety Protocols",
-      "Maintenance Guidelines",
-      "Emergency Procedures",
-      "Bilingual Content"
-    ]
-  },
-  {
-    title: "AFS Documentation Bundle",
-    icon: BookOpen,
-    description: "Complete documentation package including AFS regulations, guidelines, and practical examples for pressurized equipment safety. Available in Swedish and English.",
-    price: "$149",
-    type: "Documentation",
-    features: [
-      "Official AFS Guidelines",
-      "Practical Examples",
-      "Checklists",
-      "Reference Materials",
-      "Templates"
-    ]
-  },
-  {
-    title: "Professional Certification Program",
-    icon: ShoppingCart,
-    description: "Advanced certification program for professionals working with pressurized equipment. Includes practical assessments and certification tests.",
-    price: "$599",
-    type: "Certification",
-    features: [
-      "Official Certification",
-      "Practical Assessments",
-      "Case Studies",
-      "Expert Support",
-      "Lifetime Access"
-    ]
-  }
-];
+import { useTranslation } from "react-i18next";
 
 const Store = () => {
+  const { t } = useTranslation();
+
+  const storeItems = [
+    {
+      title: "Pressurized Equipment Safety Course",
+      icon: Code,
+      description: "Comprehensive training on safe operation and management of pressurized equipment. Covers risk assessment, maintenance, and safety protocols. Available in Swedish and English.",
+      price: "$299",
+      type: "Course",
+      features: [
+        "Risk Assessment Methods",
+        "Safety Protocols",
+        "Maintenance Guidelines",
+        "Emergency Procedures",
+        "Bilingual Content"
+      ]
+    },
+    {
+      title: "AFS Documentation Bundle",
+      icon: BookOpen,
+      description: "Complete documentation package including AFS regulations, guidelines, and practical examples for pressurized equipment safety. Available in Swedish and English.",
+      price: "$149",
+      type: "Documentation",
+      features: [
+        "Official AFS Guidelines",
+        "Practical Examples",
+        "Checklists",
+        "Reference Materials",
+        "Templates"
+      ]
+    },
+    {
+      title: "Professional Certification Program",
+      icon: ShoppingCart,
+      description: "Advanced certification program for professionals working with pressurized equipment. Includes practical assessments and certification tests.",
+      price: "$599",
+      type: "Certification",
+      features: [
+        "Official Certification",
+        "Practical Assessments",
+        "Case Studies",
+        "Expert Support",
+        "Lifetime Access"
+      ]
+    }
+  ];
+
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Professional Training Store</h2>
+      <h2 className="text-2xl font-semibold text-brand-dark mb-6">{t('professional_training')}</h2>
       <div className="grid gap-6">
         {storeItems.map((item) => (
           <div key={item.title} className="flex flex-col p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all">
@@ -67,7 +70,7 @@ const Store = () => {
                   <span className="text-lg font-semibold text-brand-purple">{item.price}</span>
                 </div>
                 <div className="mt-4">
-                  <h4 className="text-sm font-medium text-brand-dark mb-2">Key Features:</h4>
+                  <h4 className="text-sm font-medium text-brand-dark mb-2">{t('key_features')}:</h4>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {item.features.map((feature) => (
                       <li key={feature} className="flex items-center text-sm text-neutral-gray">
@@ -85,12 +88,12 @@ const Store = () => {
                     {item.type === "Documentation" ? (
                       <>
                         <ExternalLink className="h-4 w-4" />
-                        Learn More
+                        {t('learn_more')}
                       </>
                     ) : (
                       <>
                         <ShoppingCart className="h-4 w-4" />
-                        Buy Now
+                        {t('buy_now')}
                       </>
                     )}
                   </Button>
