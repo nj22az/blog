@@ -300,11 +300,11 @@ const Experience = () => {
 
   return (
     <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
-      <div className="flex justify-between items-center mb-6 sm:mb-8">
-        <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark">
+      <div className="mb-6">
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-4">
           Professional Experience
         </h2>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button 
             variant="ghost" 
             size="sm"
@@ -335,7 +335,7 @@ const Experience = () => {
         </div>
       </div>
       
-      <div className="relative space-y-6 sm:space-y-8">
+      <ul className="relative space-y-8">
         {experiences.slice(0, visibleExperiences).map((exp, index) => (
           <TimelineItem
             key={index}
@@ -347,7 +347,7 @@ const Experience = () => {
             onToggleAnimation={() => toggleAnimation(index)}
           />
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

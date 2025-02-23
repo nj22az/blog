@@ -1,4 +1,3 @@
-
 import React from 'react';
 import * as Icons from "lucide-react";
 import JobAnimation from './JobAnimation';
@@ -53,19 +52,14 @@ const TimelineItem = ({
 
   return (
     <li className="relative mb-8 last:mb-0">
-      {/* Main container */}
-      <div className="md:flex md:justify-center">
-        {/* Content card wrapper */}
-        <div className="relative w-full md:w-[480px] pl-4 pr-4 md:px-0">
-          {/* Vertical timeline line */}
-          {!isLast && (
-            <div className="absolute left-8 md:left-1/2 top-[72px] md:top-full h-[calc(100%-56px)] md:h-8 w-px bg-gray-200" />
-          )}
-          
+      <div className="relative pl-4 pr-4 md:flex md:justify-center">
+        {!isLast && (
+          <div className="absolute left-12 top-[72px] w-px h-[calc(100%+32px)] bg-gray-200 md:left-1/2 md:top-full md:h-8" />
+        )}
+        
+        <div className="relative w-full md:w-[480px]">
           <div className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            {/* Card header with icon */}
             <div className="flex items-start gap-3 mb-3">
-              {/* Icon button */}
               <div 
                 id={containerId}
                 className="relative w-8 h-8 md:w-10 md:h-10 shrink-0"
@@ -87,7 +81,6 @@ const TimelineItem = ({
                 )}
               </div>
 
-              {/* Title and Period */}
               <div className="flex-1 min-w-0">
                 <h3 className="text-base font-semibold text-brand-dark mb-1">
                   {exp.title}
@@ -99,7 +92,6 @@ const TimelineItem = ({
               </div>
             </div>
             
-            {/* Company and Location */}
             <div className="flex flex-col gap-1.5 mb-3">
               <div className="flex items-center gap-1.5 text-xs text-neutral-gray">
                 <Icons.Building className="h-3.5 w-3.5 shrink-0" />
@@ -111,12 +103,10 @@ const TimelineItem = ({
               </div>
             </div>
             
-            {/* Description */}
             <p className="text-xs md:text-sm text-neutral-gray mb-4">
               {exp.description}
             </p>
             
-            {/* Skills */}
             <div className="flex flex-wrap gap-1.5">
               {exp.skills.map((skill, skillIndex) => (
                 <span
