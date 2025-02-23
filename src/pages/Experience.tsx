@@ -2,20 +2,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { BriefcaseIcon, CalendarIcon, Building, Anchor, Shield, GraduationCap } from "lucide-react";
-
-const getIcon = (category: string) => {
-  switch (category.toLowerCase()) {
-    case 'maritime':
-      return Anchor;
-    case 'military':
-      return Shield;
-    case 'education':
-      return GraduationCap;
-    default:
-      return BriefcaseIcon;
-  }
-};
+import * as Icons from "lucide-react";
 
 interface Experience {
   period: string;
@@ -26,6 +13,19 @@ interface Experience {
   description: string;
   skills: string[];
 }
+
+const getIcon = (category: string): React.FC<Icons.LucideProps> => {
+  switch (category.toLowerCase()) {
+    case 'maritime':
+      return Icons.Anchor;
+    case 'military':
+      return Icons.Shield;
+    case 'education':
+      return Icons.GraduationCap;
+    default:
+      return Icons.Briefcase;
+  }
+};
 
 const experiences: Experience[] = [
   {
@@ -59,12 +59,10 @@ const Experience = () => {
             <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-6 sm:mb-8">Professional Experience</h2>
             
             <div className="relative space-y-6 sm:space-y-8">
-              {/* Timeline line */}
               <div className="absolute left-[19px] sm:left-[27px] top-3 bottom-3 w-px bg-gray-200" />
               
               {experiences.map((exp, index) => (
                 <div key={index} className="relative flex gap-3 sm:gap-6 animate-fade-in">
-                  {/* Timeline dot */}
                   <div className="relative shrink-0">
                     <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 relative">
                       {React.createElement(getIcon(exp.category), {
@@ -73,20 +71,19 @@ const Experience = () => {
                     </div>
                   </div>
                   
-                  {/* Content */}
                   <div className="flex-1 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
                       <div>
                         <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
                         <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
-                          <Building className="h-4 w-4 shrink-0" />
+                          <Icons.Building className="h-4 w-4 shrink-0" />
                           <span>{exp.company}</span>
                           <span className="hidden sm:inline text-gray-300">•</span>
                           <span>{exp.location}</span>
                         </div>
                       </div>
                       <div className="flex items-center text-sm text-neutral-gray">
-                        <CalendarIcon className="h-4 w-4 mr-2 shrink-0" />
+                        <Icons.Calendar className="h-4 w-4 mr-2 shrink-0" />
                         <span>{exp.period}</span>
                       </div>
                     </div>
