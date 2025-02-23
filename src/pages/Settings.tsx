@@ -1,5 +1,5 @@
 
-import { Moon, Palette, Terminal, Sparkles } from "lucide-react";
+import { Moon, Palette, Terminal, Sparkles, Monitor } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
@@ -37,6 +37,23 @@ const Settings = () => {
             onValueChange={handleThemeChange}
             className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2"
           >
+            <div>
+              <RadioGroupItem
+                value="system"
+                id="system"
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor="system"
+                className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary"
+              >
+                <div className="flex items-center gap-4">
+                  <Monitor className="h-5 w-5" />
+                  <div>System Default</div>
+                </div>
+              </Label>
+            </div>
+
             <div>
               <RadioGroupItem
                 value="light"
