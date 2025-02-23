@@ -78,21 +78,10 @@ const MainContent = () => {
         <h3 className="text-lg font-semibold text-foreground mb-4">Who Am I?</h3>
         <div className="space-y-4 text-muted-foreground">
           <p className="leading-relaxed">
-            As a Field Service Engineer at Instron, I bring together my passion for engineering and problem-solving 
-            to deliver exceptional technical solutions. My journey began in marine engineering, where I developed 
-            a strong foundation in systems maintenance and troubleshooting in challenging offshore environments.
+            I am a Field Service Engineer at Instron, driven by a genuine curiosity for how things work and a dedication to solving practical challenges. My career began in marine engineering, where working in demanding offshore environments taught me the value of perseverance, careful maintenance, and thoughtful problem-solving. Over the years, I have come to appreciate the opportunity to work with advanced automation systems and precision equipment—not just for the technical challenges they present, but also for the chance to continuously learn and improve.
           </p>
           <p className="leading-relaxed">
-            What drives me is the opportunity to work with cutting-edge automation systems and precision equipment. 
-            I specialize in calibration services and take pride in ensuring that every system I work with operates 
-            at its optimal performance level. My experience spans both onshore and offshore operations, giving me 
-            a unique perspective on implementing technical solutions in diverse environments.
-          </p>
-          <p className="leading-relaxed">
-            Beyond technical expertise, I value building strong relationships with clients and team members. 
-            I believe that effective communication and collaboration are key to successful project outcomes. 
-            Whether it's conducting installations, performing calibrations, or troubleshooting complex systems, 
-            I approach each task with dedication and attention to detail.
+            I take pride in ensuring that every system operates reliably and efficiently, whether I am conducting an installation, performing calibrations, or troubleshooting complex setups. More importantly, I believe that the success of any project lies in building respectful, open relationships with clients and colleagues alike. By embracing clear communication and collaboration, I strive to create work environments where every challenge is met with collective insight and care.
           </p>
         </div>
       </div>
