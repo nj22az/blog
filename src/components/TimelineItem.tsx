@@ -49,19 +49,15 @@ const TimelineItem = ({
 
   return (
     <div className="relative flex gap-3 sm:gap-6 animate-fade-in">
-      {/* Timeline connector lines */}
-      {!isFirst && (
-        <div className="absolute left-[19px] sm:left-[27px] top-[-20px] h-[20px] w-px bg-gray-200" />
-      )}
-      {!isLast && (
-        <div className="absolute left-[19px] sm:left-[27px] top-[40px] h-[calc(100%-40px)] w-px bg-gray-200" />
-      )}
+      {/* Timeline connector line */}
+      <div className="absolute left-[19px] sm:left-[27px] top-0 h-full w-px bg-gray-200" />
       
       <div className="relative shrink-0">
         <div 
           id={containerId}
-          className="relative w-10 h-10 sm:w-14 sm:h-14 bg-white"
+          className="relative w-10 h-10 sm:w-14 sm:h-14"
         >
+          <div className="absolute inset-[-4px] bg-white rounded-full" /> {/* White background circle */}
           <button 
             onClick={onToggleAnimation}
             className="absolute inset-0 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 hover:bg-brand-purple/20 transition-colors"
