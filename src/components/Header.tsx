@@ -12,26 +12,40 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Toggle sidebar visibility by adding/removing transform class
+    const sidebar = document.querySelector('aside');
+    sidebar?.classList.toggle('-translate-x-full');
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-gray-200 z-50 px-4">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
-        <div className="flex items-center">
-          <h1 className="text-xl font-semibold text-brand-purple">
+        <div className="flex items-center gap-4">
+          <button 
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors md:hidden"
+            onClick={toggleMobileMenu}
+          >
+            <Menu className="h-5 w-5 text-neutral-gray" />
+          </button>
+          <h1 className="text-lg sm:text-xl font-semibold text-brand-purple truncate">
             The Office of Nils Johansson
           </h1>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors hidden sm:block">
             <Bell className="h-5 w-5 text-neutral-gray" />
           </button>
-          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors hidden sm:block">
             <MessageSquare className="h-5 w-5 text-neutral-gray" />
           </button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="w-10 h-10 rounded-full bg-brand-purple/20 flex items-center justify-center hover:bg-brand-purple/30 transition-colors">
-                <span className="text-brand-purple font-medium">NJ</span>
+              <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-purple/20 flex items-center justify-center hover:bg-brand-purple/30 transition-colors">
+                <span className="text-brand-purple font-medium text-sm sm:text-base">NJ</span>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">

@@ -14,7 +14,7 @@ const navItems = [
 
 const Sidebar = () => {
   return (
-    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md">
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md -translate-x-full md:translate-x-0 transition-transform">
       <nav className="p-4 space-y-2">
         {navItems.map((item) => (
           <Link
@@ -27,6 +27,9 @@ const Sidebar = () => {
           </Link>
         ))}
       </nav>
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-center text-sm text-neutral-gray border-t border-gray-200">
+        Copyright of Nils Johansson 2025 all rights reserved.
+      </div>
     </aside>
   );
 };
