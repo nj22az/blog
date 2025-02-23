@@ -1,12 +1,13 @@
 
-import { Home, Briefcase, Star, Users, Book, Settings } from "lucide-react";
+import { Home, Briefcase, Star, Download, ShoppingCart, Book, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navItems = [
   { icon: Home, label: "Overview", path: "/" },
   { icon: Briefcase, label: "Experience", path: "/experience" },
   { icon: Star, label: "Skills", path: "/skills" },
-  { icon: Users, label: "Recommendations", path: "/recommendations" },
+  { icon: Download, label: "Downloads", path: "/downloads" },
+  { icon: ShoppingCart, label: "Store", path: "/store" },
   { icon: Book, label: "Blog", path: "/blog" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
