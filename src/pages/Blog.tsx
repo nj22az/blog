@@ -1,11 +1,11 @@
 
-import { CalendarDays, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const Blog = () => {
   return <div className="space-y-6">
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-        <h2 className="text-2xl font-semibold text-brand-dark mb-6">Blog</h2>
+        <h2 className="text-2xl font-semibold text-brand-dark mb-6">About The Office</h2>
         
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6 md:sticky md:top-20">
@@ -16,9 +16,9 @@ const Blog = () => {
             
             <Alert variant="default" className="bg-brand-purple/10 border-brand-purple/20">
               <AlertCircle className="h-4 w-4 text-brand-purple" />
-              <AlertTitle className="text-brand-purple">Stay Connected</AlertTitle>
+              <AlertTitle className="text-brand-purple">Our Mission</AlertTitle>
               <AlertDescription className="text-neutral-gray">
-                Follow us on social media to get notified when we launch!
+                Bridging industrial expertise with innovative solutions through dedicated service and technical excellence.
               </AlertDescription>
             </Alert>
           </div>
@@ -26,40 +26,45 @@ const Blog = () => {
           <div className="space-y-6">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-brand-dark">
-                Coming Soon: Your Gateway to Industrial Innovation
+                The Office of Nils Johansson
               </h3>
               <p className="text-neutral-gray leading-relaxed">
-                We're crafting a unique space where industrial automation meets maritime engineering. 
-                Our blog will be your window into the fascinating world of calibration expertise, 
-                technical insights, and industry best practices.
+                Welcome to The Office of Nils Johansson, a specialized consultancy bridging the gap between 
+                marine engineering excellence and industrial automation innovation. Founded on years of hands-on 
+                experience in both maritime operations and precision engineering, we offer unique insights and 
+                solutions to complex technical challenges.
               </p>
             </div>
 
             <div className="space-y-4 bg-gray-50 p-6 rounded-lg border border-gray-100">
-              <h4 className="font-medium text-brand-dark">What to Expect:</h4>
+              <h4 className="font-medium text-brand-dark">What We Do:</h4>
               <ul className="space-y-3 text-neutral-gray">
                 <li className="flex items-start gap-2">
                   <div className="min-w-2 h-2 w-2 rounded-full bg-brand-purple mt-2"></div>
-                  <span>In-depth technical articles and case studies</span>
+                  <span>Specialized calibration services for industrial and marine equipment</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <div className="min-w-2 h-2 w-2 rounded-full bg-brand-purple mt-2"></div>
-                  <span>Industry insights and trend analysis</span>
+                  <span>Industrial automation system design and implementation</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <div className="min-w-2 h-2 w-2 rounded-full bg-brand-purple mt-2"></div>
-                  <span>Expert interviews and professional development tips</span>
+                  <span>Marine engineering consultancy and technical support</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <div className="min-w-2 h-2 w-2 rounded-full bg-brand-purple mt-2"></div>
-                  <span>Latest news in maritime engineering</span>
+                  <span>Professional training and documentation services</span>
                 </li>
               </ul>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-neutral-gray">
-              <CalendarDays className="h-4 w-4" />
-              <span>Launching Q2 2025</span>
+            <div className="space-y-4">
+              <p className="text-neutral-gray leading-relaxed">
+                Our approach combines Swedish engineering precision with international maritime expertise, 
+                delivering reliable solutions for both onshore and offshore operations. Whether you need 
+                specialized calibration services, automation solutions, or marine engineering expertise, 
+                we're here to ensure your systems perform at their optimal capacity.
+              </p>
             </div>
           </div>
         </div>
