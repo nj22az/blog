@@ -2,8 +2,11 @@
 import { Moon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useTheme } from "next-themes";
 
 const Settings = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
       <h2 className="text-2xl font-semibold text-brand-dark mb-6">Application Settings</h2>
@@ -18,7 +21,10 @@ const Settings = () => {
               <p className="text-sm text-neutral-gray">Dark mode</p>
             </div>
           </div>
-          <Switch />
+          <Switch
+            checked={theme === "dark"}
+            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+          />
         </div>
       </div>
     </div>
