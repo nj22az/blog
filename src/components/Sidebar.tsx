@@ -1,46 +1,44 @@
 
 import { Home, Briefcase, Star, Download, ShoppingCart, Book, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
   const location = useLocation();
-  const { t } = useTranslation();
   
   const navItems = [
     {
       icon: Home,
-      label: t("overview"),
+      label: "Overview",
       path: "/"
     },
     {
       icon: Briefcase,
-      label: t("experience"),
+      label: "Experience",
       path: "/experience"
     },
     {
       icon: Star,
-      label: t("skills"),
+      label: "Skills",
       path: "/skills"
     },
     {
       icon: Download,
-      label: t("downloads"),
+      label: "Downloads",
       path: "/downloads"
     },
     {
       icon: ShoppingCart,
-      label: t("store"),
+      label: "Store",
       path: "/store"
     },
     {
       icon: Book,
-      label: t("blog"),
+      label: "Blog",
       path: "/blog"
     },
     {
       icon: Settings,
-      label: t("settings"),
+      label: "Settings",
       path: "/settings"
     }
   ];

@@ -2,11 +2,8 @@
 import React from "react";
 import { LucideProps } from "lucide-react";
 import { Code, Cpu, Cog, Server, Scale, Ruler, Gauge } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 const Skills = () => {
-  const { t } = useTranslation();
-  
   const skillCategories = [
     {
       title: "Certified Calibration Expertise",
@@ -19,31 +16,31 @@ const Skills = () => {
         "ASTM E2658 & E2309",
         "ISO 5893"
       ],
-      level: t("expert")
+      level: "Expert"
     },
     {
       title: "Industrial Automation",
       icon: Cpu,
       skills: ["PLC Programming", "HMI Development", "SCADA Systems", "Industrial Networks"],
-      level: t("advanced")
+      level: "Advanced"
     },
     {
       title: "Engineering",
       icon: Cog,
       skills: ["Mechanical Systems", "Electrical Systems", "System Integration", "Equipment Maintenance"],
-      level: t("expert")
+      level: "Expert"
     },
     {
       title: "Maritime Engineering",
       icon: Server,
       skills: ["Engine Operations", "System Maintenance", "Safety Protocols", "Equipment Repair"],
-      level: t("expert")
+      level: "Expert"
     }
   ];
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-brand-dark mb-6">{t('skills_expertise')}</h2>
+      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Skills & Expertise</h2>
       <div className="grid gap-6">
         {skillCategories.map((category, index) => {
           const IconComponent = category.icon;
@@ -57,7 +54,7 @@ const Skills = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="font-medium text-brand-dark">{category.title}</h3>
-                      <p className="text-sm text-neutral-gray mt-1">{t('level')}: {category.level}</p>
+                      <p className="text-sm text-neutral-gray mt-1">Level: {category.level}</p>
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">

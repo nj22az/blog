@@ -1,11 +1,8 @@
 
 import { ExternalLink, ShoppingCart, BookOpen, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next";
 
 const Store = () => {
-  const { t } = useTranslation();
-
   const storeItems = [
     {
       title: "Pressurized Equipment Safety Course",
@@ -53,7 +50,7 @@ const Store = () => {
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-brand-dark mb-6">{t('professional_training')}</h2>
+      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Professional Training Store</h2>
       <div className="grid gap-6">
         {storeItems.map((item) => (
           <div key={item.title} className="flex flex-col p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all">
@@ -70,7 +67,7 @@ const Store = () => {
                   <span className="text-lg font-semibold text-brand-purple">{item.price}</span>
                 </div>
                 <div className="mt-4">
-                  <h4 className="text-sm font-medium text-brand-dark mb-2">{t('key_features')}:</h4>
+                  <h4 className="text-sm font-medium text-brand-dark mb-2">Key Features:</h4>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {item.features.map((feature) => (
                       <li key={feature} className="flex items-center text-sm text-neutral-gray">
@@ -88,12 +85,12 @@ const Store = () => {
                     {item.type === "Documentation" ? (
                       <>
                         <ExternalLink className="h-4 w-4" />
-                        {t('learn_more')}
+                        Learn More
                       </>
                     ) : (
                       <>
                         <ShoppingCart className="h-4 w-4" />
-                        {t('buy_now')}
+                        Buy Now
                       </>
                     )}
                   </Button>
