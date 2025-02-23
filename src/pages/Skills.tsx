@@ -1,7 +1,7 @@
 
 import React from "react";
 import { LucideProps } from "lucide-react";
-import { Code, Cpu, Cog, Server, Scale, Ruler, Gauge } from "lucide-react";
+import { Code, Cpu, Cog, Server, Scale, Ruler, Gauge, Anchor } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
@@ -20,7 +20,13 @@ const Skills = () => {
     {
       title: "Industrial Automation",
       icon: Cpu,
-      skills: ["PLC Programming", "HMI Development", "SCADA Systems", "Industrial Networks"]
+      skills: [
+        "PLC Programming",
+        "HMI Development",
+        "SCADA Systems",
+        "Industrial Networks",
+        "Siemens Tia Portal"
+      ]
     },
     {
       title: "Engineering",
@@ -28,8 +34,8 @@ const Skills = () => {
       skills: ["Mechanical Systems", "Electrical Systems", "System Integration", "Equipment Maintenance"]
     },
     {
-      title: "Maritime Engineering",
-      icon: Server,
+      title: "Marine Engineering",
+      icon: Anchor,
       skills: [
         "Engine Operations",
         "System Maintenance",
