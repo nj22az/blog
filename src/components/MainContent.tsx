@@ -16,13 +16,16 @@ const MainContent = () => {
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark">Nils Johansson</h2>
-            <p className="text-sm sm:text-base text-neutral-gray mt-2">
-              Senior Software Engineer passionate about creating elegant solutions to complex problems.
+            <p className="text-sm sm:text-base text-neutral-gray mt-2 leading-relaxed">
+              Field Service Engineer at Instron with extensive expertise in marine and automation engineering. 
+              Specializing in calibration, installation, and automation systems for both onshore and offshore operations. 
+              Proven track record in commissioning, technical operations, and delivering hands-on engineering solutions 
+              that ensure optimal system performance.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 items-center sm:items-start">
               <div className="flex items-center gap-2 text-sm text-neutral-gray">
                 <Building className="h-4 w-4" />
-                <span>Tech Lead at Company X</span>
+                <span>Field Service Engineer at Instron</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-neutral-gray">
                 <MapPin className="h-4 w-4" />
@@ -30,7 +33,7 @@ const MainContent = () => {
               </div>
               <div className="flex items-center gap-2 text-sm text-neutral-gray">
                 <Calendar className="h-4 w-4" />
-                <span>10+ years experience</span>
+                <span>Extensive Field Experience</span>
               </div>
             </div>
           </div>
@@ -41,7 +44,7 @@ const MainContent = () => {
       <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
         <h3 className="text-lg font-semibold text-brand-dark mb-4">Skills</h3>
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {["React", "TypeScript", "Node.js", "Python", "AWS", "Docker", "GraphQL", "MongoDB"].map(
+          {["Automation Systems", "Calibration", "Installation", "Marine Engineering", "Field Service", "Technical Operations", "System Commissioning", "Offshore Operations"].map(
             (skill) => (
               <span
                 key={skill}
