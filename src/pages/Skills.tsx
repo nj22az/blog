@@ -1,12 +1,20 @@
+
 import React from "react";
 import { LucideProps } from "lucide-react";
-import { Code, Cpu, Cog, Server } from "lucide-react";
+import { Code, Cpu, Cog, Server, Scale, Ruler, Gauge } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Development",
-    icon: Code,
-    skills: ["React", "TypeScript", "Node.js", "Python", "C#", "Java"],
+    title: "Certified Calibration Expertise",
+    icon: Scale,
+    skills: [
+      "ISO/IEC 17025:2017 Certified",
+      "Force (ISO 7500-1)",
+      "Strain (ISO 9513)",
+      "Speed & Displacement",
+      "ASTM E2658 & E2309",
+      "ISO 5893"
+    ],
     level: "Expert"
   },
   {
@@ -18,7 +26,7 @@ const skillCategories = [
   {
     title: "Engineering",
     icon: Cog,
-    skills: ["Mechanical Systems", "Electrical Systems", "CAD Design", "System Integration"],
+    skills: ["Mechanical Systems", "Electrical Systems", "System Integration", "Equipment Maintenance"],
     level: "Expert"
   },
   {
