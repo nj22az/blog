@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TimelineItem from "@/components/TimelineItem";
@@ -213,6 +212,16 @@ const experiences: Experience[] = [
     location: "Swedish Coast",
     description: "My first job after university was as a military engineer. I worked in the engine room, overseeing operations, maintenance, and repairs. I also had the responsibility of steering the ship during night shifts and participating in military exercises.",
     skills: ["Military Operations", "Engine Systems", "Equipment Maintenance", "Safety Protocols", "Technical Documentation", "Emergency Response"],
+  },
+  // 2007-2011
+  {
+    period: "2007 - 2011",
+    title: "Marine Engineering Programme",
+    company: "Linnaeus University",
+    category: "Student",
+    location: "Kalmar, Sweden",
+    description: "Completed Marine Engineering Programme including 10 months of seagoing service on various vessels and different trade routes. Practical training included 10 weeks of Electrical Workshop Training (commissioning a generator plant with control system PLC and alarm systems) and 10 weeks of Mechanical workshop training (including welding, engine overhaul, and other mechanical skills).",
+    skills: ["Marine Engineering", "Seagoing Service", "Electrical Systems", "PLC Programming", "Mechanical Workshop", "Welding", "Engine Overhaul"],
   },
   // 2003-2007
   {

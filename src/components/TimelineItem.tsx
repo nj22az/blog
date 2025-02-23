@@ -32,6 +32,10 @@ const getIcon = (category: string): React.FC<Icons.LucideProps> => {
       return Icons.Factory;
     case 'automation':
       return Icons.Cpu;
+    case 'logistics':
+      return Icons.Package;
+    case 'student':
+      return Icons.GraduationCap;
     default:
       return Icons.Briefcase;
   }
