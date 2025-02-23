@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, Star, Download, ShoppingCart, Book, Settings } from "lucide-react";
+import { Home, Briefcase, Star, Download, ShoppingCart, Info, Settings } from "lucide-react";
 
 const navItems = [
   {
@@ -29,8 +29,8 @@ const navItems = [
     path: "/store"
   },
   {
-    icon: Book,
-    label: "Blog",
+    icon: Info,
+    label: "About",
     path: "/blog"
   },
   {
