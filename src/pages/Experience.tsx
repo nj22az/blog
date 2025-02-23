@@ -201,14 +201,14 @@ const Experience = () => {
       color: category.toLowerCase() === 'maritime' ? 0x9b87f5 : 0x87f5b4,
       wireframe: true,
       transparent: true,
-      opacity: 0.5
+      opacity: 0.8
     });
     
-    const waves = new THREE.Mesh(geometry, material);
-    waves.rotation.x = -Math.PI / 4;
-    waves.position.y = 0;
-    waves.position.z = -1;
-    scene.add(waves);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -Math.PI / 4;
+    mesh.position.y = 0;
+    mesh.position.z = -1;
+    scene.add(mesh);
 
     const animate = () => {
       if (!animationRefs.current[containerId]) return;
@@ -216,19 +216,40 @@ const Experience = () => {
       requestAnimationFrame(animate);
       
       const positions = geometry.attributes.position;
-      const time = Date.now() * 0.0003;
+      const time = Date.now() * 0.0005;
       
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const y = positions.getY(i);
-        let z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time);
-        
-        if (category.toLowerCase() === 'maritime') {
-          z *= 1.5;
-        } else if (category.toLowerCase() === 'industrial') {
-          z = Math.sin(x * 2 + time) * 0.8;
-        } else if (category.toLowerCase() === 'military') {
-          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time) * 1.2;
+        let z = 0;
+
+        switch (category.toLowerCase()) {
+          case 'maritime':
+            // Wave animation
+            z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 0.5 +
+                Math.sin(x * 2 + time * 2) * 0.2;
+            break;
+          case 'industrial':
+            // Mechanical/gear-like movement
+            z = Math.sin(x * 2 + time) * 0.3 +
+                Math.cos(y * 2 + time) * 0.3;
+            mesh.rotation.z = time * 0.5;
+            break;
+          case 'military':
+            // Structured, disciplined pattern
+            z = Math.abs(Math.sin(x * 3 + time) * Math.cos(y * 3 + time)) * 0.4;
+            break;
+          case 'automation':
+            // Digital wave pattern
+            z = Math.round(Math.sin(x * 4 + time) * 4) / 4 * 0.5;
+            break;
+          case 'education':
+            // Flowing, gentle waves
+            z = Math.sin(x * 0.3 + time) * 0.3 +
+                Math.cos((x + y) * 0.5 + time) * 0.2;
+            break;
+          default:
+            z = Math.sin(x + time) * 0.3;
         }
         
         positions.setZ(i, z);
