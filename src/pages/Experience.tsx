@@ -144,8 +144,8 @@ const experiences: Experience[] = [
 const Experience = () => {
   const [visibleExperiences, setVisibleExperiences] = useState(3);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<any>(null);
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const animationRefs = useRef<{ [key: string]: THREE.WebGLRenderer | null }>({});
 
   const showMore = () => {
     setVisibleExperiences(prev => Math.min(prev + 2, experiences.length));
@@ -156,59 +156,68 @@ const Experience = () => {
     setSelectedCategory(null);
   };
 
-  const initThreeJS = useCallback(() => {
-    if (!containerRef.current) return;
+  const initThreeJS = useCallback((containerId: string, category: string) => {
+    const container = cardRefs.current[containerId];
+    if (!container) return;
 
-    if (animationRef.current) {
-      containerRef.current.removeChild(animationRef.current.domElement);
-      animationRef.current = null;
+    if (animationRefs.current[containerId]) {
+      container.removeChild(animationRefs.current[containerId]!.domElement);
+      animationRefs.current[containerId] = null;
     }
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, containerRef.current.clientWidth / containerRef.current.clientHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setClearColor(0x000000, 0);
     
-    // Position the renderer's canvas absolutely
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0';
     renderer.domElement.style.left = '0';
     renderer.domElement.style.zIndex = '0';
+    renderer.domElement.style.borderRadius = '0.75rem';
     
-    containerRef.current.appendChild(renderer.domElement);
+    container.insertBefore(renderer.domElement, container.firstChild);
     
-    // Move camera further back and up
-    camera.position.z = 8;
+    camera.position.z = 5;
     camera.position.y = 2;
 
-    // Create larger wave geometry
-    const geometry = new THREE.PlaneGeometry(30, 30, 50, 50);
+    const geometry = new THREE.PlaneGeometry(15, 8, 50, 50);
     const material = new THREE.MeshBasicMaterial({
-      color: 0x9b87f5,
+      color: category.toLowerCase() === 'maritime' ? 0x9b87f5 : 0x87f5b4,
       wireframe: true,
       transparent: true,
-      opacity: 0.2
+      opacity: 0.15
     });
     
     const waves = new THREE.Mesh(geometry, material);
-    // Adjust wave position and rotation
-    waves.rotation.x = -Math.PI / 4; // Less steep angle
-    waves.position.y = 5; // Move waves up
-    waves.position.z = -5; // Move waves back
+    waves.rotation.x = -Math.PI / 6;
+    waves.position.y = 0;
+    waves.position.z = -2;
     scene.add(waves);
 
     const animate = () => {
+      if (!animationRefs.current[containerId]) return;
+      
       requestAnimationFrame(animate);
       
       const positions = geometry.attributes.position;
-      const time = Date.now() * 0.0005; // Slower wave movement
+      const time = Date.now() * 0.0003;
       
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const y = positions.getY(i);
-        const z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 1.5; // Larger waves
+        let z = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time);
+        
+        if (category.toLowerCase() === 'maritime') {
+          z *= 1.0; // Ocean waves
+        } else if (category.toLowerCase() === 'industrial') {
+          z = Math.sin(x * 2 + time) * 0.3; // Machine vibrations
+        } else if (category.toLowerCase() === 'military') {
+          z = Math.sin(x * 1.5 + time) * Math.cos(y * 1.5 + time) * 0.5; // Radar waves
+        }
+        
         positions.setZ(i, z);
       }
       
@@ -217,36 +226,47 @@ const Experience = () => {
     };
 
     animate();
-    animationRef.current = renderer;
+    animationRefs.current[containerId] = renderer;
 
     return () => {
-      if (containerRef.current && animationRef.current) {
-        containerRef.current.removeChild(animationRef.current.domElement);
+      if (container && animationRefs.current[containerId]) {
+        container.removeChild(animationRefs.current[containerId]!.domElement);
+        animationRefs.current[containerId] = null;
       }
     };
   }, []);
 
-  const handleCategoryClick = (category: string) => {
-    if (selectedCategory === category) {
+  const handleCategoryClick = (containerId: string, category: string) => {
+    if (selectedCategory === containerId) {
       setSelectedCategory(null);
-    } else {
-      setSelectedCategory(category);
-      if (category.toLowerCase() === 'maritime') {
-        initThreeJS();
+      if (animationRefs.current[containerId]) {
+        const container = cardRefs.current[containerId];
+        if (container) {
+          container.removeChild(animationRefs.current[containerId]!.domElement);
+          animationRefs.current[containerId] = null;
+        }
       }
+    } else {
+      setSelectedCategory(containerId);
+      initThreeJS(containerId, category);
     }
   };
 
   useEffect(() => {
     return () => {
-      if (containerRef.current && animationRef.current) {
-        containerRef.current.removeChild(animationRef.current.domElement);
-      }
+      Object.keys(animationRefs.current).forEach(key => {
+        const container = cardRefs.current[key];
+        const renderer = animationRefs.current[key];
+        if (container && renderer) {
+          container.removeChild(renderer.domElement);
+        }
+      });
+      animationRefs.current = {};
     };
   }, []);
 
   return (
-    <div ref={containerRef} className="relative bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
       <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-6 sm:mb-8">Professional Experience</h2>
       
       <div className="relative space-y-6 sm:space-y-8">
@@ -261,7 +281,7 @@ const Experience = () => {
             
             <div className="relative shrink-0">
               <button 
-                onClick={() => handleCategoryClick(exp.category)}
+                onClick={() => handleCategoryClick(`exp-${index}`, exp.category)}
                 className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 relative hover:bg-brand-purple/20 transition-colors"
               >
                 {React.createElement(getIcon(exp.category), {
@@ -270,34 +290,39 @@ const Experience = () => {
               </button>
             </div>
             
-            <div className="flex-1 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
-                  <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
-                    <Icons.Building className="h-4 w-4 shrink-0" />
-                    <span>{exp.company}</span>
-                    <span className="hidden sm:inline text-gray-300">•</span>
-                    <span>{exp.location}</span>
+            <div 
+              ref={el => cardRefs.current[`exp-${index}`] = el}
+              className="relative flex-1 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow overflow-hidden"
+            >
+              <div className="relative z-10">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-brand-dark">{exp.title}</h3>
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-gray mt-1">
+                      <Icons.Building className="h-4 w-4 shrink-0" />
+                      <span>{exp.company}</span>
+                      <span className="hidden sm:inline text-gray-300">•</span>
+                      <span>{exp.location}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-sm text-neutral-gray">
+                    <Icons.Calendar className="h-4 w-4 mr-2 shrink-0" />
+                    <span>{exp.period}</span>
                   </div>
                 </div>
-                <div className="flex items-center text-sm text-neutral-gray">
-                  <Icons.Calendar className="h-4 w-4 mr-2 shrink-0" />
-                  <span>{exp.period}</span>
+                
+                <p className="text-sm sm:text-base text-neutral-gray mb-4">{exp.description}</p>
+                
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {exp.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-2 sm:px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs sm:text-sm font-medium"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              </div>
-              
-              <p className="text-sm sm:text-base text-neutral-gray mb-4">{exp.description}</p>
-              
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {exp.skills.map((skill, skillIndex) => (
-                  <span
-                    key={skillIndex}
-                    className="px-2 sm:px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs sm:text-sm font-medium"
-                  >
-                    {skill}
-                  </span>
-                ))}
               </div>
             </div>
           </div>
