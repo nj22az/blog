@@ -26,8 +26,12 @@ const Header = () => {
         <div className="flex items-center gap-2 sm:gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-purple/20 flex items-center justify-center hover:bg-brand-purple/30 transition-colors">
-                <span className="text-brand-purple font-medium text-sm sm:text-base">NJ</span>
+              <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1a2238] flex items-center justify-center hover:opacity-90 transition-opacity overflow-hidden">
+                <img 
+                  src="/lovable-uploads/c8f8ae3a-cc1f-424c-9f22-03622b6f9c72.png"
+                  alt="Profile Logo"
+                  className="w-full h-full object-contain p-0.5"
+                />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
