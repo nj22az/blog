@@ -1,4 +1,3 @@
-
 import { Calendar, MapPin, Building, Globe2, Languages, Linkedin } from "lucide-react";
 
 const MainContent = () => {
@@ -24,62 +23,39 @@ const MainContent = () => {
             </p>
             
             {/* Contact and Location Information */}
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Left Column */}
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <Building className="h-8 w-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-foreground">Current Position</h3>
-                    <p className="text-muted-foreground">Field Service Engineer at Instron</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <MapPin className="h-8 w-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-foreground">Based in</h3>
-                    <p className="text-muted-foreground">Örebro, Sweden</p>
-                    <p className="text-muted-foreground">Da Nang, Quang Nam, Vietnam</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <Languages className="h-8 w-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-foreground">Languages</h3>
-                    <p className="text-muted-foreground">Swedish (Native)</p>
-                    <p className="text-muted-foreground">English (Fluent)</p>
-                  </div>
-                </div>
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="flex flex-col items-center text-center p-3">
+                <Building className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Position</h3>
+                <p className="text-xs text-muted-foreground mt-1">Field Service Engineer at Instron</p>
               </div>
 
-              {/* Right Column */}
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <Globe2 className="h-8 w-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-foreground">Connect with me</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/nils-johansson-86744583/" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center gap-2 mt-2 text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <Linkedin className="h-8 w-8" />
-                      <span>LinkedIn Profile</span>
-                    </a>
-                    <p className="text-sm text-muted-foreground mt-4">
-                      Want to reach out? Feel free to connect with me via social media above!
-                    </p>
-                  </div>
-                </div>
+              <div className="flex flex-col items-center text-center p-3">
+                <MapPin className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Location</h3>
+                <p className="text-xs text-muted-foreground mt-1">Örebro, Sweden</p>
+                <p className="text-xs text-muted-foreground">Da Nang, Vietnam</p>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3">
+                <Languages className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Languages</h3>
+                <p className="text-xs text-muted-foreground mt-1">Swedish (Native)</p>
+                <p className="text-xs text-muted-foreground">English (Fluent)</p>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3 sm:col-span-3">
+                <Globe2 className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Connect</h3>
+                <a 
+                  href="https://www.linkedin.com/in/nils-johansson-86744583/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2 mt-2 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Linkedin className="h-5 w-5" />
+                  <span className="text-xs">LinkedIn Profile</span>
+                </a>
               </div>
             </div>
           </div>
