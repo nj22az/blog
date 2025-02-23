@@ -1,37 +1,42 @@
 
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { BriefcaseIcon, CalendarIcon, BuildingIcon, GraduationCap } from "lucide-react";
+import { BriefcaseIcon, CalendarIcon, BuildingIcon, GraduationCap, Anchor, Shield } from "lucide-react";
 
-// This is sample data - you can replace it with your JSON later
+const getIcon = (category: string) => {
+  switch (category.toLowerCase()) {
+    case 'maritime':
+      return Anchor;
+    case 'military':
+      return Shield;
+    case 'education':
+      return GraduationCap;
+    default:
+      return BriefcaseIcon;
+  }
+};
+
+// Complete timeline data
 const experiences = [
   {
-    type: "work",
-    title: "Tech Lead",
-    company: "Company X",
-    location: "Stockholm",
-    period: "2020 - Present",
-    description: "Leading development teams and architecting scalable solutions.",
-    skills: ["Team Leadership", "System Architecture", "Agile", "Cloud Infrastructure"],
+    period: "January 2024 - Present",
+    title: "Field Service Engineer",
+    company: "Instron",
+    category: "Industrial",
+    location: "Nordic Region • Ireland • Poland",
+    description: "Installation and commissioning of testing systems across Nordic Region and Europe. Perform comprehensive IQOQ processes and develop testing methods using Bluehill software.",
+    skills: ["Testing Systems Installation", "IQOQ & Calibration", "Bluehill Software", "Technical Training", "Data Analysis"],
   },
   {
-    type: "work",
-    title: "Senior Developer",
-    company: "Company Y",
-    location: "Stockholm",
-    period: "2018 - 2020",
-    description: "Full-stack development and mentoring junior developers.",
-    skills: ["React", "Node.js", "AWS", "MongoDB"],
+    period: "Jul 2023 - Dec 2023",
+    title: "Automation Engineer",
+    company: "AH Automation",
+    category: "Automation",
+    location: "Sweden",
+    description: "Developed expertise in Siemens TIA Portal and automation systems. Implemented conveyor belt systems with touchscreen Human-Machine Interface (HMI) interfaces.",
+    skills: ["PLC Programming", "HMI Development", "System Integration", "Technical Documentation", "Automation Design"],
   },
-  {
-    type: "education",
-    title: "MSc in Computer Science",
-    company: "University Z",
-    location: "Stockholm",
-    period: "2016 - 2018",
-    description: "Specialized in Software Engineering and Distributed Systems.",
-    skills: ["Algorithms", "Distributed Systems", "Machine Learning"],
-  },
+  // ... Add more experiences here following the same structure
 ];
 
 const Experience = () => {
@@ -53,11 +58,9 @@ const Experience = () => {
                   {/* Timeline dot */}
                   <div className="relative shrink-0">
                     <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple/10 flex items-center justify-center z-10 relative">
-                      {exp.type === "work" ? (
-                        <BriefcaseIcon className="h-5 w-5 sm:h-6 sm:w-6 text-brand-purple" />
-                      ) : (
-                        <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-brand-purple" />
-                      )}
+                      {React.createElement(getIcon(exp.category), {
+                        className: "h-5 w-5 sm:h-6 sm:w-6 text-brand-purple"
+                      })}
                     </div>
                   </div>
                   
