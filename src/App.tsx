@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,7 +8,7 @@ import { ThemeProvider } from "next-themes";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
-// Lazy load pages with preloading
+// Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
 const Experience = lazy(() => import("./pages/Experience"));
 const Downloads = lazy(() => import("./pages/Downloads"));
@@ -18,21 +18,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const Settings = lazy(() => import("./pages/Settings"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Preload all routes
-const preloadRoutes = () => {
-  const routes = [
-    () => import("./pages/Index"),
-    () => import("./pages/Experience"),
-    () => import("./pages/Downloads"),
-    () => import("./pages/Store"),
-    () => import("./pages/Skills"),
-    () => import("./pages/Blog"),
-    () => import("./pages/Settings"),
-  ];
-  routes.forEach(route => route());
-};
-
-// Loading component with better visual feedback
+// Loading component
 const LoadingSpinner = () => (
   <div className="min-h-[200px] flex items-center justify-center">
     <div className="relative">
@@ -42,7 +28,7 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// Layout component to handle common structure
+// Layout component
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   
@@ -53,9 +39,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
         <main className="flex-1 ml-0 md:ml-64 min-h-[calc(100vh-4rem)] mt-16">
           <div className="max-w-3xl mx-auto px-4 py-8">
-            <Suspense fallback={<LoadingSpinner />}>
-              {children}
-            </Suspense>
+            {children}
           </div>
         </main>
       </div>
@@ -64,15 +48,23 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 };
 
 const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        staleTime: 30000,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <TooltipProvider>
           <Router>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Layout>
+            <Layout>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/experience" element={<Experience />} />
@@ -83,11 +75,11 @@ const App = () => {
                   <Route path="/settings" element={<Settings />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </Layout>
-            </Suspense>
+              </Suspense>
+            </Layout>
+            <Toaster />
+            <Sonner />
           </Router>
-          <Toaster />
-          <Sonner />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
