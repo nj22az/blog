@@ -1,6 +1,6 @@
-import { Menu } from "lucide-react";
+import { Menu, Info } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const toggleMobileMenu = () => {
@@ -19,14 +19,7 @@ const Header = () => {
           >
             <Menu className="h-5 w-5 text-foreground" />
           </button>
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full overflow-hidden transition-transform duration-300 hover:scale-[2.5] hover:z-50 cursor-pointer">
-              <img 
-                src={logo} 
-                alt="The Office of Nils Johansson Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
+          <div className="flex items-center gap-2">
             <div className="flex flex-col items-start">
               <span className="text-sm font-light tracking-wider text-muted-foreground/80">
                 The Office of
@@ -35,6 +28,13 @@ const Header = () => {
                 Nils Johansson
               </h1>
             </div>
+            <Link 
+              to="/about"
+              className="ml-2 p-2 hover:bg-accent rounded-full transition-colors flex items-center justify-center"
+              title="About"
+            >
+              <Info className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+            </Link>
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
