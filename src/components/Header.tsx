@@ -1,5 +1,6 @@
 import { Menu } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import logo from "../assets/images/logo.png";
 
 const Header = () => {
   const toggleMobileMenu = () => {
@@ -18,13 +19,22 @@ const Header = () => {
           >
             <Menu className="h-5 w-5 text-foreground" />
           </button>
-          <div className="flex flex-col items-start">
-            <span className="text-sm font-light tracking-wider text-muted-foreground/80">
-              The Office of
-            </span>
-            <h1 className="text-xl font-medium tracking-tight text-foreground -mt-1 sm:text-2xl">
-              Nils Johansson
-            </h1>
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full overflow-hidden transition-transform duration-300 hover:scale-[2.5] hover:z-50 cursor-pointer">
+              <img 
+                src={logo} 
+                alt="The Office of Nils Johansson Logo" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-sm font-light tracking-wider text-muted-foreground/80">
+                The Office of
+              </span>
+              <h1 className="text-xl font-medium tracking-tight text-foreground -mt-1 sm:text-2xl">
+                Nils Johansson
+              </h1>
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
