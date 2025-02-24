@@ -1,4 +1,4 @@
-import { Menu, Info } from "lucide-react";
+import { Menu } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
@@ -19,23 +19,17 @@ const Header = () => {
           >
             <Menu className="h-5 w-5 text-foreground" />
           </button>
-          <div className="flex items-center gap-2">
-            <div className="flex flex-col items-start">
-              <span className="text-sm font-light tracking-wider text-muted-foreground/80">
-                The Office of
-              </span>
-              <h1 className="text-xl font-medium tracking-tight text-foreground -mt-1 sm:text-2xl">
-                Nils Johansson
-              </h1>
-            </div>
-            <Link 
-              to="/about"
-              className="ml-2 p-2 hover:bg-accent rounded-full transition-colors flex items-center justify-center"
-              title="About"
-            >
-              <Info className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
-            </Link>
-          </div>
+          <Link 
+            to="/about"
+            className="group flex flex-col items-start px-2 py-1 rounded-lg transition-colors hover:bg-accent"
+          >
+            <span className="text-sm font-light tracking-wider text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+              The Office of
+            </span>
+            <h1 className="text-xl font-medium tracking-tight text-foreground -mt-1 sm:text-2xl group-hover:text-primary transition-colors">
+              Nils Johansson
+            </h1>
+          </Link>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Profile button removed */}
