@@ -1,5 +1,6 @@
 import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
 import profilePicture from "../assets/images/profile.png";
+import aboutImage from "../assets/images/about.png";
 
 const MainContent = () => {
   return (
@@ -76,13 +77,22 @@ const MainContent = () => {
       {/* About Me Section */}
       <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-border">
         <h3 className="text-lg font-semibold text-foreground mb-4">Who Am I?</h3>
-        <div className="space-y-4 text-muted-foreground">
-          <p className="leading-relaxed">
-            I am a Field Service Engineer at Instron, driven by a genuine curiosity for how things work and a dedication to solving practical challenges. My career began in marine engineering, where working in demanding offshore environments taught me the value of perseverance, careful maintenance, and thoughtful problem-solving. Over the years, I have come to appreciate the opportunity to work with advanced automation systems and precision equipment—not just for the technical challenges they present, but also for the chance to continuously learn and improve.
-          </p>
-          <p className="leading-relaxed">
-            I take pride in ensuring that every system operates reliably and efficiently, whether I am conducting an installation, performing calibrations, or troubleshooting complex setups. More importantly, I believe that the success of any project lies in building respectful, open relationships with clients and colleagues alike. By embracing clear communication and collaboration, I strive to create work environments where every challenge is met with collective insight and care.
-          </p>
+        <div className="space-y-4">
+          <div className="relative w-full h-48 sm:h-64 rounded-lg overflow-hidden mb-6">
+            <img 
+              src={aboutImage} 
+              alt="About Me" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4 text-muted-foreground">
+            <p className="leading-relaxed">
+              I am a Field Service Engineer at Instron, driven by a genuine curiosity for how things work and a dedication to solving practical challenges. My career began in marine engineering, where working in demanding offshore environments taught me the value of perseverance, careful maintenance, and thoughtful problem-solving. Over the years, I have come to appreciate the opportunity to work with advanced automation systems and precision equipment—not just for the technical challenges they present, but also for the chance to continuously learn and improve.
+            </p>
+            <p className="leading-relaxed">
+              I take pride in ensuring that every system operates reliably and efficiently, whether I am conducting an installation, performing calibrations, or troubleshooting complex setups. More importantly, I believe that the success of any project lies in building respectful, open relationships with clients and colleagues alike. By embracing clear communication and collaboration, I strive to create work environments where every challenge is met with collective insight and care.
+            </p>
+          </div>
         </div>
       </div>
     </div>
