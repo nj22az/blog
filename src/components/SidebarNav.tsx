@@ -42,20 +42,22 @@ const SidebarNav = ({ onLinkClick }: SidebarNavProps) => {
   const location = useLocation();
 
   return (
-    <nav className="p-4 space-y-3 relative z-10">
+    <nav className="p-4 space-y-2 relative z-10">
       {navItems.map(item => (
         <Link
           key={item.label}
           to={item.path}
           onClick={onLinkClick}
-          className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors group ${
+            location.pathname === item.path
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-accent hover:text-foreground"
+          }`}
         >
-          <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-            <item.icon className="h-6 w-6 text-primary" />
+          <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <item.icon className="h-5 w-5" />
           </div>
-          <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-            {item.label}
-          </span>
+          <span className="font-medium">{item.label}</span>
         </Link>
       ))}
     </nav>
