@@ -1,10 +1,9 @@
-
 import React, { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
@@ -64,41 +63,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Configure Query Client with better error handling
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      staleTime: 30000,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
 const App = () => {
-  useEffect(() => {
-    preloadRoutes();
-  }, []);
+  const queryClient = new QueryClient();
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      value={{
-        light: "light",
-        dark: "dark",
-        "soft-pastel": "soft-pastel",
-        "dos-prompt": "dos-prompt",
-        synthwave: "synthwave",
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground antialiased transition-colors duration-300">
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+          <Router>
+            <Suspense fallback={<LoadingSpinner />}>
               <Layout>
                 <Routes>
                   <Route path="/" element={<Index />} />
@@ -111,11 +84,13 @@ const App = () => {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Layout>
-            </BrowserRouter>
-          </div>
+            </Suspense>
+          </Router>
+          <Toaster />
+          <Sonner />
         </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
