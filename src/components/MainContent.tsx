@@ -1,4 +1,5 @@
-import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
+import { MapPin, Building, Languages, Linkedin, Github, Home, Briefcase, Star, Download, ShoppingCart, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import profilePicture from "../assets/images/profile.png";
 
 const MainContent = () => {
@@ -70,6 +71,69 @@ const MainContent = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Navigation Icons */}
+        <div className="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-4">
+          <Link
+            to="/"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Home className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Overview</span>
+          </Link>
+
+          <Link
+            to="/experience"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Briefcase className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Experience</span>
+          </Link>
+
+          <Link
+            to="/skills"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Star className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Skills</span>
+          </Link>
+
+          <Link
+            to="/downloads"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Download className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Downloads</span>
+          </Link>
+
+          <Link
+            to="/store"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <ShoppingCart className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Store</span>
+          </Link>
+
+          <Link
+            to="/settings"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-accent transition-colors group"
+          >
+            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Settings className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">Settings</span>
+          </Link>
         </div>
       </div>
 

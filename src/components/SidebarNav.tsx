@@ -1,36 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, Star, Download, ShoppingCart, Settings } from "lucide-react";
+import { Home } from "lucide-react";
 
 const navItems = [
   {
     icon: Home,
     label: "Overview",
     path: "/"
-  },
-  {
-    icon: Briefcase,
-    label: "Experience",
-    path: "/experience"
-  },
-  {
-    icon: Star,
-    label: "Skills",
-    path: "/skills"
-  },
-  {
-    icon: Download,
-    label: "Downloads",
-    path: "/downloads"
-  },
-  {
-    icon: ShoppingCart,
-    label: "Store",
-    path: "/store"
-  },
-  {
-    icon: Settings,
-    label: "Settings",
-    path: "/settings"
   }
 ];
 
