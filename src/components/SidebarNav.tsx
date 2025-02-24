@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { Home, Briefcase, Star, Download, ShoppingCart, Info, Settings } from "lucide-react";
 
@@ -7,6 +6,11 @@ const navItems = [
     icon: Home,
     label: "Overview",
     path: "/"
+  },
+  {
+    icon: Info,
+    label: "About",
+    path: "/about"
   },
   {
     icon: Briefcase,
@@ -27,11 +31,6 @@ const navItems = [
     icon: ShoppingCart,
     label: "Store",
     path: "/store"
-  },
-  {
-    icon: Info,
-    label: "About",
-    path: "/blog"
   },
   {
     icon: Settings,

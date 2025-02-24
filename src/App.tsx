@@ -16,6 +16,7 @@ const Store = lazy(() => import("./pages/Store"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Settings = lazy(() => import("./pages/Settings"));
+const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading component
@@ -67,6 +68,7 @@ const App = () => {
               <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
                   <Route path="/experience" element={<Experience />} />
                   <Route path="/downloads" element={<Downloads />} />
                   <Route path="/store" element={<Store />} />
