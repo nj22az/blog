@@ -1,4 +1,4 @@
-import { MapPin, Building, Languages, Linkedin, Github, Briefcase } from "lucide-react";
+import { MapPin, Building, Languages, Linkedin, Github, Briefcase, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import profilePicture from "../assets/images/profile.png";
 
@@ -25,7 +25,7 @@ const MainContent = () => {
             </p>
             
             {/* Contact and Location Information */}
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
               <div className="flex flex-col items-center text-center p-3">
                 <Building className="h-6 w-6 text-primary mb-2" />
                 <h3 className="text-sm font-medium text-foreground">Position</h3>
@@ -54,6 +54,16 @@ const MainContent = () => {
                 <h3 className="text-sm font-medium text-foreground">Experience</h3>
                 <p className="text-xs text-muted-foreground mt-1">10+ Years</p>
                 <p className="text-xs text-muted-foreground">Marine & Automation</p>
+              </Link>
+
+              <Link 
+                to="/skills"
+                className="flex flex-col items-center text-center p-3 transition-colors hover:text-primary cursor-pointer"
+              >
+                <Star className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Skills</h3>
+                <p className="text-xs text-muted-foreground mt-1">Engineering</p>
+                <p className="text-xs text-muted-foreground">Automation</p>
               </Link>
 
               <div className="col-span-full border-t border-border mt-2 pt-4">
