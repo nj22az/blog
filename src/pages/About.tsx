@@ -32,20 +32,19 @@ const About = () => {
       <div className="space-y-12">
         {/* Header with Logo */}
         <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-6 sm:space-y-0 fade-up-section opacity-0 translate-y-8">
-          <div className="relative min-w-[96px] w-24 h-24 group cursor-pointer">
-            <div className="absolute inset-0 bg-white rounded-full shadow-lg transform transition-all duration-300 group-hover:scale-110"></div>
+          <div className="relative w-24 h-24 group cursor-pointer rounded-full bg-white shadow-sm overflow-hidden">
             <img
               src={logo}
               alt="The Office of Nils Johansson Logo"
-              className="relative w-full h-full object-contain transition-all duration-300 transform group-hover:scale-110 group-active:scale-125"
+              className="w-full h-full p-2 object-contain transition-all duration-300 transform group-hover:scale-110 group-active:scale-125"
             />
-            {/* Zoom overlay on click/hover for small screens */}
-            <div className="absolute inset-0 sm:hidden">
-              <div className="hidden group-active:block fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white/95 p-4 rounded-2xl shadow-2xl">
+            {/* Zoom overlay for mobile */}
+            <div className="sm:hidden">
+              <div className="hidden group-active:block fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white p-4 rounded-full shadow-xl">
                 <img
                   src={logo}
                   alt="The Office of Nils Johansson Logo"
-                  className="w-48 h-48 object-contain"
+                  className="w-40 h-40 object-contain"
                 />
               </div>
             </div>
