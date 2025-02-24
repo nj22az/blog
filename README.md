@@ -1,69 +1,100 @@
-# Welcome to your Lovable project
 
-## Project info
+# The Office of Nils Johansson
 
-**URL**: https://lovable.dev/projects/c3b1395e-094c-4b8b-ae52-fcb050faf536
+## About
+This is the official website for the Office of Nils Johansson, a professional portfolio and information hub showcasing expertise in marine engineering, automation, and field service engineering.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Professional Overview**: Detailed profile section with background information, skills, and professional experience
+- **Interactive Timeline**: Dynamic experience timeline with animated job category indicators
+- **Responsive Design**: Fully responsive layout that works seamlessly on mobile, tablet, and desktop devices
+- **Modern UI**: Clean, professional interface with smooth transitions and animations
+- **Easy Navigation**: Intuitive sidebar navigation with collapsible menu for mobile devices
 
-**Use Lovable**
+## Technology Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c3b1395e-094c-4b8b-ae52-fcb050faf536) and start prompting.
+This website is built with modern web technologies:
 
-Changes made via Lovable will be committed automatically to this repo.
+### Core Technologies
+- **React**: For building the user interface
+- **TypeScript**: For type-safe code and better development experience
+- **Vite**: For fast development and optimized production builds
 
-**Use your preferred IDE**
+### UI and Styling
+- **Tailwind CSS**: For utility-first styling
+- **shadcn/ui**: For pre-built, customizable UI components
+- **Lucide Icons**: For consistent and scalable icons
+- **Three.js**: For interactive 3D animations in the experience timeline
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Additional Features
+- **React Router**: For client-side routing
+- **React Query**: For efficient data management
+- **Next Themes**: For theme management
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Project Structure
 
-Follow these steps:
+```
+src/
+  ├── components/     # Reusable UI components
+  ├── pages/         # Page components for each route
+  ├── hooks/         # Custom React hooks
+  ├── lib/          # Utility functions and helpers
+  └── types/        # TypeScript type definitions
+```
+
+## Key Components
+
+- **Header**: Contains the site title and navigation menu toggle
+- **Sidebar**: Main navigation component with collapsible menu
+- **MainContent**: Overview page with profile information
+- **Experience**: Interactive timeline of professional experience
+- **JobAnimation**: Custom Three.js animations for job categories
+
+## Getting Started
+
+To run this project locally:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone <repository-url>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to project directory
+cd office-nils-johansson
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Building for Production
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+# Create optimized production build
+npm run build
 
-**Use GitHub Codespaces**
+# Preview production build locally
+npm run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Browser Support
 
-## What technologies are used for this project?
+The website is compatible with all modern browsers:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-This project is built with .
+## Contributing
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+If you'd like to contribute to this project, please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/c3b1395e-094c-4b8b-ae52-fcb050faf536) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+© 2025 Nils Johansson. All rights reserved.
