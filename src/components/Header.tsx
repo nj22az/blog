@@ -21,14 +21,16 @@ const Header = () => {
           </button>
           <Link 
             to="/about"
-            className="group flex flex-col items-start px-2 py-1 rounded-lg transition-colors hover:bg-accent"
+            className="group relative flex flex-col items-start px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-sm active:scale-[0.98] select-none"
           >
-            <span className="text-sm font-light tracking-wider text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+            <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/80 rounded-lg transition-colors duration-200" />
+            <span className="relative text-[13px] font-normal tracking-wide text-muted-foreground/90 group-hover:text-foreground transition-colors">
               The Office of
             </span>
-            <h1 className="text-xl font-medium tracking-tight text-foreground -mt-1 sm:text-2xl group-hover:text-primary transition-colors">
+            <h1 className="relative text-[20px] font-medium tracking-tight text-foreground -mt-0.5 sm:text-[22px] group-hover:text-primary transition-colors">
               Nils Johansson
             </h1>
+            <div className="absolute inset-0 rounded-lg ring-1 ring-black/[0.08] group-hover:ring-black/[0.15] transition-all duration-200" />
           </Link>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
