@@ -1,4 +1,4 @@
-import { MapPin, Building, Languages, Linkedin, Github } from "lucide-react";
+import { MapPin, Building, Languages, Linkedin, Github, Briefcase } from "lucide-react";
 import profilePicture from "../assets/images/profile.png";
 
 const MainContent = () => {
@@ -24,7 +24,7 @@ const MainContent = () => {
             </p>
             
             {/* Contact and Location Information */}
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="flex flex-col items-center text-center p-3">
                 <Building className="h-6 w-6 text-primary mb-2" />
                 <h3 className="text-sm font-medium text-foreground">Position</h3>
@@ -43,6 +43,13 @@ const MainContent = () => {
                 <h3 className="text-sm font-medium text-foreground">Languages</h3>
                 <p className="text-xs text-muted-foreground mt-1">Swedish (Native)</p>
                 <p className="text-xs text-muted-foreground">English (Fluent)</p>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3">
+                <Briefcase className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-medium text-foreground">Experience</h3>
+                <p className="text-xs text-muted-foreground mt-1">10+ Years</p>
+                <p className="text-xs text-muted-foreground">Marine & Automation</p>
               </div>
 
               <div className="col-span-full border-t border-border mt-2 pt-4">
