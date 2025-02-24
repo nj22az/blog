@@ -1,4 +1,5 @@
 import { MapPin, Building, Languages, Linkedin, Github, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 import profilePicture from "../assets/images/profile.png";
 
 const MainContent = () => {
@@ -45,12 +46,15 @@ const MainContent = () => {
                 <p className="text-xs text-muted-foreground">English (Fluent)</p>
               </div>
 
-              <div className="flex flex-col items-center text-center p-3">
+              <Link 
+                to="/experience"
+                className="flex flex-col items-center text-center p-3 transition-colors hover:text-primary cursor-pointer"
+              >
                 <Briefcase className="h-6 w-6 text-primary mb-2" />
                 <h3 className="text-sm font-medium text-foreground">Experience</h3>
                 <p className="text-xs text-muted-foreground mt-1">10+ Years</p>
                 <p className="text-xs text-muted-foreground">Marine & Automation</p>
-              </div>
+              </Link>
 
               <div className="col-span-full border-t border-border mt-2 pt-4">
                 <div className="flex items-center justify-center gap-4">
