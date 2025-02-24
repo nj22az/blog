@@ -48,22 +48,32 @@ const MainContent = () => {
 
               <Link 
                 to="/experience"
-                className="flex flex-col items-center text-center p-3 transition-colors hover:text-primary cursor-pointer"
+                className="group flex flex-col items-center p-4 rounded-xl border border-gray-200 hover:border-brand-purple/50 hover:shadow-md transition-all"
               >
-                <Briefcase className="h-6 w-6 text-primary mb-2" />
-                <h3 className="text-sm font-medium text-foreground">Experience</h3>
-                <p className="text-xs text-muted-foreground mt-1">10+ Years</p>
-                <p className="text-xs text-muted-foreground">Marine & Automation</p>
+                <div className="p-3 rounded-full bg-brand-purple/10 group-hover:scale-110 transition-transform">
+                  <Briefcase className="h-6 w-6 text-brand-purple" />
+                </div>
+                <h3 className="mt-3 font-medium text-brand-dark">Experience</h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  Professional
+                  <br />
+                  Journey
+                </p>
               </Link>
 
               <Link 
                 to="/skills"
-                className="flex flex-col items-center text-center p-3 transition-colors hover:text-primary cursor-pointer"
+                className="group flex flex-col items-center p-4 rounded-xl border border-gray-200 hover:border-brand-purple/50 hover:shadow-md transition-all"
               >
-                <Star className="h-6 w-6 text-primary mb-2" />
-                <h3 className="text-sm font-medium text-foreground">Skills</h3>
-                <p className="text-xs text-muted-foreground mt-1">Engineering</p>
-                <p className="text-xs text-muted-foreground">Automation</p>
+                <div className="p-3 rounded-full bg-brand-purple/10 group-hover:scale-110 transition-transform">
+                  <Star className="h-6 w-6 text-brand-purple" />
+                </div>
+                <h3 className="mt-3 font-medium text-brand-dark">Skills</h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  Engineering
+                  <br />
+                  Automation
+                </p>
               </Link>
 
               <div className="col-span-full border-t border-border mt-2 pt-4">

@@ -1,7 +1,9 @@
-
 import React from "react";
 import { LucideProps } from "lucide-react";
 import { Code, Cpu, Cog, Server, Scale, Ruler, Gauge, Anchor } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Skills = () => {
   const skillCategories = [
@@ -50,36 +52,49 @@ const Skills = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-brand-dark mb-6">Skills & Expertise</h2>
-      <div className="grid gap-6">
-        {skillCategories.map((category, index) => {
-          const IconComponent = category.icon;
-          return (
-            <div key={index} className="p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-brand-purple/10">
-                  <IconComponent className="h-6 w-6 text-brand-purple" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-medium text-brand-dark">{category.title}</h3>
+    <div className="space-y-4">
+      <Link to="/">
+        <Button 
+          variant="ghost" 
+          size="sm"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to Overview
+        </Button>
+      </Link>
+
+      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+        <h2 className="text-2xl font-semibold text-brand-dark mb-6">Skills & Expertise</h2>
+        <div className="grid gap-6">
+          {skillCategories.map((category, index) => {
+            const IconComponent = category.icon;
+            return (
+              <div key={index} className="p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-brand-purple/10">
+                    <IconComponent className="h-6 w-6 text-brand-purple" />
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-sm px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between">
+                      <h3 className="font-medium text-brand-dark">{category.title}</h3>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {category.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-sm px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
