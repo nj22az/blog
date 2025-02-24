@@ -1,15 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Download, ShoppingCart, Settings, Info } from "lucide-react";
+import { Home, Download, ShoppingCart, Settings, Info, User } from "lucide-react";
 
 const navItems = [
   {
-    icon: Home,
-    label: "Nils Johansson",
+    icon: User,
+    label: "Profile",
     path: "/"
   },
   {
     icon: Info,
-    label: "About The Office of NJ",
+    label: "About",
     path: "/about"
   },
   {
