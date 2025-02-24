@@ -1,68 +1,140 @@
+import { useEffect, useRef } from "react";
+import { Card } from "@/components/ui/card";
+import { Sparkles, GraduationCap, Globe2, Ruler, Gauge, Anchor } from "lucide-react";
 import aboutImage from "../assets/images/about.png";
 import logo from "../assets/images/logo.png";
 
 const About = () => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-up");
+            entry.target.classList.remove("opacity-0", "translate-y-8");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".fade-up-section").forEach((element) => {
+      observerRef.current?.observe(element);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-border">
-        <div className="max-w-4xl mx-auto">
-          {/* Logo and Title Section */}
-          <div className="flex flex-col items-center text-center mb-12">
-            <div className="w-32 h-32 sm:w-40 sm:h-40 mb-6 rounded-full overflow-hidden border-4 border-[#1d3557]/10">
-              <img 
-                src={logo} 
-                alt="The Office of Nils Johansson Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="space-y-2">
-              <h1 className="text-2xl sm:text-3xl font-semibold text-[#1d3557] tracking-tight">
-                The Office of Nils Johansson
-              </h1>
-              <p className="text-lg text-muted-foreground font-light">
-                Sweden & Vietnam
-              </p>
-            </div>
+    <section className="py-8 px-4 md:px-8 max-w-7xl mx-auto">
+      <div className="space-y-12">
+        {/* Header with Logo */}
+        <div className="flex items-center space-x-4 fade-up-section opacity-0 translate-y-8">
+          <div className="relative w-24 h-24 group">
+            <div className="absolute inset-0 bg-white rounded-full shadow-lg transform transition-transform group-hover:scale-105"></div>
+            <img
+              src={logo}
+              alt="The Office of Nils Johansson Logo"
+              className="relative w-full h-full transition-transform duration-300 transform group-hover:rotate-6"
+            />
           </div>
-
-          {/* Main Content */}
-          <div className="space-y-8">
-            {/* Featured Image */}
-            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
-              <img 
-                src={aboutImage} 
-                alt="The Office Environment" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </div>
-
-            {/* Description */}
-            <div className="space-y-6 text-muted-foreground">
-              <p className="text-lg leading-relaxed">
-                Welcome to The Office of Nils Johansson, a unique workspace that bridges Sweden and Vietnam. 
-                This isn't just a physical location—it's a hub of engineering innovation and cross-cultural collaboration. 
-                Our office environment reflects our commitment to combining technical expertise with a welcoming, 
-                collaborative atmosphere.
-              </p>
-              
-              <p className="text-lg leading-relaxed">
-                The space is designed to facilitate both focused technical work and open communication. 
-                Whether it's conducting detailed calibrations, analyzing engineering data, or hosting virtual 
-                meetings with clients across different time zones, our office is equipped to handle diverse 
-                engineering challenges while maintaining a comfortable, productive environment.
-              </p>
-
-              <p className="text-lg leading-relaxed">
-                We believe that a well-designed workspace contributes significantly to the quality of our work. 
-                That's why we've created an environment that balances professional capabilities with personal comfort, 
-                enabling us to deliver the best possible service to our clients while enjoying what we do.
-              </p>
-            </div>
+          <div>
+            <span className="inline-flex items-center gap-2 px-3 py-1 text-sm tracking-wider bg-gray-100 rounded-full">
+              <Sparkles className="w-4 h-4" />
+              WELCOME TO
+            </span>
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mt-2">
+              The Office of Nils Johansson
+            </h1>
           </div>
         </div>
+
+        {/* Main Content */}
+        <div className="space-y-8 max-w-4xl">
+          <Card className="p-8 backdrop-blur-sm bg-white/50 border border-gray-200 fade-up-section opacity-0 translate-y-8">
+            <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+              <Gauge className="w-6 h-6" />
+              Engineering Excellence & Innovation
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              Bridging Sweden and Vietnam through engineering innovation, we specialize in calibration, industrial automation, 
+              and marine engineering. Our unique approach combines Nordic precision with Southeast Asian dynamism.
+            </p>
+          </Card>
+
+          <Card className="p-8 backdrop-blur-sm bg-white/50 border border-gray-200 fade-up-section opacity-0 translate-y-8">
+            <img
+              src={aboutImage}
+              alt="The Office Environment"
+              className="w-full h-auto rounded-lg shadow-md mb-6"
+            />
+            <p className="text-sm text-gray-500 italic">
+              Our workspace: where engineering innovation meets collaborative spirit
+            </p>
+          </Card>
+
+          <Card className="p-8 backdrop-blur-sm bg-white/50 border border-gray-200 fade-up-section opacity-0 translate-y-8">
+            <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+              <Globe2 className="w-6 h-6" />
+              Our Expertise
+            </h2>
+            <ul className="space-y-4 text-gray-600">
+              <li className="flex items-center gap-2">
+                <Ruler className="w-5 h-5" />
+                ISO/IEC 17025:2017 Certified Calibration
+              </li>
+              <li className="flex items-center gap-2">
+                <Gauge className="w-5 h-5" />
+                Industrial Automation & PLC Programming
+              </li>
+              <li className="flex items-center gap-2">
+                <Anchor className="w-5 h-5" />
+                Marine Engineering & System Integration
+              </li>
+            </ul>
+          </Card>
+
+          <div className="grid md:grid-cols-3 gap-8 fade-up-section opacity-0 translate-y-8">
+            <Card className="p-6 backdrop-blur-sm bg-white/50 border border-gray-200">
+              <h3 className="text-xl font-semibold mb-3">Technical Excellence</h3>
+              <p className="text-gray-600">
+                Precision calibration and engineering services with international certification.
+              </p>
+            </Card>
+
+            <Card className="p-6 backdrop-blur-sm bg-white/50 border border-gray-200">
+              <h3 className="text-xl font-semibold mb-3">Global Reach</h3>
+              <p className="text-gray-600">
+                Operating across Sweden and Vietnam, bringing together the best of both worlds.
+              </p>
+            </Card>
+
+            <Card className="p-6 backdrop-blur-sm bg-white/50 border border-gray-200">
+              <h3 className="text-xl font-semibold mb-3">Innovation Focus</h3>
+              <p className="text-gray-600">
+                Cutting-edge solutions in automation, calibration, and marine engineering.
+              </p>
+            </Card>
+          </div>
+
+          <Card className="p-8 backdrop-blur-sm bg-white/50 border border-gray-200 fade-up-section opacity-0 translate-y-8">
+            <h3 className="text-2xl font-semibold mb-4">Connect With Us</h3>
+            <p className="text-gray-600 mb-6">
+              Whether you need calibration services, automation solutions, or marine engineering expertise, 
+              we're here to help elevate your technical operations.
+            </p>
+            <div>
+              <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition-all duration-300 cursor-pointer">
+                <Sparkles className="w-5 h-5 mr-2" />
+                Get in Touch
+              </span>
+            </div>
+          </Card>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
