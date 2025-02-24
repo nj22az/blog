@@ -1,19 +1,32 @@
-
 import { Moon, Palette, Terminal, Sparkles, Monitor } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 const Settings = () => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Only render theme options after mounting to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
-    toast.success(`Theme switched to ${newTheme}!`, {
-      duration: 2000,
-    });
+    // Add a small delay to ensure the theme change is processed
+    setTimeout(() => {
+      toast.success(`Theme switched to ${newTheme}!`, {
+        duration: 2000,
+      });
+    }, 100);
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="bg-background border-border rounded-xl p-6 shadow-sm border">
@@ -33,7 +46,7 @@ const Settings = () => {
           </div>
 
           <RadioGroup
-            defaultValue={theme}
+            value={theme}
             onValueChange={handleThemeChange}
             className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2"
           >
