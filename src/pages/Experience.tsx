@@ -300,20 +300,20 @@ const Experience = () => {
 
   return (
     <div className="space-y-4">
-      <Link to="/">
+      <Link to="/about?tab=nils">
         <Button 
           variant="ghost" 
           size="sm"
           className="text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Overview
+          Back to Nils
         </Button>
       </Link>
 
-      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+      <div className="bg-background rounded-xl p-4 sm:p-6 shadow-sm border border-border">
         <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-4">
             Professional Experience
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -321,7 +321,7 @@ const Experience = () => {
               variant="ghost" 
               size="sm"
               onClick={downloadCSV}
-              className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
+              className="text-primary hover:text-primary/90 hover:bg-primary/10"
             >
               <Download className="h-4 w-4 mr-1" />
               Download CSV
@@ -330,7 +330,7 @@ const Experience = () => {
               variant="ghost" 
               size="sm"
               onClick={visibleExperiences < experiences.length ? showMore : showLess}
-              className="text-brand-purple hover:text-brand-purple/90 hover:bg-brand-purple/10"
+              className="text-primary hover:text-primary/90 hover:bg-primary/10"
             >
               {visibleExperiences < experiences.length ? (
                 <>

@@ -53,37 +53,37 @@ const Skills = () => {
 
   return (
     <div className="space-y-4">
-      <Link to="/">
+      <Link to="/about?tab=nils">
         <Button 
           variant="ghost" 
           size="sm"
           className="text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Overview
+          Back to Nils
         </Button>
       </Link>
 
-      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
-        <h2 className="text-2xl font-semibold text-brand-dark mb-6">Skills & Expertise</h2>
+      <div className="bg-background rounded-xl p-4 sm:p-6 shadow-sm border border-border">
+        <h2 className="text-2xl font-semibold text-foreground mb-6">Skills & Expertise</h2>
         <div className="grid gap-6">
           {skillCategories.map((category, index) => {
             const IconComponent = category.icon;
             return (
-              <div key={index} className="p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all">
+              <div key={index} className="p-6 rounded-xl border border-border hover:shadow-md transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-brand-purple/10">
-                    <IconComponent className="h-6 w-6 text-brand-purple" />
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <IconComponent className="h-6 w-6 text-primary" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
-                      <h3 className="font-medium text-brand-dark">{category.title}</h3>
+                      <h3 className="font-medium text-foreground">{category.title}</h3>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {category.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="text-sm px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple"
+                          className="text-sm px-3 py-1 rounded-full bg-primary/10 text-primary"
                         >
                           {skill}
                         </span>

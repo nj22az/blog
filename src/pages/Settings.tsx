@@ -1,9 +1,10 @@
-import { Moon, Palette, Terminal, Sparkles, Monitor } from "lucide-react";
+import { Moon, Palette, Terminal, Sparkles, Monitor, Globe } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const Settings = () => {
   const { theme, setTheme } = useTheme();
@@ -24,6 +25,14 @@ const Settings = () => {
     }, 100);
   };
 
+  // Function to trigger browser's built-in translation
+  const triggerBrowserTranslation = () => {
+    toast.info("Please use your browser's built-in translation feature", {
+      description: "Look for the translate icon in your browser's address bar or right-click menu",
+      duration: 5000,
+    });
+  };
+
   if (!mounted) {
     return null;
   }
@@ -35,6 +44,32 @@ const Settings = () => {
       </h2>
       
       <div className="space-y-6">
+        {/* Language Settings */}
+        <div className="space-y-4 mb-8">
+          <div className="flex items-center space-x-4">
+            <Globe className="h-5 w-5 text-primary" />
+            <div>
+              <Label className="text-base font-medium text-foreground">Language</Label>
+              <p className="text-sm text-muted-foreground">Translate this website to your preferred language</p>
+            </div>
+          </div>
+
+          <div className="p-4 border rounded-lg bg-muted/20">
+            <p className="text-sm mb-4">
+              This website supports translation through your browser's built-in translation feature. 
+              For the best experience on mobile devices, please use your browser's translation option.
+            </p>
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2"
+              onClick={triggerBrowserTranslation}
+            >
+              <Globe className="h-4 w-4" />
+              <span>How to Translate</span>
+            </Button>
+          </div>
+        </div>
+
         {/* Theme Settings */}
         <div className="space-y-4">
           <div className="flex items-center space-x-4">

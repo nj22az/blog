@@ -1,17 +1,11 @@
-import React from 'react';
 import { Link, useLocation } from "react-router-dom";
-import { Home, Settings, Info, BookOpen, Mail, Link2 } from "lucide-react";
+import { Home, Download, ShoppingCart, Settings, Info, User, BookOpen } from "lucide-react";
 
-const sidebarLinks = [
+const navItems = [
   {
-    icon: Home,
-    label: "Home",
+    icon: User,
+    label: "Profile",
     path: "/"
-  },
-  {
-    icon: BookOpen,
-    label: "Blog",
-    path: "/blog"
   },
   {
     icon: Info,
@@ -19,14 +13,19 @@ const sidebarLinks = [
     path: "/about"
   },
   {
-    icon: Link2,
-    label: "Links",
-    path: "/links"
+    icon: BookOpen,
+    label: "Blog",
+    path: "/blog"
   },
   {
-    icon: Mail,
-    label: "Contact",
-    path: "/contact"
+    icon: Download,
+    label: "Downloads",
+    path: "/downloads"
+  },
+  {
+    icon: ShoppingCart,
+    label: "Store",
+    path: "/store"
   },
   {
     icon: Settings,
@@ -44,7 +43,7 @@ const SidebarNav = ({ onLinkClick }: SidebarNavProps) => {
 
   return (
     <nav className="p-4 space-y-1 relative z-10">
-      {sidebarLinks.map(item => (
+      {navItems.map(item => (
         <Link
           key={item.label}
           to={item.path}
@@ -63,4 +62,4 @@ const SidebarNav = ({ onLinkClick }: SidebarNavProps) => {
   );
 };
 
-export default SidebarNav;
+export default SidebarNav; 
