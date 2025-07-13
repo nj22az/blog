@@ -2,19 +2,15 @@ import { CalendarIcon, ExternalLink, User } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { WordPressPost, fetchAuthor } from "@/lib/wordpress-api";
-import { useEffect, useState } from "react";
+import { MonoAvatar } from "./MonoAvatar";
+import { WordPressPost } from "@services/wordpress-api";
+import NilsProfile from '@/assets/images/nils-profile.jpeg';
 
 interface BlogPostProps {
   post: WordPressPost;
 }
 
 export function BlogPost({ post }: BlogPostProps) {
-  const [authorName, setAuthorName] = useState<string>('');
-  const [authorAvatar, setAuthorAvatar] = useState<string>('');
-
   // Format the date
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -25,39 +21,6 @@ export function BlogPost({ post }: BlogPostProps) {
   // Get featured image if available
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   
-  // Get author data - try from _embedded first, then fetch if needed
-  useEffect(() => {
-    const getAuthorData = async () => {
-      try {
-        // Try to get author from _embedded first
-        if (post._embedded?.author?.[0]) {
-          const embeddedAuthor = post._embedded.author[0];
-          setAuthorName(embeddedAuthor.name || 'Nils Johansson');
-          setAuthorAvatar(embeddedAuthor.avatar_urls?.['96'] || '');
-          return;
-        }
-
-        // If no embedded author but we have author ID, fetch it
-        if (post.author) {
-          const authorData = await fetchAuthor(post.author);
-          if (authorData) {
-            setAuthorName(authorData.name || 'Nils Johansson');
-            setAuthorAvatar(authorData.avatar_urls?.['96'] || '');
-            return;
-          }
-        }
-
-        // Default fallback
-        setAuthorName('Nils Johansson');
-      } catch (error) {
-        console.error('Error fetching author data:', error);
-        setAuthorName('Nils Johansson');
-      }
-    };
-
-    getAuthorData();
-  }, [post]);
-  
   // Strip HTML tags from excerpt
   const stripHtml = (html: string) => {
     const tmp = document.createElement('DIV');
@@ -66,10 +29,6 @@ export function BlogPost({ post }: BlogPostProps) {
   };
   
   const excerpt = stripHtml(post.excerpt.rendered).substring(0, 150) + (stripHtml(post.excerpt.rendered).length > 150 ? '...' : '');
-
-  // Log the post object to debug
-  console.log('Post in BlogPost component:', post);
-  console.log('WordPress link:', post.link);
 
   return (
     <Card className="overflow-hidden transition-all hover:shadow-md flex flex-col h-full">
@@ -101,13 +60,13 @@ export function BlogPost({ post }: BlogPostProps) {
       </CardContent>
       <div className="px-6 pb-2 flex-none">
         <div className="flex items-center space-x-2 mb-4">
-          <Avatar className="h-7 w-7">
-            <AvatarImage src={authorAvatar} alt={authorName} />
-            <AvatarFallback>
-              <User className="h-4 w-4" />
-            </AvatarFallback>
-          </Avatar>
-          <span className="text-sm text-muted-foreground">{authorName}</span>
+          <MonoAvatar 
+            src={NilsProfile} 
+            alt="Nils Johansson" 
+            owner="nils" 
+            size="sm"
+          />
+          <span className="text-sm text-muted-foreground">Nils Johansson</span>
         </div>
       </div>
       <CardFooter className="flex flex-col gap-2 pt-0 flex-none">
@@ -115,22 +74,6 @@ export function BlogPost({ post }: BlogPostProps) {
           <Link to={`/blog/${post.slug}`}>
             Read More
           </Link>
-        </Button>
-        <Button asChild variant="ghost" size="sm" className="w-full">
-          <a 
-            href={post.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center"
-            onClick={(e) => {
-              e.stopPropagation();
-              console.log('WordPress link clicked:', post.link);
-              window.open(post.link, '_blank', 'noopener,noreferrer');
-            }}
-          >
-            <span>View on WordPress</span>
-            <ExternalLink className="ml-1 h-3 w-3" />
-          </a>
         </Button>
       </CardFooter>
     </Card>

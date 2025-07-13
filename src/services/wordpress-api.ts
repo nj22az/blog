@@ -1,37 +1,9 @@
-// WordPress API service for fetching blog posts from theofficeofnils.wordpress.com
+import axios from "axios";
+import { ApiClient } from "./api-client";
+import { WordPressPost } from "@types/blog";
 
-export interface WordPressPost {
-  id: number;
-  date: string;
-  title: {
-    rendered: string;
-  };
-  content: {
-    rendered: string;
-  };
-  excerpt: {
-    rendered: string;
-  };
-  featured_media: number;
-  _embedded?: {
-    'wp:featuredmedia'?: Array<{
-      source_url: string;
-      alt_text?: string;
-    }>;
-    'author'?: Array<{
-      name: string;
-      slug?: string;
-      avatar_urls?: {
-        [key: string]: string;
-      };
-    }>;
-  };
-  author: number;
-  link: string;
-  slug: string;
-  categories?: number[];
-  tags?: number[];
-}
+// WordPress API client with specific configuration
+const wordpressClient = new ApiClient("https://public-api.wordpress.com/wp/v2/sites/theofficeofnils.wordpress.com");
 
 export interface WordPressMedia {
   id: number;
@@ -76,46 +48,23 @@ const WP_API_URL = 'https://public-api.wordpress.com/wp/v2/sites/theofficeofnils
  */
 export async function fetchBlogPosts(page = 1, perPage = 10, categoryId?: number): Promise<WordPressPost[]> {
   try {
-    console.log(`DEBUG - Fetching WordPress posts: page ${page}, perPage ${perPage}${categoryId ? `, category ${categoryId}` : ''}`);
+    const params = new URLSearchParams({
+      _embed: 'true',
+      page: page.toString(),
+      per_page: perPage.toString(),
+    });
     
-    // Build the URL with all needed parameters
-    // Using _embed=true ensures we get author and featured media data
-    let url = `${WP_API_URL}/posts?_embed=true&page=${page}&per_page=${perPage}`;
-    
-    // Add category filter if provided
     if (categoryId) {
-      url += `&categories=${categoryId}`;
+      params.append('categories', categoryId.toString());
     }
     
-    const response = await fetch(url);
-    
-    // Check for response headers to handle pagination
-    const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '0', 10);
-    const totalPosts = parseInt(response.headers.get('X-WP-Total') || '0', 10);
-    
-    console.log(`DEBUG - WordPress API headers: Total pages: ${totalPages}, Total posts: ${totalPosts}`);
-    
-    if (!response.ok) {
-      // If it's a 400 error on page > 1, it's likely we're out of posts
-      if (response.status === 400 && page > 1) {
-        console.log("DEBUG - No more posts available (page out of range)");
-        return [];
-      }
-      throw new Error(`Failed to fetch posts: ${response.status} ${response.statusText}`);
-    }
-    
-    const data = await response.json();
-    console.log(`DEBUG - Successfully fetched ${data.length} posts`);
-    
-    // Log the first post to check author data
-    if (data.length > 0) {
-      console.log('DEBUG - First post author data:', data[0].author, data[0]._embedded?.author);
-    }
-    
-    return data;
+    return await wordpressClient.get<WordPressPost[]>(`/posts?${params}`);
   } catch (error) {
     console.error('Error fetching blog posts:', error);
-    throw error; // Re-throw to let the component handle it
+    if (axios.isAxiosError(error) && error.response?.status === 400 && page > 1) {
+      return []; // No more posts available
+    }
+    throw error;
   }
 }
 
@@ -126,24 +75,13 @@ export async function fetchBlogPosts(page = 1, perPage = 10, categoryId?: number
  */
 export async function fetchPostBySlug(slug: string): Promise<WordPressPost | null> {
   try {
-    console.log(`DEBUG - Fetching post with slug: ${slug}`);
-    const response = await fetch(
-      `${WP_API_URL}/posts?_embed=true&slug=${encodeURIComponent(slug)}`
-    );
+    const params = new URLSearchParams({
+      _embed: 'true',
+      slug: encodeURIComponent(slug),
+    });
     
-    if (!response.ok) {
-      throw new Error(`Failed to fetch post: ${response.status} ${response.statusText}`);
-    }
-    
-    const posts = await response.json();
-    if (posts.length === 0) {
-      console.log(`DEBUG - No post found with slug: ${slug}`);
-      return null;
-    }
-    
-    console.log(`DEBUG - Successfully fetched post with slug: ${slug}`);
-    console.log('DEBUG - Post author data:', posts[0].author, posts[0]._embedded?.author);
-    return posts[0];
+    const posts = await wordpressClient.get<WordPressPost[]>(`/posts?${params}`);
+    return posts.length > 0 ? posts[0] : null;
   } catch (error) {
     console.error(`Error fetching post with slug ${slug}:`, error);
     return null;

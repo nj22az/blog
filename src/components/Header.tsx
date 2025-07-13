@@ -1,51 +1,141 @@
-import { Menu } from "lucide-react";
-import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
-import logoImage from "../assets/images/logo.png";
+import { useState, useCallback } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, BookOpen, User, Mail } from "lucide-react";
+import { NavItem } from "@types/index";
+
+const navItems: NavItem[] = [
+  { title: "Blog", href: "/", icon: BookOpen },
+  { title: "About", href: "/about", icon: User },
+  { title: "Contact", href: "/contact", icon: Mail },
+];
+
+const pageTitle: Record<string, string> = {
+  "/about": "About Nils & Thuan",
+  "/contact": "Let's Connect",
+  "/experience": "Professional Journey",
+  "/": "Engineering Insights",
+};
 
 const Header = () => {
-  const toggleMobileMenu = () => {
-    const sidebar = document.querySelector('aside');
-    sidebar?.classList.toggle('-translate-x-full');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const getPageTitle = useCallback(() => {
+    if (location.pathname.startsWith('/blog/')) {
+      return "Article";
+    }
+    return pageTitle[location.pathname] || "Engineering Insights";
+  }, [location.pathname]);
+
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  const isActive = (href: string) => {
+    if (href === "/" && location.pathname === "/") return true;
+    if (href !== "/" && location.pathname.startsWith(href)) return true;
+    return false;
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-md border-b border-border z-50 px-4">
-      <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <button 
-            data-mobile-menu-trigger 
-            className="p-2 hover:bg-accent rounded-full transition-colors md:hidden"
-            onClick={toggleMobileMenu}
-          >
-            <Menu className="h-5 w-5 text-foreground" />
-          </button>
+    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-neutral-200 z-50">
+      <div className="flagship-grid h-16">
+        <div className="flagship-container flex items-center justify-between">
+          {/* Logo - Left */}
           <Link 
-            to="/"
-            className="group relative flex flex-col items-start px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-sm active:scale-[0.98] select-none"
+            to="/" 
+            className="group flex items-center space-x-3 interactive-scale focus-ring rounded-lg p-2 -m-2"
           >
-            <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/80 rounded-lg transition-colors duration-200" />
-            <span className="relative text-[13px] font-normal tracking-wide text-muted-foreground/90 group-hover:text-foreground transition-colors">
-              The Office of
-            </span>
-            <h1 className="relative text-[20px] font-medium tracking-tight text-foreground -mt-0.5 sm:text-[22px] group-hover:text-primary transition-colors">
-              Nils Johansson
-            </h1>
-            <div className="absolute inset-0 rounded-lg ring-1 ring-black/[0.08] group-hover:ring-black/[0.15] transition-all duration-200" />
-          </Link>
-        </div>
-        <div className="flex items-center gap-2 sm:gap-4">
-          <Link to="/" className="flex items-center">
-            <div className="h-12 w-12 rounded-full overflow-hidden bg-transparent flex items-center justify-center transition-all duration-300 hover:scale-125">
-              <img 
-                src={logoImage} 
-                alt="The Office of Nils Johansson Logo" 
-                className="h-full w-full object-contain"
-              />
+            <div className="flex flex-col">
+              <span className="text-xl font-semibold leading-none transition-colors group-hover:opacity-80" style={{ color: 'hsl(var(--brand-primary))' }}>
+                The Office
+              </span>
+              <span className="text-sm font-medium leading-none mt-0.5 opacity-70">
+                of Nils Johansson
+              </span>
             </div>
           </Link>
+          
+          {/* Page Title - Center (Desktop) */}
+          <h1 className="text-heading hidden lg:block">
+            {getPageTitle()}
+          </h1>
+          
+          {/* Navigation - Right (Desktop) */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map(({ title, href, icon: Icon }) => (
+              <Link
+                key={href}
+                to={href}
+                className={`nav-link flex items-center space-x-2 px-4 py-2 rounded-lg transition-all focus-ring ${
+                  isActive(href) 
+                    ? 'bg-muted active' 
+                    : 'hover:bg-muted/50'
+                }`}
+                style={{
+                  color: isActive(href) ? 'hsl(var(--accent))' : 'hsl(var(--foreground))'
+                }}
+                title={title}
+              >
+                <Icon className="w-4 h-4" />
+                <span className="text-sm font-medium">{title}</span>
+              </Link>
+            ))}
+          </nav>
+          
+          {/* Mobile Menu Button */}
+          <div className="flex items-center md:hidden">
+            <button 
+              className="p-3 -m-3 rounded-lg hover:bg-muted transition-colors focus-ring" 
+              onClick={toggleMenu}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+              style={{ color: 'hsl(var(--foreground))' }}
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
+      
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-border z-40 md:hidden animate-reveal-fade">
+          <nav className="flagship-grid py-4">
+            <div className="flagship-container space-y-1">
+              <div className="lg:hidden mb-4">
+                <h2 className="text-heading">{getPageTitle()}</h2>
+              </div>
+              {navItems.map(({ title, href, icon: Icon }) => (
+                <Link
+                  key={href}
+                  to={href}
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all focus-ring ${
+                    isActive(href)
+                      ? 'bg-muted'
+                      : 'hover:bg-muted/50'
+                  }`}
+                  style={{
+                    color: isActive(href) ? 'hsl(var(--accent))' : 'hsl(var(--foreground))'
+                  }}
+                  onClick={closeMenu}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="text-base font-medium">{title}</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

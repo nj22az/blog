@@ -1,10 +1,11 @@
 import { CalendarIcon, ArrowLeft, ExternalLink, MessageSquare, User, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { WordPressPost, fetchAuthor } from "@/lib/wordpress-api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { WordPressPost, fetchAuthor } from "@services/wordpress-api";
+import { MonoAvatar } from "@/components/MonoAvatar";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
+import NilsProfile from '@/assets/images/nils-profile.jpeg';
 
 interface BlogDetailProps {
   post: WordPressPost;
@@ -12,7 +13,6 @@ interface BlogDetailProps {
 
 export function BlogDetail({ post }: BlogDetailProps) {
   const [authorName, setAuthorName] = useState<string>('');
-  const [authorAvatar, setAuthorAvatar] = useState<string>('');
 
   // Format the date
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
@@ -32,7 +32,6 @@ export function BlogDetail({ post }: BlogDetailProps) {
         if (post._embedded?.author?.[0]) {
           const embeddedAuthor = post._embedded.author[0];
           setAuthorName(embeddedAuthor.name || 'Nils Johansson');
-          setAuthorAvatar(embeddedAuthor.avatar_urls?.['96'] || '');
           return;
         }
 
@@ -41,7 +40,6 @@ export function BlogDetail({ post }: BlogDetailProps) {
           const authorData = await fetchAuthor(post.author);
           if (authorData) {
             setAuthorName(authorData.name || 'Nils Johansson');
-            setAuthorAvatar(authorData.avatar_urls?.['96'] || '');
             return;
           }
         }
@@ -93,12 +91,12 @@ export function BlogDetail({ post }: BlogDetailProps) {
             
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={authorAvatar} alt={authorName} />
-              <AvatarFallback>
-                <User className="h-4 w-4" />
-              </AvatarFallback>
-            </Avatar>
+            <MonoAvatar 
+              src={NilsProfile} 
+              alt={authorName || "Nils Johansson"} 
+              owner="nils" 
+              size="sm"
+            />
             <span>{authorName}</span>
           </div>
           

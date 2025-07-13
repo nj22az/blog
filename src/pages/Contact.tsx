@@ -8,43 +8,41 @@ const Contact: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6">
       {/* Header */}
-      <div className="text-center mb-10 space-y-3">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">Get in Touch</h1>
-        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          I'm always open to discussing new projects, opportunities, or just connecting.
+      <div className="text-center mb-12 space-y-4">
+        <h1 className="text-hierarchy-1 mb-3">Let's Connect</h1>
+        <p className="text-body-large max-w-2xl mx-auto">
+          Ready to discuss marine engineering solutions, explore collaboration opportunities, or connect professionally? I'm here to help.
         </p>
       </div>
       
       {/* Contact Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <ContactCard 
-          icon={<MessageSquare className="h-8 w-8 text-primary" />}
-          title="Contact Form"
-          description="Send me a message directly"
-          content="Use my contact form to reach out about engineering projects, automation solutions, or any other professional inquiries."
-          buttonText="Open Contact Form"
-          buttonIcon={<Mail className="h-5 w-5" />}
+          icon={<MessageSquare className="h-6 w-6 text-accent-600" />}
+          title="Direct Message"
+          description="Project inquiries and consultation"
+          content="Reach out through my secure contact form to discuss marine engineering projects, automation solutions, or technical consulting opportunities."
+          buttonText="Send Message"
+          buttonIcon={<Mail className="h-4 w-4" />}
           href="https://theofficeofnils.wordpress.com/contact-me/"
-          isMainOption={true}
         />
 
         <ContactCard 
-          icon={<Linkedin className="h-8 w-8 text-primary" />}
+          icon={<Linkedin className="h-6 w-6 text-accent-600" />}
           title="LinkedIn"
-          description="Professional networking"
-          content="Connect with me on LinkedIn to discuss opportunities, collaborations, or to learn more about my experience in marine engineering."
-          buttonText="View LinkedIn Profile"
-          buttonIcon={<Linkedin className="h-5 w-5" />}
+          description="Professional networking and connections"
+          content="Connect with me on LinkedIn to explore collaboration opportunities, discuss industry insights, or learn more about my marine engineering expertise."
+          buttonText="Connect on LinkedIn"
+          buttonIcon={<Linkedin className="h-4 w-4" />}
           href="https://www.linkedin.com/in/nils-johansson-86744583/"
-          isMainOption={true}
         />
       </div>
       
       {/* Response Time */}
-      <div className="text-center p-6 rounded-xl border border-border mb-10 bg-card">
-        <h3 className="text-lg font-semibold mb-2">Response Time</h3>
-        <p className="text-sm text-muted-foreground">
-          I typically respond to inquiries within 24-48 hours during business days.
+      <div className="text-center glass-surface p-8 rounded-2xl mb-10">
+        <h3 className="text-hierarchy-3 mb-3 text-glass-800">Response Commitment</h3>
+        <p className="text-body text-glass-600">
+          Professional inquiries receive a response within 24-48 hours during business days.
         </p>
       </div>
     </div>
@@ -59,7 +57,6 @@ interface ContactCardProps {
   buttonText: string;
   buttonIcon: React.ReactNode;
   href: string;
-  isMainOption: boolean;
 }
 
 const ContactCard: React.FC<ContactCardProps> = ({
@@ -69,48 +66,43 @@ const ContactCard: React.FC<ContactCardProps> = ({
   content,
   buttonText,
   buttonIcon,
-  href,
-  isMainOption
+  href
 }) => {
   return (
     <Card className={cn(
-      "overflow-hidden border transition-all duration-300 hover:shadow-md h-full flex flex-col",
-      isMainOption ? "border-primary/20" : "border-border"
+      "glass-card overflow-hidden transition-all duration-300 interactive-glow interactive-scale h-full flex flex-col"
     )}>
-      <CardContent className="p-6 flex flex-col h-full">
-        <div className="flex items-start gap-4 mb-4">
-          <div className={cn(
-            "p-2 rounded-full",
-            isMainOption ? "bg-primary/10" : "bg-muted"
-          )}>
+      <CardContent className="p-8 flex flex-col h-full">
+        <div className="flex items-start gap-4 mb-6">
+          <div className="p-3 rounded-xl bg-accent-50 border border-accent-200/50">
             {icon}
           </div>
           <div>
-            <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-            <p className="text-sm text-muted-foreground">{description}</p>
+            <h2 className="text-hierarchy-3 mb-1">{title}</h2>
+            <p className="text-body-small text-glass-500">{description}</p>
           </div>
         </div>
         
-        <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">
+        <p className="text-body text-glass-600 leading-relaxed mb-8 flex-grow">
           {content}
         </p>
         
         <div className="mt-auto">
           <Button 
             asChild 
-            variant="default"
+            variant="outline"
             size="lg" 
-            className="w-full rounded-lg font-medium"
+            className="w-full rounded-xl font-medium interactive-scale border-accent-200 hover:bg-accent-50 hover:border-accent-300"
           >
             <a 
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2"
+              className="flex items-center justify-center gap-3"
             >
               {buttonIcon}
               {buttonText}
-              <ExternalLink className="h-4 w-4 ml-1 opacity-70" />
+              <ExternalLink className="h-4 w-4 opacity-60" />
             </a>
           </Button>
         </div>

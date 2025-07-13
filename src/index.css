@@ -1,171 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-* {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* Animation Styles */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.5s ease-out forwards;
-}
+/* ==========================================
+   FLAGSHIP DESIGN SYSTEM FOUNDATION
+   Premium, bespoke styling for Nils & Thuan
+   ========================================== */
 
 @layer base {
-  :root {
-    --background: 0 0% 98%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 262.1 83.3% 97.8%;
-    --accent-foreground: 262.1 83.3% 27.8%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262.1 83.3% 57.8%;
-    --radius: 0.75rem;
+  /* Premium base styles */
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variant-ligatures: contextual;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+  
+  body {
+    font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+  
+  /* Hide scrollbars for clean aesthetics */
+  ::-webkit-scrollbar {
+    display: none;
   }
-
-  .soft-pastel {
-    --background: 180 20% 99%;
-    --foreground: 200 50% 20%;
-    --card: 180 20% 99%;
-    --card-foreground: 200 50% 20%;
-    --popover: 180 20% 99%;
-    --popover-foreground: 200 50% 20%;
-    --primary: 330 80% 70%;
-    --primary-foreground: 330 80% 20%;
-    --secondary: 180 50% 96%;
-    --secondary-foreground: 180 50% 30%;
-    --muted: 180 50% 96%;
-    --muted-foreground: 180 30% 50%;
-    --accent: 150 50% 96%;
-    --accent-foreground: 150 50% 30%;
-    --destructive: 0 80% 70%;
-    --destructive-foreground: 0 80% 20%;
-    --border: 180 30% 90%;
-    --input: 180 30% 90%;
-    --ring: 330 80% 70%;
-    --radius: 1rem;
+  
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
-  .dos-prompt {
-    --background: 120 70% 5%;
-    --foreground: 120 100% 80%;
-    --card: 120 70% 8%;
-    --card-foreground: 120 100% 80%;
-    --popover: 120 70% 8%;
-    --popover-foreground: 120 100% 80%;
-    --primary: 120 100% 50%;
-    --primary-foreground: 120 70% 5%;
-    --secondary: 120 70% 12%;
-    --secondary-foreground: 120 100% 80%;
-    --muted: 120 70% 12%;
-    --muted-foreground: 120 100% 60%;
-    --accent: 120 70% 15%;
-    --accent-foreground: 120 100% 80%;
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 0 0% 0%;
-    --border: 120 100% 20%;
-    --input: 120 70% 15%;
-    --ring: 120 100% 50%;
-    --radius: 0;
-  }
-
-  .synthwave {
-    --background: 240 85% 5%;
-    --foreground: 300 100% 88%;
-    --card: 240 85% 8%;
-    --card-foreground: 300 100% 88%;
-    --popover: 240 85% 8%;
-    --popover-foreground: 300 100% 88%;
-    --primary: 320 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 233 80% 65%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 240 85% 12%;
-    --muted-foreground: 300 100% 75%;
-    --accent: 191 80% 65%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 100% 65%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 240 85% 20%;
-    --input: 240 85% 15%;
-    --ring: 320 100% 65%;
-    --radius: 0.5rem;
+  
+  /* Premium focus styles for accessibility */
+  *:focus-visible {
+    outline: 3px solid hsl(195, 85%, 55%);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-/* ... keep existing code (base styles) */
+/* Premium theme variables */
+@layer base {
+  :root {
+    /* Brand Colors - Deep Navy Primary */
+    --brand-primary: 220 35% 45%;
+    --brand-primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Warm Slate */
+    --secondary: 210 20% 52%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent - Unique Cerulean */
+    --accent: 195 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Status Colors */
+    --success: 158 64% 41%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 50%;
+    --warning-foreground: 0 0% 100%;
+    --error: 0 58% 52%;
+    --error-foreground: 0 0% 100%;
+    
+    /* Neutral Scale for UI */
+    --background: 0 0% 100%;
+    --foreground: 210 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 15%;
+    --muted: 210 15% 97%;
+    --muted-foreground: 210 15% 45%;
+    --border: 210 15% 85%;
+    --input: 210 15% 85%;
+    --ring: 195 85% 55%;
+    
+    /* Legacy mappings for shadcn/ui compatibility */
+    --primary: var(--brand-primary);
+    --primary-foreground: var(--brand-primary-foreground);
+    --destructive: var(--error);
+    --destructive-foreground: var(--error-foreground);
+    
+    /* Premium spacing and sizing */
+    --radius: 0.5rem;
+    --header-height: 4rem;
+    --section-spacing: 3rem;
+  }
+
+}
+
+/* ==========================================
+   FLAGSHIP COMPONENT LIBRARY
+   Premium, uniform styling system
+   ========================================== */
+
+@layer components {
+  /* Premium Grid System */
+  .flagship-grid {
+    @apply grid grid-cols-flagship gap-6 max-w-7xl mx-auto px-6;
+  }
+  
+  .flagship-container {
+    @apply col-span-12 lg:col-span-8 lg:col-start-3;
+  }
+  
+  /* Premium Card Anatomy */
+  .flagship-card {
+    @apply bg-white border rounded-lg shadow-md p-6 transition-all;
+    border-color: hsl(var(--border));
+  }
+  
+  .flagship-card:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+  
+  /* Premium Typography Scale */
+  .text-display {
+    @apply text-5xl font-bold tracking-tight;
+    color: hsl(var(--foreground));
+  }
+  
+  .text-heading {
+    @apply text-3xl font-semibold tracking-tight;
+    color: hsl(var(--foreground));
+  }
+  
+  .text-subheading {
+    @apply text-xl font-medium;
+    color: hsl(var(--foreground));
+  }
+  
+  .text-body {
+    @apply text-lg leading-relaxed;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-body-sm {
+    @apply text-base leading-relaxed;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-caption {
+    @apply text-sm uppercase tracking-wide font-medium;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-micro {
+    @apply text-xs uppercase tracking-wide font-medium;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  /* Premium Button System */
+  .btn-primary {
+    @apply px-4 py-3 rounded-lg font-medium text-white transition-all;
+    background-color: hsl(var(--accent));
+  }
+  
+  .btn-primary:hover {
+    @apply shadow-lg -translate-y-0.5;
+    background-color: hsl(var(--accent) / 0.9);
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-3 rounded-lg font-medium border-2 transition-all;
+    border-color: hsl(var(--accent));
+    color: hsl(var(--accent));
+  }
+  
+  .btn-secondary:hover {
+    @apply shadow-lg -translate-y-0.5 text-white;
+    background-color: hsl(var(--accent));
+  }
+  
+  /* Premium Avatar with Ring Treatment */
+  .flagship-avatar {
+    @apply rounded-full overflow-hidden transition-all relative;
+  }
+  
+  .flagship-avatar::before {
+    @apply absolute inset-0 rounded-full ring-2 ring-white ring-offset-2;
+    content: '';
+    ring-offset-color: transparent;
+  }
+  
+  .flagship-avatar:hover {
+    @apply -translate-y-0.5 shadow-lg;
+  }
+  
+  .flagship-avatar:hover::before {
+    ring-color: hsl(var(--accent));
+  }
+  
+  /* Premium Navigation Underline */
+  .nav-link {
+    @apply relative font-medium transition-colors;
+    color: hsl(var(--foreground));
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: hsl(var(--accent));
+  }
+  
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all;
+    background-color: hsl(var(--accent));
+    content: '';
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+  
+  /* Section Spacing System */
+  .flagship-section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  .flagship-section-sm {
+    @apply py-8 md:py-10 lg:py-12;
+  }
+  
+  /* Premium Reveal Animations */
+  .reveal-on-scroll {
+    @apply opacity-0 translate-y-6 transition-all duration-slow;
+  }
+  
+  .reveal-on-scroll.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Staggered reveal for lists */
+  .reveal-staggered > * {
+    @apply opacity-0 translate-y-6 transition-all duration-slow;
+  }
+  
+  .reveal-staggered.revealed > *:nth-child(1) { @apply delay-0; }
+  .reveal-staggered.revealed > *:nth-child(2) { @apply delay-100; }
+  .reveal-staggered.revealed > *:nth-child(3) { @apply delay-200; }
+  .reveal-staggered.revealed > *:nth-child(4) { @apply delay-300; }
+  
+  .reveal-staggered.revealed > * {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* ==========================================
+   FLAGSHIP UTILITY CLASSES
+   Premium utilities for specific needs
+   ========================================== */
+
+@layer utilities {
+  /* Legacy grid support for existing components */
+  .content-grid {
+    @apply flagship-grid;
+  }
+  
+  .content-container {
+    @apply flagship-container;
+  }
+  
+  /* Premium interactive utilities */
+  .interactive-scale {
+    @apply transition-transform hover:scale-105 active:scale-95;
+  }
+  
+  .interactive-lift {
+    @apply transition-all hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  /* Accessibility utilities */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+  
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    outline-color: hsl(var(--accent));
+  }
+}

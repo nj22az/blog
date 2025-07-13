@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchBlogPosts, WordPressPost, fetchAuthor } from '@/lib/wordpress-api';
+import { fetchBlogPosts, WordPressPost, fetchAuthor } from '@services/wordpress-api';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { CalendarIcon, Clock, ExternalLink, User } from 'lucide-react';
