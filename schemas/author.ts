@@ -12,6 +12,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+      description: 'A short professional title or description (e.g., "Marine Engineer", "Textile Specialist")',
+      placeholder: 'e.g., Marine Engineer & Global Field Service Expert',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

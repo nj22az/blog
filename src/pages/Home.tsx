@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Mail, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { fetchAllBlogPosts, BlogPost as UnifiedBlogPost } from '@services/blog-api';
+import { Link } from 'react-router-dom';
+import { fetchAllBlogPosts, SanityPost } from '@/services/sanity-api';
 import { BlogPost } from "@/components/BlogPost";
-import Contact from './Contact';
-import AvatarGroup from '@/components/AvatarGroup';
+import Hero from '@/components/Hero';
+import { usePremiumAnimations } from '@/hooks/usePremiumAnimations';
 
 const Home = () => {
-  const [posts, setPosts] = useState<UnifiedBlogPost[]>([]);
+  const [posts, setPosts] = useState<SanityPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const { fadeIn, slideUp } = usePremiumAnimations();
 
   useEffect(() => {
     const loadPosts = async () => {
       try {
         setLoading(true);
-        const newPosts = await fetchAllBlogPosts(); // Sanity only (post-migration)
-        
+        const newPosts = await fetchAllBlogPosts();
         setPosts(newPosts);
-        setHasMore(false); // Since we're getting all posts at once
-        
       } catch (err) {
         console.error('Error fetching blog posts:', err);
       } finally {
@@ -31,59 +26,54 @@ const Home = () => {
     };
 
     loadPosts();
-  }, [page]);
-
-  const handleLoadMore = () => {
-    setPage(prev => prev + 1);
-  };
+  }, []);
 
   return (
-    <div className="space-y-12">
-      {/* Hero Section */}
-      <section className="text-center space-y-4 mb-12">
-        <h1 className="text-4xl font-bold tracking-tight">Welcome to Our Blog!</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          This is Nils and Thuan's personal space for sharing articles on marine engineering, travel experiences, and personal reflections.
-        </p>
-        <AvatarGroup />
-      </section>
+    <div>
+      {/* Dynamic Hero Section */}
+      <Hero />
 
-      {/* Latest Blog Posts */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-bold">Latest Articles</h2>
-        
-        {loading && page === 1 ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map(post => (
-              <BlogPost key={post.id} post={post} />
-            ))}
-          </div>
-        )}
-
-        {!loading && hasMore && (
-          <div className="flex justify-center mt-8">
-            <Button 
-              onClick={handleLoadMore} 
-              variant="outline"
-              className="min-w-32"
-            >
-              Load More
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+        {/* Featured Blog Posts */}
+        <section {...fadeIn({ delay: 100 })} className="space-y-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900">Featured Articles</h2>
+              <p className="text-gray-600 mt-2">Latest insights and stories from our team</p>
+            </div>
+            <Button asChild variant="outline" className="focus:ring-2 focus:ring-blue-500">
+              <Link to="/blog">View All Posts</Link>
             </Button>
           </div>
-        )}
+          
+          {loading ? (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            </div>
+          ) : (
+            <div {...slideUp({ delay: 200 })} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.slice(0, 6).map(post => (
+                <BlogPost key={post._id} post={post} />
+              ))}
+            </div>
+          )}
 
-        {loading && page > 1 && (
-          <div className="flex justify-center my-8">
-            <Loader2 className="h-6 w-6 animate-spin text-primary" />
-          </div>
-        )}
-      </section>
+          {posts.length > 6 && (
+            <div {...fadeIn({ delay: 300 })} className="flex justify-center mt-12">
+              <Button asChild variant="outline" size="lg" className="focus:ring-2 focus:ring-blue-500">
+                <Link to="/blog">
+                  View All {posts.length} Articles
+                </Link>
+              </Button>
+            </div>
+          )}
+        </section>
 
+        {/* Additional sections can be added here */}
+        {/* For example: Newsletter signup, recent projects, testimonials, etc. */}
       </div>
+    </div>
   );
 };
 

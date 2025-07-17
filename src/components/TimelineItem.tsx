@@ -1,6 +1,5 @@
 import React from 'react';
 import * as Icons from "lucide-react";
-import JobAnimation from './JobAnimation';
 
 interface TimelineItemProps {
   index: number;
@@ -42,7 +41,6 @@ const getIcon = (category: string): React.FC<Icons.LucideProps> => {
 
 const TimelineItem = ({ 
   index, 
-  isFirst, 
   isLast, 
   exp, 
   showAnimation,
@@ -74,10 +72,7 @@ const TimelineItem = ({
                   })}
                 </button>
                 {showAnimation && (
-                  <JobAnimation 
-                    containerId={containerId}
-                    category={exp.category}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 animate-pulse rounded-full" />
                 )}
               </div>
 

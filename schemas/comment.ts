@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {CheckCircle, Clock} from 'lucide-react'
 
 export default defineType({
   name: 'comment',
@@ -59,7 +59,7 @@ export default defineType({
       return {
         title: title,
         subtitle: subtitle?.substring(0, 50) + '...',
-        media: media ? '✅' : '⏳',
+        media: media ? CheckCircle : Clock,
       }
     },
   },

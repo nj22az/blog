@@ -92,12 +92,4 @@ export default defineConfig({
     types: schemaTypes,
   },
 
-  // Mobile-friendly studio configuration
-  studio: {
-    components: {
-      navbar: {
-        // Custom navbar for better mobile experience
-      },
-    },
-  },
 })

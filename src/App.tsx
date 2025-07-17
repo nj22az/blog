@@ -3,27 +3,25 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Header from "@/components/Header";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Experience = lazy(() => import("./pages/Experience"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Loading component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="relative">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      <div className="mt-4 text-sm text-muted-foreground">Loading...</div>
-    </div>
+// Simple loading component
+const SimpleLoader = () => (
+  <div className="flex items-center justify-center min-h-64">
+    <Loader2 className="h-8 w-8 animate-spin" />
   </div>
 );
 
@@ -62,11 +60,13 @@ const SEO = () => {
 };
 
 const App = () => {
+  // Simple QueryClient configuration
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: 1,
-        staleTime: 30000,
+        retry: 2,
+        staleTime: 5 * 60 * 1000, // 5 minutes
+        gcTime: 10 * 60 * 1000,   // 10 minutes
         refetchOnWindowFocus: false,
       },
     },
@@ -77,30 +77,47 @@ const App = () => {
       <HelmetProvider>
         <ThemeProvider 
           attribute="class" 
-          defaultTheme="glass" 
+          defaultTheme="light" 
           enableSystem
-          themes={["glass", "light", "dark", "soft-pastel", "dos-prompt", "synthwave"]}
-          forcedTheme={undefined}
-          disableTransitionOnChange
+          themes={["light", "dark"]}
         >
           <TooltipProvider>
             <SEO />
             <Router>
-              <div className="min-h-screen bg-background text-foreground">
+              {/* Clean layout */}
+              <div className="min-h-screen bg-white text-slate-900 antialiased">
                 <Header />
-                <main className="max-w-7xl mx-auto px-4 py-8 mt-16">
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/experience" element={<Experience />} />
-                      <Route path="/blog/:slug" element={<BlogPost />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </Suspense>
+                
+                {/* Main content */}
+                <main className="relative">
+                  <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 mt-16">
+                    <Suspense fallback={<SimpleLoader />}>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/experience" element={<Experience />} />
+                        <Route path="/blog" element={<Blog />} />
+                        <Route path="/blog/:slug" element={<BlogPost />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </Suspense>
+                  </div>
                 </main>
+
+                {/* Simple footer */}
+                <footer className="mt-32 border-t border-slate-200 bg-white">
+                  <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+                    <div className="text-center">
+                      <p className="text-xs text-slate-400">
+                        © 2025 The Office of Nils Johansson · All rights reserved
+                      </p>
+                    </div>
+                  </div>
+                </footer>
               </div>
+              
+              {/* Toast notifications */}
               <Toaster />
               <Sonner />
             </Router>

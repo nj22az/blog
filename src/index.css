@@ -151,48 +151,46 @@
     --eink-light-gray: 0, 0%, 75%;
     --eink-white: 0, 0%, 98%;
     
-    /* Playful Pastels (Light mode) */
-    --pastel-lavender: 262, 83%, 75%;
-    --pastel-mint: 142, 76%, 75%;
-    --pastel-peach: 25, 95%, 80%;
-    --pastel-sky: 200, 98%, 80%;
-    --pastel-rose: 330, 81%, 80%;
-    --pastel-cream: 45, 100%, 92%;
+    /* Industrial Color System */
+    --accent: 220, 87%, 56%;     /* steel-blue #2563eb */
+    --accent-dark: 220, 87%, 46%; /* darker blue #1e40af */
+    --neutral-50: 220, 14%, 98%;
+    --neutral-100: 220, 13%, 95%;
+    --neutral-200: 220, 13%, 91%;
+    --neutral-300: 212, 12%, 84%;
+    --neutral-400: 215, 13%, 65%;
+    --neutral-500: 220, 9%, 46%;
+    --neutral-600: 215, 14%, 34%;
+    --neutral-700: 217, 19%, 27%;
+    --neutral-800: 215, 28%, 17%;
+    --neutral-900: 221, 39%, 11%;
   }
 
   .dark {
-    --background: 220 13% 9%;
-    --foreground: 0 0% 98%;
-    --card: 220 13% 9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 220 13% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 262 83% 68%;
-    --primary-foreground: 220 13% 9%;
-    --secondary: 220 9% 25%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 9% 25%;
-    --muted-foreground: 220 9% 65%;
-    --accent: 142 76% 73%;
-    --accent-foreground: 220 13% 9%;
+    --background: 221 39% 11%;
+    --foreground: 220 14% 98%;
+    --card: 215 28% 17%;
+    --card-foreground: 220 14% 98%;
+    --popover: 215 28% 17%;
+    --popover-foreground: 220 14% 98%;
+    --primary: 220 87% 56%;
+    --primary-foreground: 220 14% 98%;
+    --secondary: 215 14% 34%;
+    --secondary-foreground: 220 14% 98%;
+    --muted: 215 14% 34%;
+    --muted-foreground: 215 13% 65%;
+    --accent: 220 87% 56%;
+    --accent-foreground: 220 14% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 9% 25%;
-    --input: 220 9% 25%;
-    --ring: 262 83% 68%;
+    --border: 215 14% 34%;
+    --input: 215 14% 34%;
+    --ring: 220 87% 56%;
     
-    /* Dark mode glass morphism */
-    --glass-bg: hsla(220, 13%, 9%, 0.8);
-    --glass-border: hsla(0, 0%, 100%, 0.1);
-    --glass-shadow: 0 8px 32px 0 hsla(0, 0%, 0%, 0.5);
-    
-    /* Dark mode pastels */
-    --pastel-lavender: 262 83% 35%;
-    --pastel-mint: 142 76% 35%;
-    --pastel-peach: 25 95% 35%;
-    --pastel-sky: 200 98% 35%;
-    --pastel-rose: 330 81% 35%;
-    --pastel-cream: 45 100% 15%;
+    /* Dark mode industrial */
+    --glass-bg: hsla(215, 28%, 17%, 0.9);
+    --glass-border: hsla(220, 13%, 91%, 0.1);
+    --glass-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.3);
   }
 }
 
@@ -350,9 +348,17 @@
     @apply text-xs font-light leading-normal text-eink-medium-gray tracking-wide;
   }
   
-  /* Playful Text Accents */
-  .text-playful-gradient {
-    @apply bg-gradient-to-r from-pastel-lavender via-pastel-mint to-pastel-sky bg-clip-text text-transparent;
+  /* Industrial Text Styles */
+  .text-primary {
+    @apply text-neutral-900 font-semibold;
+  }
+  
+  .text-secondary {
+    @apply text-neutral-700 font-medium;
+  }
+  
+  .text-accent {
+    @apply text-accent font-medium;
   }
   
   .text-eink-primary {
@@ -402,18 +408,32 @@
   
   /* Japanese Spreadsheet Grid Components */
   .japanese-grid {
-    @apply grid gap-0 border border-eink-light-gray/20;
-    background: linear-gradient(to right, hsl(var(--eink-light-gray))/10 1px, transparent 1px),
-                linear-gradient(to bottom, hsl(var(--eink-light-gray))/10 1px, transparent 1px);
+    @apply grid gap-0 border border-neutral-200;
+    background: linear-gradient(to right, hsl(var(--neutral-200)) 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--neutral-200)) 1px, transparent 1px);
     background-size: var(--grid-base) var(--grid-base);
   }
   
   .japanese-grid-cell {
-    @apply p-3 border-r border-b border-eink-light-gray/10 font-mono text-sm text-eink-dark-gray hover:bg-pastel-cream/30 transition-colors duration-200;
+    padding: 0.75rem;
+    border-right: 1px solid hsl(var(--neutral-200));
+    border-bottom: 1px solid hsl(var(--neutral-200));
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.875rem;
+    color: hsl(var(--neutral-700));
+    transition: background-color 200ms;
+  }
+  
+  .japanese-grid-cell:hover {
+    background-color: hsl(var(--neutral-50));
   }
   
   .japanese-grid-header {
-    @apply bg-gradient-to-r from-pastel-lavender/20 to-pastel-mint/20 font-semibold text-eink-black border-r border-b border-eink-light-gray/30;
+    background-color: hsl(var(--neutral-100));
+    font-weight: 600;
+    color: hsl(var(--neutral-900));
+    border-right: 1px solid hsl(var(--neutral-200));
+    border-bottom: 1px solid hsl(var(--neutral-200));
   }
   
   /* Tomodachi Life Playful Elements */
@@ -451,41 +471,68 @@
   
   /* Monospaced Data Typography */
   .mono-data {
-    @apply font-mono text-sm leading-relaxed tracking-wider text-eink-dark-gray;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+    color: hsl(var(--neutral-700));
     font-feature-settings: 'tnum' 1, 'zero' 1;
     font-variant-numeric: tabular-nums;
   }
   
   .mono-data-large {
-    @apply font-mono text-base leading-relaxed tracking-wider text-eink-black;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1rem;
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+    color: hsl(var(--neutral-900));
     font-feature-settings: 'tnum' 1, 'zero' 1;
     font-variant-numeric: tabular-nums;
   }
   
-  /* Premium button styles with Tomodachi vibes */
-  .btn-premium {
-    @apply glass-surface px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  /* Industrial-style flat buttons */
+  .btn-primary {
+    background-color: hsl(var(--accent));
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 150ms ease-in-out;
   }
   
-  .btn-playful {
-    @apply btn-premium bg-gradient-to-r from-pastel-lavender via-pastel-mint to-pastel-sky text-eink-black hover:scale-105 active:scale-95 transition-transform duration-150;
-    position: relative;
-    overflow: hidden;
+  .btn-primary:hover {
+    background-color: hsl(var(--accent-dark));
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   
-  .btn-playful::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease-in-out;
+  .btn-outline {
+    border: 1px solid hsl(var(--accent));
+    color: hsl(var(--accent));
+    background-color: transparent;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: all 150ms ease-in-out;
   }
   
-  .btn-playful:hover::before {
-    left: 100%;
+  .btn-outline:hover {
+    background-color: hsl(var(--neutral-50));
+  }
+  
+  .btn-secondary {
+    background-color: hsl(var(--neutral-100));
+    color: hsl(var(--neutral-700));
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    border: 1px solid hsl(var(--neutral-200));
+    transition: all 150ms ease-in-out;
+  }
+  
+  .btn-secondary:hover {
+    background-color: hsl(var(--neutral-200));
+    color: hsl(var(--neutral-900));
   }
   
   /* Enhanced cards */
@@ -694,104 +741,31 @@
     font-feature-settings: 'kern' 1;
   }
   
-  /* Tomodachi Character Elements */
-  .character-smile {
-    position: relative;
+  /* Minimal hover effects */
+  .hover-lift {
+    @apply transition-all duration-150 ease-in-out;
   }
   
-  .character-smile::after {
-    content: '😊';
-    position: absolute;
-    right: -24px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    transition: transform 0.3s ease-in-out;
-    font-size: 16px;
+  .hover-lift:hover {
+    @apply -translate-y-0.5 shadow-md;
   }
   
-  .character-smile:hover::after {
-    transform: translateY(-50%) scale(1);
-    animation: character-wink 2s ease-in-out;
+  /* Professional focus states */
+  .focus-industrial {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
   }
   
-  /* Page Load Character Greetings */
-  .page-greeting {
-    animation: page-greeting 1.5s ease-out;
+  /* Industrial Cards */
+  .card-industrial {
+    @apply bg-white border border-neutral-200 shadow-sm rounded-sm;
   }
   
-  @keyframes page-greeting {
-    0% {
-      opacity: 0;
-      transform: translateY(40px) scale(0.8) rotate(-5deg);
-    }
-    50% {
-      opacity: 0.8;
-      transform: translateY(-8px) scale(1.1) rotate(2deg);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1) rotate(0deg);
-    }
+  .card-industrial:hover {
+    @apply shadow-md;
   }
   
-  /* Interactive Sparkles */
-  .sparkle-on-hover {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .sparkle-on-hover::before {
-    content: '✨';
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-    transition: all 0.3s ease-in-out;
-    pointer-events: none;
-    font-size: 12px;
-  }
-  
-  .sparkle-on-hover:hover::before {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-    animation: sparkle 1s ease-in-out infinite;
-  }
-  
-  @keyframes sparkle {
-    0%, 100% {
-      transform: scale(1) rotate(0deg);
-    }
-    50% {
-      transform: scale(1.2) rotate(180deg);
-    }
-  }
-  
-  /* Friendship Rainbow Effects */
-  .friendship-glow {
-    background: linear-gradient(45deg, 
-      hsl(var(--pastel-lavender)), 
-      hsl(var(--pastel-mint)), 
-      hsl(var(--pastel-sky)), 
-      hsl(var(--pastel-peach)), 
-      hsl(var(--pastel-rose))
-    );
-    background-size: 200% 200%;
-    animation: friendship-rainbow 4s ease-in-out infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  @keyframes friendship-rainbow {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  /* Professional spacing (Ma) */
+  .ma-industrial {
+    @apply px-6 py-8 space-y-6;
   }
 }
