@@ -1,287 +1,797 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================
-   FLAGSHIP DESIGN SYSTEM FOUNDATION
-   Premium, bespoke styling for Nils & Thuan
-   ========================================== */
+@layer base {
+  :root {
+    /* Japanese-in-English Aesthetic - E-ink Optimized */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 30% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 30% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 170 50% 75%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 65% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 20% 90%;
+    --input: 40 20% 90%;
+    --ring: 0 0% 9%;
+    --radius: 1rem;
+    
+    /* Japanese-Inspired Refined Palette */
+    --sakura-pink: 340 82% 88%;
+    --sakura-deep: 340 82% 75%;
+    --matcha-green: 95 35% 78%;
+    --matcha-deep: 95 35% 65%;
+    --washi-beige: 40 30% 94%;
+    --washi-warm: 40 30% 88%;
+    --sumi-charcoal: 0 0% 13%;
+    --sumi-ink: 0 0% 9%;
+    
+    /* Risograph Duotone Combinations */
+    --riso-mint-lavender: linear-gradient(135deg, hsl(142, 76%, 85%) 0%, hsl(262, 83%, 88%) 100%);
+    --riso-peach-sky: linear-gradient(135deg, hsl(25, 95%, 85%) 0%, hsl(200, 98%, 85%) 100%);
+    --riso-sakura-matcha: linear-gradient(135deg, hsl(340, 82%, 88%) 0%, hsl(95, 35%, 78%) 100%);
+    
+    /* E-ink High Contrast (≥4.5:1) */
+    --text-primary: 0 0% 9%;
+    --text-secondary: 0 0% 25%;
+    --text-tertiary: 0 0% 45%;
+    --bg-primary: 0 0% 100%;
+    --bg-secondary: 40 30% 96%;
+    --bg-tertiary: 40 20% 90%;
+    
+    /* Apple-inspired Glass morphism */
+    --glass-bg: hsla(40, 30%, 98%, 0.85);
+    --glass-border: hsla(40, 20%, 90%, 0.6);
+    --glass-shadow: 0 8px 32px 0 hsla(0, 0%, 0%, 0.12);
+    --glass-blur: 16px;
+    
+    /* Risograph Paper Texture */
+    --riso-texture: 
+      radial-gradient(circle at 1px 1px, hsla(0, 0%, 0%, 0.03) 1px, transparent 0),
+      radial-gradient(circle at 3px 3px, hsla(0, 0%, 0%, 0.02) 1px, transparent 0);
+    --riso-grain: 
+      repeating-linear-gradient(0deg, transparent, transparent 1px, hsla(0, 0%, 0%, 0.01) 2px),
+      repeating-linear-gradient(90deg, transparent, transparent 1px, hsla(0, 0%, 0%, 0.01) 2px);
+    
+    /* 8px Baseline Grid */
+    --grid-base: 8px;
+    --grid-2x: 16px;
+    --grid-3x: 24px;
+    --grid-4x: 32px;
+    --grid-6x: 48px;
+    --grid-8x: 64px;
+    --grid-12x: 96px;
+    
+    /* Enhanced spacing system (8px base) */
+    --spacing-xs: 0.25rem;   /* 4px */
+    --spacing-sm: 0.5rem;    /* 8px */
+    --spacing-md: 1rem;      /* 16px */
+    --spacing-lg: 1.5rem;    /* 24px */
+    --spacing-xl: 2rem;      /* 32px */
+    --spacing-2xl: 3rem;     /* 48px */
+    --spacing-3xl: 4rem;     /* 64px */
+    
+    /* Typography scale */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+    --text-5xl: 3rem;        /* 48px */
+    --text-6xl: 3.75rem;     /* 60px */
+    
+    /* Japanese Design System - Sumi (墨) - Ink variations */
+    --sumi-50: 0, 0%, 98%;
+    --sumi-100: 0, 0%, 95%;
+    --sumi-200: 0, 0%, 90%;
+    --sumi-300: 0, 0%, 80%;
+    --sumi-400: 0, 0%, 65%;
+    --sumi-500: 0, 0%, 45%;
+    --sumi-600: 0, 0%, 35%;
+    --sumi-700: 0, 0%, 25%;
+    --sumi-800: 0, 0%, 15%;
+    --sumi-900: 0, 0%, 8%;
+    
+    /* Shiro (白) - Pure and off-whites */
+    --shiro-paper: 45, 30%, 98%;
+    --shiro-snow: 210, 20%, 98%;
+    --shiro-rice: 60, 15%, 96%;
+    --shiro-silk: 30, 10%, 97%;
+    --shiro-bone: 45, 8%, 94%;
+    
+    /* Hai (灰) - Ash grays */
+    --hai-light: 30, 5%, 85%;
+    --hai-medium: 25, 3%, 70%;
+    --hai-dark: 20, 2%, 55%;
+    --hai-charcoal: 15, 2%, 40%;
+    
+    /* Cha (茶) - Tea browns */
+    --cha-light: 35, 15%, 75%;
+    --cha-medium: 30, 20%, 60%;
+    --cha-dark: 25, 25%, 45%;
+    --cha-matcha: 70, 20%, 40%;
+    
+    /* Mizu (水) - Water blues */
+    --mizu-clear: 200, 30%, 85%;
+    --mizu-shallow: 195, 25%, 70%;
+    --mizu-deep: 190, 20%, 55%;
+    --mizu-ocean: 185, 15%, 40%;
+    
+    /* Mori (森) - Forest greens */
+    --mori-bamboo: 120, 15%, 70%;
+    --mori-moss: 110, 20%, 50%;
+    --mori-pine: 100, 25%, 35%;
+    --mori-cedar: 90, 30%, 25%;
+    
+    /* Accent colors */
+    --accent-sakura: 340, 30%, 85%;
+    --accent-autumn: 25, 40%, 70%;
+    --accent-gold: 45, 35%, 75%;
+    --accent-copper: 20, 30%, 65%;
+    
+    /* E-ink Optimized Colors (≥4.5:1 contrast) */
+    --eink-black: 0, 0%, 9%;
+    --eink-dark-gray: 0, 0%, 25%;
+    --eink-medium-gray: 0, 0%, 45%;
+    --eink-light-gray: 0, 0%, 75%;
+    --eink-white: 0, 0%, 98%;
+    
+    /* Playful Pastels (Light mode) */
+    --pastel-lavender: 262, 83%, 75%;
+    --pastel-mint: 142, 76%, 75%;
+    --pastel-peach: 25, 95%, 80%;
+    --pastel-sky: 200, 98%, 80%;
+    --pastel-rose: 330, 81%, 80%;
+    --pastel-cream: 45, 100%, 92%;
+  }
+
+  .dark {
+    --background: 220 13% 9%;
+    --foreground: 0 0% 98%;
+    --card: 220 13% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 83% 68%;
+    --primary-foreground: 220 13% 9%;
+    --secondary: 220 9% 25%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 9% 25%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 142 76% 73%;
+    --accent-foreground: 220 13% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 9% 25%;
+    --input: 220 9% 25%;
+    --ring: 262 83% 68%;
+    
+    /* Dark mode glass morphism */
+    --glass-bg: hsla(220, 13%, 9%, 0.8);
+    --glass-border: hsla(0, 0%, 100%, 0.1);
+    --glass-shadow: 0 8px 32px 0 hsla(0, 0%, 0%, 0.5);
+    
+    /* Dark mode pastels */
+    --pastel-lavender: 262 83% 35%;
+    --pastel-mint: 142 76% 35%;
+    --pastel-peach: 25 95% 35%;
+    --pastel-sky: 200 98% 35%;
+    --pastel-rose: 330 81% 35%;
+    --pastel-cream: 45 100% 15%;
+  }
+}
 
 @layer base {
-  /* Premium base styles */
-  html {
-    scroll-behavior: smooth;
-    font-feature-settings: 'cv11', 'ss01';
-    font-variant-ligatures: contextual;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  * {
+    @apply border-border;
   }
   
   body {
-    font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    line-height: 1.5;
-    letter-spacing: -0.011em;
+    @apply bg-background text-eink-black dark:text-eink-white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 300;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.015em;
+    line-height: 1.8;
   }
   
-  /* Hide scrollbars for clean aesthetics */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  
-  * {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  /* Premium focus styles for accessibility */
-  *:focus-visible {
-    outline: 3px solid hsl(195, 85%, 55%);
-    outline-offset: 2px;
-    border-radius: 4px;
+  /* Enhanced focus states */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
-
-/* Premium theme variables */
-@layer base {
-  :root {
-    /* Brand Colors - Deep Navy Primary */
-    --brand-primary: 220 35% 45%;
-    --brand-primary-foreground: 0 0% 100%;
-    
-    /* Secondary - Warm Slate */
-    --secondary: 210 20% 52%;
-    --secondary-foreground: 0 0% 100%;
-    
-    /* Accent - Unique Cerulean */
-    --accent: 195 85% 55%;
-    --accent-foreground: 0 0% 100%;
-    
-    /* Status Colors */
-    --success: 158 64% 41%;
-    --success-foreground: 0 0% 100%;
-    --warning: 43 96% 50%;
-    --warning-foreground: 0 0% 100%;
-    --error: 0 58% 52%;
-    --error-foreground: 0 0% 100%;
-    
-    /* Neutral Scale for UI */
-    --background: 0 0% 100%;
-    --foreground: 210 15% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 210 15% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 15% 15%;
-    --muted: 210 15% 97%;
-    --muted-foreground: 210 15% 45%;
-    --border: 210 15% 85%;
-    --input: 210 15% 85%;
-    --ring: 195 85% 55%;
-    
-    /* Legacy mappings for shadcn/ui compatibility */
-    --primary: var(--brand-primary);
-    --primary-foreground: var(--brand-primary-foreground);
-    --destructive: var(--error);
-    --destructive-foreground: var(--error-foreground);
-    
-    /* Premium spacing and sizing */
-    --radius: 0.5rem;
-    --header-height: 4rem;
-    --section-spacing: 3rem;
-  }
-
-}
-
-/* ==========================================
-   FLAGSHIP COMPONENT LIBRARY
-   Premium, uniform styling system
-   ========================================== */
 
 @layer components {
-  /* Premium Grid System */
-  .flagship-grid {
-    @apply grid grid-cols-flagship gap-6 max-w-7xl mx-auto px-6;
+  /* Japanese-inspired Glass morphism with Risograph layers */
+  .glass-surface {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    position: relative;
   }
   
-  .flagship-container {
-    @apply col-span-12 lg:col-span-8 lg:col-start-3;
+  .glass-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--riso-texture);
+    opacity: 0.3;
+    pointer-events: none;
+    border-radius: inherit;
   }
   
-  /* Premium Card Anatomy */
-  .flagship-card {
-    @apply bg-white border rounded-lg shadow-md p-6 transition-all;
-    border-color: hsl(var(--border));
+  .glass-card {
+    @apply glass-surface rounded-2xl p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1;
   }
   
-  .flagship-card:hover {
-    @apply shadow-lg -translate-y-1;
+  /* Risograph Paper Effects */
+  .riso-paper {
+    background: var(--riso-grain), linear-gradient(45deg, hsl(var(--washi-beige)) 0%, hsl(var(--shiro-paper)) 100%);
+    position: relative;
   }
   
-  /* Premium Typography Scale */
-  .text-display {
-    @apply text-5xl font-bold tracking-tight;
-    color: hsl(var(--foreground));
+  .riso-paper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--riso-texture);
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: multiply;
   }
   
-  .text-heading {
-    @apply text-3xl font-semibold tracking-tight;
-    color: hsl(var(--foreground));
+  /* Premium Japanese Cards */
+  .japanese-card {
+    @apply bg-white dark:bg-eink-black/95 backdrop-blur-sm rounded-3xl border border-eink-light-gray/30 dark:border-eink-dark-gray/50 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-2 hover:border-pastel-lavender/50;
   }
   
-  .text-subheading {
-    @apply text-xl font-medium;
-    color: hsl(var(--foreground));
+  /* Micro-interactions */
+  .interactive-hover {
+    @apply transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-lg;
+  }
+  
+  .interactive-press {
+    @apply transition-all duration-150 ease-out active:scale-[0.98] active:shadow-md;
+  }
+  
+  .playful-accent {
+    @apply relative overflow-hidden;
+  }
+  
+  .playful-accent::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-pastel-lavender via-pastel-mint to-pastel-sky opacity-0 transition-opacity duration-500;
+  }
+  
+  .playful-accent:hover::before {
+    @apply opacity-10;
+  }
+  
+  .glass-800 {
+    background: hsla(0, 0%, 100%, 0.8);
+  }
+  
+  .glass-600 {
+    background: hsla(0, 0%, 100%, 0.6);
+  }
+  
+  .glass-500 {
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  
+  .dark .glass-800 {
+    background: hsla(222, 84%, 5%, 0.8);
+  }
+  
+  .dark .glass-600 {
+    background: hsla(222, 84%, 5%, 0.6);
+  }
+  
+  .dark .glass-500 {
+    background: hsla(222, 84%, 5%, 0.5);
+  }
+  
+  /* Interactive animations */
+  .interactive-scale {
+    @apply transition-transform duration-200 ease-out hover:scale-105 active:scale-95;
+  }
+  
+  .interactive-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/25;
+  }
+  
+  /* Japanese Typography Hierarchy */
+  .text-hierarchy-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-extralight tracking-wider leading-tight;
+  }
+  
+  .text-hierarchy-2 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-light tracking-wide leading-snug;
+  }
+  
+  .text-hierarchy-3 {
+    @apply text-xl md:text-2xl lg:text-3xl font-light tracking-wide leading-snug;
   }
   
   .text-body {
-    @apply text-lg leading-relaxed;
-    color: hsl(var(--muted-foreground));
+    @apply text-base font-light leading-relaxed tracking-wide;
   }
   
-  .text-body-sm {
-    @apply text-base leading-relaxed;
-    color: hsl(var(--muted-foreground));
+  .text-body-large {
+    @apply text-lg font-light leading-relaxed tracking-wide;
+  }
+  
+  .text-body-small {
+    @apply text-sm font-light leading-relaxed tracking-wide;
   }
   
   .text-caption {
-    @apply text-sm uppercase tracking-wide font-medium;
-    color: hsl(var(--muted-foreground));
+    @apply text-xs font-light leading-normal text-eink-medium-gray tracking-wide;
   }
   
-  .text-micro {
-    @apply text-xs uppercase tracking-wide font-medium;
-    color: hsl(var(--muted-foreground));
+  /* Playful Text Accents */
+  .text-playful-gradient {
+    @apply bg-gradient-to-r from-pastel-lavender via-pastel-mint to-pastel-sky bg-clip-text text-transparent;
   }
   
-  /* Premium Button System */
-  .btn-primary {
-    @apply px-4 py-3 rounded-lg font-medium text-white transition-all;
-    background-color: hsl(var(--accent));
+  .text-eink-primary {
+    @apply text-eink-black dark:text-eink-white;
   }
   
-  .btn-primary:hover {
-    @apply shadow-lg -translate-y-0.5;
-    background-color: hsl(var(--accent) / 0.9);
+  .text-eink-secondary {
+    @apply text-eink-dark-gray dark:text-eink-medium-gray;
   }
   
-  .btn-secondary {
-    @apply px-4 py-3 rounded-lg font-medium border-2 transition-all;
-    border-color: hsl(var(--accent));
-    color: hsl(var(--accent));
+  /* Grid system */
+  .flagship-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
   }
   
-  .btn-secondary:hover {
-    @apply shadow-lg -translate-y-0.5 text-white;
-    background-color: hsl(var(--accent));
+  .flagship-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
-  /* Premium Avatar with Ring Treatment */
-  .flagship-avatar {
-    @apply rounded-full overflow-hidden transition-all relative;
-  }
-  
-  .flagship-avatar::before {
-    @apply absolute inset-0 rounded-full ring-2 ring-white ring-offset-2;
-    content: '';
-    ring-offset-color: transparent;
-  }
-  
-  .flagship-avatar:hover {
-    @apply -translate-y-0.5 shadow-lg;
-  }
-  
-  .flagship-avatar:hover::before {
-    ring-color: hsl(var(--accent));
-  }
-  
-  /* Premium Navigation Underline */
-  .nav-link {
-    @apply relative font-medium transition-colors;
-    color: hsl(var(--foreground));
-  }
-  
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    color: hsl(var(--accent));
-  }
-  
-  .nav-link::after {
-    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all;
-    background-color: hsl(var(--accent));
-    content: '';
-  }
-  
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    @apply w-full;
-  }
-  
-  /* Section Spacing System */
-  .flagship-section {
-    @apply py-12 md:py-16 lg:py-20;
-  }
-  
-  .flagship-section-sm {
-    @apply py-8 md:py-10 lg:py-12;
-  }
-  
-  /* Premium Reveal Animations */
-  .reveal-on-scroll {
-    @apply opacity-0 translate-y-6 transition-all duration-slow;
-  }
-  
-  .reveal-on-scroll.revealed {
-    @apply opacity-100 translate-y-0;
-  }
-  
-  /* Staggered reveal for lists */
-  .reveal-staggered > * {
-    @apply opacity-0 translate-y-6 transition-all duration-slow;
-  }
-  
-  .reveal-staggered.revealed > *:nth-child(1) { @apply delay-0; }
-  .reveal-staggered.revealed > *:nth-child(2) { @apply delay-100; }
-  .reveal-staggered.revealed > *:nth-child(3) { @apply delay-200; }
-  .reveal-staggered.revealed > *:nth-child(4) { @apply delay-300; }
-  
-  .reveal-staggered.revealed > * {
-    @apply opacity-100 translate-y-0;
-  }
-}
-
-/* ==========================================
-   FLAGSHIP UTILITY CLASSES
-   Premium utilities for specific needs
-   ========================================== */
-
-@layer utilities {
-  /* Legacy grid support for existing components */
   .content-grid {
-    @apply flagship-grid;
+    @apply grid grid-cols-12 gap-4 md:gap-6 lg:gap-8;
   }
   
   .content-container {
-    @apply flagship-container;
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
-  /* Premium interactive utilities */
-  .interactive-scale {
-    @apply transition-transform hover:scale-105 active:scale-95;
+  /* Shimmer effect */
+  .shimmer {
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.4), 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
   }
   
-  .interactive-lift {
-    @apply transition-all hover:-translate-y-1 hover:shadow-lg;
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
   
-  /* Accessibility utilities */
-  .sr-only {
-    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-    clip: rect(0, 0, 0, 0);
+  /* Japanese Spreadsheet Grid Components */
+  .japanese-grid {
+    @apply grid gap-0 border border-eink-light-gray/20;
+    background: linear-gradient(to right, hsl(var(--eink-light-gray))/10 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--eink-light-gray))/10 1px, transparent 1px);
+    background-size: var(--grid-base) var(--grid-base);
   }
   
-  .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
-    outline-color: hsl(var(--accent));
+  .japanese-grid-cell {
+    @apply p-3 border-r border-b border-eink-light-gray/10 font-mono text-sm text-eink-dark-gray hover:bg-pastel-cream/30 transition-colors duration-200;
+  }
+  
+  .japanese-grid-header {
+    @apply bg-gradient-to-r from-pastel-lavender/20 to-pastel-mint/20 font-semibold text-eink-black border-r border-b border-eink-light-gray/30;
+  }
+  
+  /* Tomodachi Life Playful Elements */
+  .tomodachi-bounce {
+    animation: tomodachi-bounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes tomodachi-bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    10% {
+      transform: translateY(-8px) rotate(1deg);
+    }
+    40% {
+      transform: translateY(-4px) rotate(-0.5deg);
+    }
+    60% {
+      transform: translateY(-2px) rotate(0.5deg);
+    }
+  }
+  
+  .character-wink {
+    animation: character-wink 3s ease-in-out infinite;
+  }
+  
+  @keyframes character-wink {
+    0%, 94%, 100% {
+      transform: scaleY(1);
+    }
+    95%, 97% {
+      transform: scaleY(0.1);
+    }
+  }
+  
+  /* Monospaced Data Typography */
+  .mono-data {
+    @apply font-mono text-sm leading-relaxed tracking-wider text-eink-dark-gray;
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .mono-data-large {
+    @apply font-mono text-base leading-relaxed tracking-wider text-eink-black;
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  /* Premium button styles with Tomodachi vibes */
+  .btn-premium {
+    @apply glass-surface px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  }
+  
+  .btn-playful {
+    @apply btn-premium bg-gradient-to-r from-pastel-lavender via-pastel-mint to-pastel-sky text-eink-black hover:scale-105 active:scale-95 transition-transform duration-150;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-playful::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease-in-out;
+  }
+  
+  .btn-playful:hover::before {
+    left: 100%;
+  }
+  
+  /* Enhanced cards */
+  .card-premium {
+    @apply glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .card-tomodachi {
+    @apply card-premium riso-paper;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-tomodachi::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, hsla(var(--pastel-lavender), 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  
+  .card-tomodachi:hover::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /* Enhanced prose styles with Japanese aesthetics */
+  .prose {
+    @apply text-foreground/90 leading-relaxed;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-foreground font-light tracking-wide mb-6;
+  }
+  
+  .prose h1 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  .prose h2 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  .prose h3 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  .prose p {
+    @apply text-foreground/85 leading-relaxed mb-6 tracking-wide;
+  }
+  
+  .prose strong {
+    @apply text-foreground font-medium;
+  }
+  
+  .prose em {
+    @apply text-foreground/80 italic;
+  }
+  
+  .prose blockquote {
+    @apply border-l-2 border-primary/20 pl-6 italic text-muted-foreground/80 bg-glass-100 py-4 my-6 rounded-r-lg;
+  }
+  
+  .prose code {
+    @apply bg-glass-200 px-2 py-1 rounded text-sm font-mono text-foreground/90 border border-border/20;
+  }
+  
+  .prose pre {
+    @apply bg-glass-100 p-6 rounded-xl overflow-x-auto border border-border/20 shadow-inner;
+  }
+  
+  .prose ul,
+  .prose ol {
+    @apply text-foreground/85 pl-6 mb-6 space-y-2;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-primary/80 underline decoration-1 underline-offset-2 transition-colors;
+  }
+  
+  /* Glass border utilities */
+  .border-glass-border {
+    border-color: var(--glass-border);
+  }
+  
+  .shadow-glass {
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Spacing utilities based on 8px system */
+  .space-xs { @apply space-y-1; }
+  .space-sm { @apply space-y-2; }
+  .space-md { @apply space-y-4; }
+  .space-lg { @apply space-y-6; }
+  .space-xl { @apply space-y-8; }
+  .space-2xl { @apply space-y-12; }
+  .space-3xl { @apply space-y-16; }
+  
+  /* Grid span utilities */
+  .col-span-full { @apply col-span-12; }
+  .col-span-half { @apply col-span-6; }
+  .col-span-third { @apply col-span-4; }
+  .col-span-quarter { @apply col-span-3; }
+  
+  /* Responsive grid spans */
+  @media (min-width: 768px) {
+    .md\:col-span-full { @apply col-span-12; }
+    .md\:col-span-half { @apply col-span-6; }
+    .md\:col-span-third { @apply col-span-4; }
+    .md\:col-span-quarter { @apply col-span-3; }
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-in-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-in-out;
+  }
+  
+  .animate-ma-enter {
+    animation: ma-enter 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  /* Japanese Ma (間) - Breathing space animations */
+  @keyframes ma-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(32px) scale(0.96);
+    }
+    40% {
+      opacity: 0.6;
+      transform: translateY(8px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Japanese Ma spacing utilities */
+  .ma-xs { @apply mb-2; }    /* 8px */
+  .ma-sm { @apply mb-4; }    /* 16px */
+  .ma-md { @apply mb-8; }    /* 32px */
+  .ma-lg { @apply mb-12; }   /* 48px */
+  .ma-xl { @apply mb-16; }   /* 64px */
+  .ma-2xl { @apply mb-24; }  /* 96px */
+  .ma-3xl { @apply mb-32; }  /* 128px */
+  
+  /* Enhanced E-ink contrast helpers */
+  .contrast-enhanced {
+    filter: contrast(1.1) brightness(1.02);
+  }
+  
+  .text-sharp {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'kern' 1;
+  }
+  
+  /* Tomodachi Character Elements */
+  .character-smile {
+    position: relative;
+  }
+  
+  .character-smile::after {
+    content: '😊';
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    transition: transform 0.3s ease-in-out;
+    font-size: 16px;
+  }
+  
+  .character-smile:hover::after {
+    transform: translateY(-50%) scale(1);
+    animation: character-wink 2s ease-in-out;
+  }
+  
+  /* Page Load Character Greetings */
+  .page-greeting {
+    animation: page-greeting 1.5s ease-out;
+  }
+  
+  @keyframes page-greeting {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8) rotate(-5deg);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateY(-8px) scale(1.1) rotate(2deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+  }
+  
+  /* Interactive Sparkles */
+  .sparkle-on-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sparkle-on-hover::before {
+    content: '✨';
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    font-size: 12px;
+  }
+  
+  .sparkle-on-hover:hover::before {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+    animation: sparkle 1s ease-in-out infinite;
+  }
+  
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+    }
+  }
+  
+  /* Friendship Rainbow Effects */
+  .friendship-glow {
+    background: linear-gradient(45deg, 
+      hsl(var(--pastel-lavender)), 
+      hsl(var(--pastel-mint)), 
+      hsl(var(--pastel-sky)), 
+      hsl(var(--pastel-peach)), 
+      hsl(var(--pastel-rose))
+    );
+    background-size: 200% 200%;
+    animation: friendship-rainbow 4s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes friendship-rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 }
