@@ -62,7 +62,7 @@ const Header = () => {
   };
 
   const getLogoStyles = () => {
-    return "group flex items-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-sm p-2 -m-2";
+    return "flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-sm p-2 -m-2";
   };
 
   const getNavItemStyles = (href: string) => {
@@ -98,20 +98,19 @@ const Header = () => {
   }
 
   return (
-    <header {...fadeIn()} className={getHeaderStyles()}>
+    <header className={getHeaderStyles()}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo - Left */}
           <Link 
             to="/" 
             className={getLogoStyles()}
-            {...slideUp({ delay: 100 })}
           >
             {siteSettings?.logoImage?.asset?._ref ? (
               <img 
                 src={urlFor(siteSettings.logoImage).width(120).url()} 
                 alt={siteSettings.siteTitle || "The Office of Nils Johansson"}
-                className="h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                className="h-10 w-auto"
               />
             ) : (
               <div className="flex flex-col leading-tight">
@@ -126,10 +125,7 @@ const Header = () => {
           </Link>
           
           {/* Navigation - Right (Desktop) */}
-          <nav 
-            {...slideUp({ delay: 300 })}
-            className="hidden md:flex items-center"
-          >
+          <nav className="hidden md:flex items-center">
             {navItems.map(({ title, href, icon, description }) => {
               const Icon = getIcon(icon);
               return (

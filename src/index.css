@@ -152,18 +152,18 @@
     --eink-white: 0, 0%, 98%;
     
     /* Industrial Color System */
-    --accent: 220, 87%, 56%;     /* steel-blue #2563eb */
-    --accent-dark: 220, 87%, 46%; /* darker blue #1e40af */
+    --accent: 220, 87%, 40%;     /* darker steel-blue for better contrast */
+    --accent-dark: 220, 87%, 30%; /* even darker blue #1e40af */
     --neutral-50: 220, 14%, 98%;
     --neutral-100: 220, 13%, 95%;
     --neutral-200: 220, 13%, 91%;
     --neutral-300: 212, 12%, 84%;
     --neutral-400: 215, 13%, 65%;
     --neutral-500: 220, 9%, 46%;
-    --neutral-600: 215, 14%, 34%;
-    --neutral-700: 217, 19%, 27%;
-    --neutral-800: 215, 28%, 17%;
-    --neutral-900: 221, 39%, 11%;
+    --neutral-600: 215, 14%, 25%;
+    --neutral-700: 217, 19%, 15%;
+    --neutral-800: 215, 28%, 10%;
+    --neutral-900: 221, 39%, 5%;
   }
 
   .dark {
@@ -200,16 +200,17 @@
   }
   
   body {
-    @apply bg-background text-eink-black dark:text-eink-white;
+    background-color: white;
+    color: hsl(var(--neutral-900));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-feature-settings: 'cv11', 'ss01';
     font-variation-settings: 'opsz' 32;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 0.015em;
-    line-height: 1.8;
+    line-height: 1.6;
   }
   
   /* Enhanced focus states */
@@ -350,23 +351,18 @@
   
   /* Industrial Text Styles */
   .text-primary {
-    @apply text-neutral-900 font-semibold;
+    color: hsl(var(--neutral-900));
+    font-weight: 600;
   }
   
   .text-secondary {
-    @apply text-neutral-700 font-medium;
+    color: hsl(var(--neutral-700));
+    font-weight: 500;
   }
   
   .text-accent {
-    @apply text-accent font-medium;
-  }
-  
-  .text-eink-primary {
-    @apply text-eink-black dark:text-eink-white;
-  }
-  
-  .text-eink-secondary {
-    @apply text-eink-dark-gray dark:text-eink-medium-gray;
+    color: hsl(var(--accent));
+    font-weight: 600;
   }
   
   /* Grid system */
@@ -494,45 +490,51 @@
   .btn-primary {
     background-color: hsl(var(--accent));
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     transition: all 150ms ease-in-out;
+    border: none;
+    cursor: pointer;
   }
   
   .btn-primary:hover {
     background-color: hsl(var(--accent-dark));
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
   }
   
   .btn-outline {
-    border: 1px solid hsl(var(--accent));
+    border: 2px solid hsl(var(--accent));
     color: hsl(var(--accent));
-    background-color: transparent;
-    font-weight: 500;
+    background-color: white;
+    font-weight: 600;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     transition: all 150ms ease-in-out;
+    cursor: pointer;
   }
   
   .btn-outline:hover {
-    background-color: hsl(var(--neutral-50));
+    background-color: hsl(var(--accent));
+    color: white;
   }
   
   .btn-secondary {
     background-color: hsl(var(--neutral-100));
-    color: hsl(var(--neutral-700));
-    font-weight: 500;
+    color: hsl(var(--neutral-900));
+    font-weight: 600;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
-    border: 1px solid hsl(var(--neutral-200));
+    padding: 0.75rem 1.5rem;
+    border: 2px solid hsl(var(--neutral-300));
     transition: all 150ms ease-in-out;
+    cursor: pointer;
   }
   
   .btn-secondary:hover {
     background-color: hsl(var(--neutral-200));
     color: hsl(var(--neutral-900));
+    border-color: hsl(var(--neutral-400));
   }
   
   /* Enhanced cards */
