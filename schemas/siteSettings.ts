@@ -30,10 +30,70 @@ export default defineType({
       name: 'logoImage',
       title: 'Logo Image',
       type: 'image',
-      description: 'Site logo (optional - leave empty to use text logo)',
+      description: 'Site logo (SVG preferred for best quality at all sizes)',
       options: {
         hotspot: true,
+        accept: '.svg,.png,.jpg,.jpeg,.webp',
       },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Accessible description of the logo',
+        },
+        {
+          name: 'height',
+          title: 'Preferred Height (px)',
+          type: 'number',
+          description: 'Optimal logo height - will scale responsively',
+          initialValue: 40,
+          validation: Rule => Rule.min(20).max(120),
+        },
+      ],
+    }),
+    defineField({
+      name: 'logoStyle',
+      title: 'Logo Style',
+      type: 'object',
+      description: 'Logo positioning and styling options',
+      fields: [
+        {
+          name: 'position',
+          title: 'Logo Position',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Left (Standard)', value: 'left' },
+              { title: 'Center', value: 'center' },
+              { title: 'Left with Text Right', value: 'left-text-right' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'left',
+        },
+        {
+          name: 'showTextWithLogo',
+          title: 'Show Text with Logo',
+          type: 'boolean',
+          description: 'Display site title alongside logo image',
+          initialValue: false,
+        },
+        {
+          name: 'logoSpacing',
+          title: 'Logo Spacing',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Compact', value: 'compact' },
+              { title: 'Comfortable', value: 'comfortable' },
+              { title: 'Spacious', value: 'spacious' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'comfortable',
+        },
+      ],
     }),
     defineField({
       name: 'openGraphImage',

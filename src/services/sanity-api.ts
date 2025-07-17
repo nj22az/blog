@@ -77,12 +77,19 @@ export interface SanityJapaneseDesign {
   subtleAnimations?: boolean;
 }
 
+export interface SanityLogoStyle {
+  position?: 'left' | 'center' | 'left-text-right';
+  showTextWithLogo?: boolean;
+  logoSpacing?: 'compact' | 'comfortable' | 'spacious';
+}
+
 export interface SanitySiteSettings {
   _id: string;
   siteTitle: string;
   siteSubtitle?: string;
   siteDescription?: string;
   logoImage?: SanityImageAsset;
+  logoStyle?: SanityLogoStyle;
   openGraphImage?: SanityImageAsset;
   headerStyle?: 'minimal' | 'glass' | 'zen' | 'sophisticated';
   headerBackground?: 'transparent' | 'glass' | 'solid' | 'gradient';
@@ -225,7 +232,12 @@ export async function fetchSiteSettings(): Promise<SanitySiteSettings | null> {
         siteTitle,
         siteSubtitle,
         siteDescription,
-        logoImage,
+        logoImage {
+          ...,
+          alt,
+          height
+        },
+        logoStyle,
         openGraphImage,
         headerStyle,
         headerBackground,
