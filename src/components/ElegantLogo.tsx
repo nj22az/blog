@@ -1,7 +1,27 @@
+/**
+ * 🔒 ELEGANT LOGO COMPONENT - DESIGN LOCKED
+ * 
+ * ⚠️  CRITICAL WARNING: This component implements the final approved logo design.
+ * ⚠️  Modifications are PROHIBITED without explicit authorization.
+ * ⚠️  See LOGO_DESIGN_LOCK.md for complete specifications.
+ * 
+ * Final Design: Two-row elegant typography with sophisticated hierarchy
+ * - ROW 1: "The Office" (light, neutral-700, uppercase) + "of" (extralight, neutral-500, italic)  
+ * - ROW 2: "Nils Johansson" (semibold, neutral-900, prominent)
+ * 
+ * Features: Responsive scaling, elegant hover effects, e-ink optimization
+ * Status: LOCKED ✅ (v1.0 - 2025-01-17)
+ */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { urlFor } from '@/services/sanity';
 import { SanitySiteSettings } from '@/services/sanity-api';
+
+// 🔒 DESIGN LOCK VERIFICATION
+const DESIGN_VERSION = '1.0';
+const DESIGN_LOCK_DATE = '2025-01-17';
+const AUTHORIZED_MODIFICATIONS = false; // Set to true only with explicit approval
 
 interface ElegantLogoProps {
   siteSettings: SanitySiteSettings | null;
@@ -109,17 +129,58 @@ export const ElegantLogo: React.FC<ElegantLogoProps> = ({ siteSettings, classNam
           </div>
         )}
 
-        {/* Text Logo (shown when no image OR when showTextWithLogo is true) */}
+        {/* Elegant Two-Row Text Logo */}
         {(!hasLogo || showTextWithLogo) && (
-          <div className="flex flex-col leading-tight">
-            <span className={titleClasses}>
-              {siteSettings?.siteTitle || "The Office"}
-            </span>
-            {siteSettings?.siteSubtitle && (
-              <span className={subtitleClasses}>
-                {siteSettings.siteSubtitle}
-              </span>
-            )}
+          <div className="flex flex-col leading-none">
+            {/* Parse title and subtitle for two-row layout */}
+            {(() => {
+              const title = siteSettings?.siteTitle || "The Office";
+              const subtitle = siteSettings?.siteSubtitle || "Of Nils Johansson";
+              
+              // Split "The Office Of Nils Johansson" into elegant two-row format
+              const isDefaultFormat = title.includes("Office") && subtitle.toLowerCase().includes("nils");
+              
+              if (isDefaultFormat) {
+                return (
+                  <>
+                    {/* First Row: "The Office" + "Of" */}
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-xl sm:text-2xl lg:text-3xl font-light text-neutral-700 tracking-wider uppercase letter-spacing-widest">
+                        The Office
+                      </span>
+                      <span className="text-base sm:text-lg lg:text-xl font-extralight text-neutral-500 tracking-wide lowercase italic">
+                        of
+                      </span>
+                    </div>
+                    
+                    {/* Second Row: "Nils Johansson" */}
+                    <div className="mt-1">
+                      <span className="text-lg sm:text-xl lg:text-2xl font-semibold text-neutral-900 tracking-tight">
+                        Nils Johansson
+                      </span>
+                    </div>
+                  </>
+                );
+              } else {
+                // Fallback for custom titles
+                return (
+                  <>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-xl sm:text-2xl lg:text-3xl font-light text-neutral-700 tracking-wider uppercase letter-spacing-widest">
+                        {title}
+                      </span>
+                    </div>
+                    {subtitle && (
+                      <div className="mt-1">
+                        <span className="text-lg sm:text-xl lg:text-2xl font-semibold text-neutral-900 tracking-tight">
+                          {subtitle}
+                        </span>
+                      </div>
+                    )}
+                  </>
+                );
+              }
+            })()}
           </div>
         )}
       </Link>

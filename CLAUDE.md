@@ -1,5 +1,26 @@
 # Project Instructions for Claude
 
+## 🔒 PROTECTED DESIGN ELEMENTS
+
+### LOGO DESIGN - LOCKED ✅
+**The elegant two-row logo design is FINALIZED and PROTECTED:**
+- File: `LOGO_DESIGN_LOCK.md` contains complete specifications
+- Components: `/src/components/ElegantLogo.tsx` (LOCKED)
+- CSS: Lines 774-836 in `/src/index.css` (PROTECTED)
+- Status: NO MODIFICATIONS ALLOWED without explicit authorization
+
+**Current Design (v1.0):**
+```
+The Office  of
+Nils Johansson
+```
+- Typography hierarchy with sophisticated weight/color distinctions
+- Responsive scaling across all devices (mobile to 4K)  
+- Elegant hover effects and professional interactions
+- E-ink optimized with proper contrast ratios
+
+---
+
 ## Development Workflow
 
 ### Pre-commit Checks (MANDATORY)

@@ -771,7 +771,11 @@
     @apply px-6 py-8 space-y-6;
   }
   
-  /* Elegant Logo Styles */
+  /* 🔒 ELEGANT LOGO STYLES - DESIGN LOCKED v1.0 (2025-01-17)
+   * ⚠️  CRITICAL: These styles are PROTECTED and implement the final approved design
+   * ⚠️  See LOGO_DESIGN_LOCK.md before making ANY modifications
+   * ⚠️  Unauthorized changes may break the elegant two-row typography hierarchy
+   */
   .elegant-logo {
     position: relative;
     z-index: 10;
@@ -787,6 +791,29 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
   }
   
+  /* Two-Row Logo Typography */
+  .elegant-logo .letter-spacing-widest {
+    letter-spacing: 0.15em;
+  }
+  
+  /* Enhanced text effects on hover */
+  .elegant-logo:hover span {
+    transition: all 300ms ease-out;
+  }
+  
+  .elegant-logo:hover .text-neutral-700 {
+    color: hsl(var(--neutral-600));
+  }
+  
+  .elegant-logo:hover .text-neutral-500 {
+    color: hsl(var(--accent));
+  }
+  
+  .elegant-logo:hover .text-neutral-900 {
+    color: hsl(var(--neutral-900));
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
   /* Responsive logo scaling */
   @media (max-width: 640px) {
     .elegant-logo img {
@@ -794,12 +821,21 @@
       min-height: 24px !important;
     }
     
-    .elegant-logo .title {
-      font-size: 1.125rem;
+    /* Mobile typography - compact but elegant */
+    .elegant-logo .text-xl {
+      font-size: 0.875rem;
     }
     
-    .elegant-logo .subtitle {
+    .elegant-logo .text-base {
       font-size: 0.75rem;
+    }
+    
+    .elegant-logo .text-lg {
+      font-size: 1rem;
+    }
+    
+    .elegant-logo .letter-spacing-widest {
+      letter-spacing: 0.1em;
     }
   }
   
