@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { GlassButton } from '@/components/ui/GlassButton';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { MonoAvatar } from '@/components/MonoAvatar';
 import { fetchSanityAuthors, fetchAboutPage, SanityAuthor, SanityAboutPage } from '@/services/sanity-api';
@@ -50,15 +50,35 @@ const About = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-64">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="flex items-center justify-center py-16">
+          <Loader2 className="h-8 w-8 animate-spin text-neutral-600" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-12">
-      <div className="grid md:grid-cols-2 gap-8">
+    <div className="bg-white">
+      <div className="max-w-4xl mx-auto px-6 py-16 sm:py-20">
+        {/* Newspaper-style header */}
+        <div className="text-left mb-12">
+          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
+            Meet the Team
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 leading-tight mb-6">
+            About Us
+          </h1>
+          <div className="prose prose-lg max-w-none border-b border-neutral-200 pb-8">
+            <p className="text-xl sm:text-2xl text-neutral-700 leading-relaxed font-light">
+              Professional engineers and cultural bridges connecting maritime expertise 
+              with Southeast Asian insights.
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-12">
+          <div className="grid md:grid-cols-2 gap-12">
         {authors.length > 0 ? (
           authors.map((author) => (
             <Card key={author._id} id={author.slug?.current}>
@@ -82,12 +102,15 @@ const About = () => {
                 <p>{author.bio || 'No bio available.'}</p>
                 
                 {author.slug?.current === 'nils-johansson' && (
-                  <Button asChild variant="outline" className="mt-4">
-                    <Link to="/experience" className="flex items-center gap-2">
+                  <GlassButton 
+                    asChild 
+                    className="mt-4 rounded-full px-6 py-3"
+                  >
+                    <Link to="/experience">
                       <Briefcase className="h-4 w-4" />
-                      View My Professional Timeline
+                      View Professional Timeline
                     </Link>
-                  </Button>
+                  </GlassButton>
                 )}
               </CardContent>
             </Card>
@@ -117,12 +140,15 @@ const About = () => {
                 <p>
                   This blog is where I share my insights on marine engineering, preventive maintenance, and industrial safety, as well as my experiences from traveling and living abroad.
                 </p>
-                <Button asChild variant="outline" className="mt-4">
-                  <Link to="/experience" className="flex items-center gap-2">
+                <GlassButton 
+                  asChild 
+                  className="mt-4 rounded-full px-6 py-3"
+                >
+                  <Link to="/experience">
                     <Briefcase className="h-4 w-4" />
-                    View My Professional Timeline
+                    View Professional Timeline
                   </Link>
-                </Button>
+                </GlassButton>
               </CardContent>
             </Card>
 
@@ -152,22 +178,29 @@ const About = () => {
             </Card>
           </>
         )}
-      </div>
+          </div>
 
-      <section className="text-center bg-muted/50 p-8 rounded-lg">
-        <h2 className="text-2xl font-bold mb-2">
-          {aboutPage?.philosophyTitle || "Our Philosophy"}
-        </h2>
-        <div className="text-lg italic text-muted-foreground max-w-3xl mx-auto">
-          {aboutPage?.philosophyText ? (
-            <PortableText value={aboutPage.philosophyText} />
-          ) : (
-            <p>
-              "Together, we combine industrial know-how, global experience, and cultural insights to support your professional success and enrich your personal journey."
-            </p>
-          )}
+          {/* Philosophy section - newspaper style */}
+          <section className="border-t border-neutral-200 pt-12">
+            <div className="text-left">
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-neutral-900 mb-6">
+                {aboutPage?.philosophyTitle || "Our Philosophy"}
+              </h2>
+              <div className="prose prose-lg max-w-none">
+                <div className="text-xl text-neutral-700 leading-relaxed font-light italic">
+                  {aboutPage?.philosophyText ? (
+                    <PortableText value={aboutPage.philosophyText} />
+                  ) : (
+                    <p>
+                      "Together, we combine industrial know-how, global experience, and cultural insights to support your professional success and enrich your personal journey."
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Header from "@/components/Header";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Loader2 } from "lucide-react";
 
@@ -51,7 +52,7 @@ const SEO = () => {
       {/* Language Tags for Browser Translation */}
       <html lang="en" />
       <meta httpEquiv="Content-Language" content="en" />
-      <meta name="google" content="notranslate" />
+      <meta name="google" content="translate" />
       
       {/* Canonical URL */}
       <link rel="canonical" href="https://nilsjohansson.com/" />
@@ -72,6 +73,7 @@ const App = () => {
     },
   });
 
+
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
@@ -90,7 +92,7 @@ const App = () => {
                 
                 {/* Main content */}
                 <main className="relative">
-                  <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 mt-16">
+                  <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-4 pb-8">
                     <Suspense fallback={<SimpleLoader />}>
                       <Routes>
                         <Route path="/" element={<Home />} />
@@ -104,6 +106,9 @@ const App = () => {
                     </Suspense>
                   </div>
                 </main>
+
+                {/* Scroll to top button */}
+                <ScrollToTop />
 
                 {/* Simple footer */}
                 <footer className="mt-32 border-t border-slate-200 bg-white">

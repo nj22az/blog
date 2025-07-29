@@ -111,7 +111,7 @@ export function BlogPost({ post }: BlogPostProps) {
           asChild 
           variant="outline" 
           size="sm" 
-          className="w-full btn-primary"
+          className="w-full apple-glass-interactive bg-gray-800/80 hover:bg-gray-800/90 text-white"
         >
           <Link to={`/blog/${post.slug.current}`}>
             Read More

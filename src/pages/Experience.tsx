@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { GlassButton } from '@/components/ui/GlassButton';
 import TimelineItem from "@/components/TimelineItem";
 import { ChevronDown, ChevronUp, Download, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -299,55 +299,58 @@ const Experience = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <Link to="/about?tab=nils">
-        <Button 
-          variant="ghost" 
-          size="sm"
-          className="text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Nils
-        </Button>
-      </Link>
-
-      <div className="bg-background rounded-xl p-4 sm:p-6 shadow-sm border border-border">
-        <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-4">
-            Professional Experience
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <Button 
+    <div className="bg-white py-16 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-left mb-12 border-b border-neutral-200 pb-8">
+          <Link to="/about#nils">
+            <GlassButton 
               variant="ghost" 
               size="sm"
-              onClick={downloadCSV}
-              className="text-primary hover:text-primary/90 hover:bg-primary/10"
+              className="mb-4"
             >
-              <Download className="h-4 w-4 mr-1" />
-              Download CSV
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={visibleExperiences < experiences.length ? showMore : showLess}
-              className="text-primary hover:text-primary/90 hover:bg-primary/10"
-            >
-              {visibleExperiences < experiences.length ? (
-                <>
-                  Show All
-                  <ChevronDown className="ml-1 h-4 w-4" />
-                </>
-              ) : (
-                <>
-                  Show Less
-                  <ChevronUp className="ml-1 h-4 w-4" />
-                </>
-              )}
-            </Button>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to About Nils
+            </GlassButton>
+          </Link>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 leading-tight mb-6">
+            Professional Timeline
+          </h1>
+          <div className="prose prose-lg max-w-none">
+            <p className="text-xl sm:text-2xl text-neutral-700 leading-relaxed font-light">
+              A detailed history of my career, from maritime and industrial engineering to automation and global field service.
+            </p>
           </div>
         </div>
+
+        <div className="flex flex-wrap gap-4 mb-8">
+          <GlassButton 
+            variant="outline" 
+            size="sm"
+            onClick={downloadCSV}
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download as CSV
+          </GlassButton>
+          <GlassButton 
+            variant="outline" 
+            size="sm"
+            onClick={visibleExperiences < experiences.length ? showMore : showLess}
+          >
+            {visibleExperiences < experiences.length ? (
+              <>
+                Show All Experiences
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Show Fewer Experiences
+                <ChevronUp className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </GlassButton>
+        </div>
         
-        <ul className="relative space-y-8">
+        <ul className="relative border-l-2 border-neutral-200 space-y-12 pl-8">
           {experiences.slice(0, visibleExperiences).map((exp, index) => (
             <TimelineItem
               key={index}

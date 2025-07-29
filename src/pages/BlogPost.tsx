@@ -5,7 +5,8 @@ import { fetchBlogPostBySlug, SanityPost } from "@/services/sanity-api";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/services/sanity";
 import { MonoAvatar } from "@/components/MonoAvatar";
-import { Button } from "@/components/ui/button";
+import { GlassButton } from '@/components/ui/GlassButton';
+import { SocialShare } from '@/components/ui/SocialShare';
 import { usePremiumAnimations } from "@/hooks/usePremiumAnimations";
 import NilsProfile from '@/assets/images/nils-profile.jpeg';
 import ThuanProfile from '@/assets/images/thuan-profile.jpeg';
@@ -81,12 +82,12 @@ const BlogPost = () => {
     return (
       <div className="text-center py-12">
         <p className="text-red-600 mb-4">{error}</p>
-        <Button asChild variant="outline">
+        <GlassButton asChild variant="outline">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
-        </Button>
+        </GlassButton>
       </div>
     );
   }
@@ -95,12 +96,12 @@ const BlogPost = () => {
     return (
       <div className="text-center py-12">
         <p className="text-muted-foreground mb-4">Post not found</p>
-        <Button asChild variant="outline">
+        <GlassButton asChild variant="outline">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
-        </Button>
+        </GlassButton>
       </div>
     );
   }
@@ -112,22 +113,23 @@ const BlogPost = () => {
   });
 
   return (
-    <article className="max-w-4xl mx-auto">
+    <article className="max-w-4xl mx-auto py-12 px-6">
       {/* Back button */}
       <div {...fadeIn({ delay: 0 })} className="mb-8">
-        <Button asChild variant="outline" size="sm" className="btn-outline focus-industrial">
-          <Link to="/" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Articles
-          </Link>
-        </Button>
+        <Link 
+          to="/blog" 
+          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-800 transition-colors duration-200 py-1 px-3 rounded-full border border-neutral-200 hover:border-neutral-300 bg-neutral-50/50 hover:bg-neutral-100/50"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back
+        </Link>
       </div>
 
       {/* Article header */}
-      <header {...slideUp({ delay: 100 })} className="mb-16">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-neutral-900 mb-12">{post.title}</h1>
+      <header {...slideUp({ delay: 100 })} className="mb-10 text-left border-b border-neutral-200 pb-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4">{post.title}</h1>
         
-        <div className="flex items-center gap-8 text-eink-medium-gray mb-8">
+        <div className="flex items-center gap-8 text-sm text-neutral-500">
           <div className="flex items-center gap-4">
             <MonoAvatar 
               src={getAuthorImage(post.author)} 
@@ -135,24 +137,24 @@ const BlogPost = () => {
               owner={getAuthorOwner(post.author)}
               size="sm"
             />
-            <span className="font-medium text-neutral-900">{post.author?.name || "Unknown Author"}</span>
+            <span className="font-medium text-neutral-800">{post.author?.name || "Unknown Author"}</span>
           </div>
           <div className="flex items-center gap-3">
             <CalendarIcon className="h-4 w-4" />
-            <span className="font-medium text-neutral-700">{formattedDate}</span>
+            <span className="font-light tracking-wide">{formattedDate}</span>
           </div>
         </div>
 
         {post.author?.subtitle && (
-          <p className="text-sm text-neutral-600 mt-6">{post.author.subtitle}</p>
+          <p className="text-lg text-neutral-600 mt-4 font-light italic">{post.author.subtitle}</p>
         )}
       </header>
 
       {/* Featured image */}
       {post.mainImage && (
-        <div {...fadeIn({ delay: 200 })} className="mb-8 rounded-sm overflow-hidden card-industrial">
+        <div {...fadeIn({ delay: 200 })} className="mb-10 rounded-lg overflow-hidden shadow-sm">
           <img 
-            src={urlFor(post.mainImage).width(800).url()}
+            src={urlFor(post.mainImage).width(1200).url()}
             alt={post.mainImage.alt || post.title}
             className="w-full h-auto"
           />
@@ -162,9 +164,9 @@ const BlogPost = () => {
       {/* Article content */}
       <div 
         {...slideUp({ delay: 300 })} 
-        className="prose prose-lg max-w-none card-industrial ma-industrial"
+        className="prose prose-lg max-w-none"
       >
-        <div className="text-neutral-900 leading-relaxed space-y-6">
+        <div className="text-neutral-800 leading-relaxed space-y-6">
           {post.body ? (
             <PortableText value={post.body} />
           ) : (
@@ -175,32 +177,34 @@ const BlogPost = () => {
         </div>
       </div>
 
-      {/* Article footer */}
-      <footer {...fadeIn({ delay: 400 })} className="mt-16 pt-8 border-t border-neutral-200 card-industrial ma-industrial">
+      {/* Author section */}
+      <footer {...fadeIn({ delay: 350 })} className="mt-12 pt-6 border-t border-neutral-200">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3">
             <MonoAvatar 
               src={getAuthorImage(post.author)} 
               alt={post.author?.name || "Author"} 
               owner={getAuthorOwner(post.author)}
-              size="md"
+              size="sm"
             />
             <div>
-              <p className="font-medium text-neutral-900">{post.author?.name || "Unknown Author"}</p>
+              <p className="text-sm font-medium text-neutral-900">{post.author?.name || "Unknown Author"}</p>
               {post.author?.bio && (
-                <p className="text-sm text-neutral-700 mt-2">{post.author.bio}</p>
+                <p className="text-xs text-neutral-600 mt-0.5">{post.author.bio}</p>
               )}
             </div>
           </div>
           
-          <Button asChild variant="outline" className="btn-outline">
-            <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              More Articles
-            </Link>
-          </Button>
+          {/* Share button */}
+          <SocialShare
+            url={window.location.href}
+            title={post.title}
+            description={post.excerpt || ''}
+            className="shrink-0"
+          />
         </div>
       </footer>
+
     </article>
   );
 };
